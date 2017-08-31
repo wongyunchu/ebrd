@@ -91,7 +91,7 @@
         previewsContainer: '#dropzonePreview',
         previewTemplate: document.querySelector('#preview-template').innerHTML,
         dictFileTooBig: 'Image is bigger than 8MB',
-        dictDefaultMessage: "Click 또는  File을 Drop 하실 수 있습니다!",
+        dictDefaultMessage: "Click 또는  File을 Drop 하실 수 있습니다!-나는 마스터 ",
         addRemoveLinks: true,
         dictRemoveFile: 'Remove',
         maxFilesize: 5,
