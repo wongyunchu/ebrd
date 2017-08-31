@@ -43,7 +43,7 @@
 
         <div class="dz-details">
             <div class="dz-size"><span data-dz-size=""></span></div>
-            <div class="dz-filename"><span data-dz-name=""></span></div>
+            <div class="dz-filename"><span data-dz-name=""></span></div>1
         </div>
         <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
         <div class="dz-error-message"><span data-dz-errormessage=""></span></div>
