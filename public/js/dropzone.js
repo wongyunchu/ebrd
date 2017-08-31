@@ -407,7 +407,7 @@
         }
       }
       return target;
-    };
+    };1
 
     function Dropzone(element, options) {
       var elementOptions, fallback, _ref;
