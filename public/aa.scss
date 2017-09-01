@@ -1,0 +1,14 @@
+//
+// Base styles
+//
+
+.alert {
+  padding: $alert-padding;
+  margin-bottom: $spacer-y;
+  border: $alert-border-width solid transparent;
+  @include border-radius($alert-border-radius);
+}
+
+.ddd {
+  background: #ffff8d;
+}
