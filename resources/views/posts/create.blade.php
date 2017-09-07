@@ -4,16 +4,25 @@
 @section('stylesheets')
     {!! (Html::style('css/parsley.css')) !!}
     {!! Html::style('css/select2.min.css') !!}
-    {{--<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.7/summernote.css" rel="stylesheet">--}}
+
+    {{--x-editor--}}
+    {{--<script src="{{ asset('js/dropzone.js')}}"></script>--}}
+    {{--{!! (Html::script('js/dropzone.js')) !!}--}}
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=sryyzpozg7u0t3ffpr85qz3eq02lpqdf54kfbvs28rmfez4c"></script>
     <script>tinymce.init({selector: 'textarea'});</script>
+
+    {{--dropzone--}}
+
+    {!! (Html::style('css/dropzone.css')) !!}
+
 @endsection
 
 @section('content')
     <div class="row">
+        {{--{{phpinfo()}}--}}
         <div class="col-xs-offset-1 col-xs-10">
 
-            {!! Form::open(['route' => 'posts.store', 'data-parsley-validate'=>'', 'files' => true]) !!}
+            {!! Form::open(['route' => ['posts.store'],  'files' => true, 'enctype' => 'multipart/form-data', 'data-parsley-validate'=>'', 'id' => 'postForm']) !!}
 
             {{--{{Form::label('title', 'Title:')}}--}}
             {{--{{Form::text('title', null, ['class'=>'form-control'])}}--}}
@@ -25,7 +34,7 @@
 
             <div class="md-form-group float-label">
                 {{Form::text('title', null, ['class'=>'md-input', 'required', 'min-length'=>'5'])}}
-                <label>Title : </label>
+                <label>Title: </label>
             </div>
 
             <div class="md-form-group float-label">
@@ -42,52 +51,215 @@
                     @endforeach
                 </select>
             </div>
-{{--
+            {{--
 
-            <div class="form_group">
-                {{Form::label('tags', 'Tags:')}}
-                <select class="form-control select2-multi" name="tags[]" multiple="multiple">
-                    @foreach($tags as $tag)
-                        <option value="{{$tag->id}}">{{$tag->name}}</option>
-                    @endforeach
-                </select>
+                        <div class="form_group">
+                            {{Form::label('tags', 'Tags:')}}
+                            <select class="form-control select2-multi" name="tags[]" multiple="multiple">
+                                @foreach($tags as $tag)
+                                    <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+            --}}
+            {{--'class' => 'dropzone', 'id' => 'image-upload'--}}
+{{--
+            <div class="md-form-group" >
+                {{Form::label('featured_img', 'featured Image :')}}
+                --}}
+{{--{{Form::file('featured_img', null, ['class'=>'form-control'])}}--}}{{--
+
+
+                --}}
+{{--{!! Form::open([ 'route' => [ 'dropzone.store' ], 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'image-upload' ]) !!}--}}{{--
+
+                <div class="dropzone-previews" id="dropzonePreview"></div>
+                <a id="btnFileAdd" class="btn btn-primary btn-xs">파일첨부</a>
+                --}}
+{{--{!! Form::close() !!}--}}{{--
+
             </div>
 --}}
-
-            <div class="md-form-group">
-                {{Form::label('featured_img', 'featured Image :')}}
-                {{Form::file('featured_img', null, ['class'=>'form-control'])}}
-            </div>
 
             <div class="form_group">
                 {{Form::label('body', 'Post Body:')}}
                 {{Form::textarea('body', null, ['class'=>'form-control'])}}
             </div>
 
-            {{Form::submit('Create Post', ['class'=>'btn btn-success btn-lg btn-block', 'style'=> 'margin-top:20px'])}}
+            {{--{{Form::submit('Create Post', ['id'=>'submit-all','class'=>'btn btn-success btn-lg btn-block', 'style'=> 'margin-top:20px'])}}--}}
             {!! Form::close() !!}
 
+            {!! Form::open([ 'route' => [ 'dropzone.store' ], 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'image-upload' ]) !!}
+                <div class="dropzone-previews" id="dropzonePreview"></div>
+            {!! Form::close() !!}
+
+
+            <button type="submit" id="submit-all" class="btn btn-primary btn-xs">Upload the file</button>
 
         </div>
         @stop
         @section('scripts')
             {!! (Html::script('js/select2.min.js')) !!}
-            <script type="text/javascript">
-                $(".select2-multi").select2();
+            {!! (Html::script('js/dropzone.js')) !!}
 
-                $(document).ready(function () {
-                    $('#summernote').summernote(
-                        {
-                            height: 300,
-                            placeholder: 'write here...'
-                        }
-                    );
-//            $('#summernote').summernote('editor.insertText', 'hello world');
+            <script type="text/javascript">
+                $( "#submit-all" ).click(function() {
+                    $( "#postForm" ).submit();
                 });
 
+/*                $( "#postForm" ).submit(function( event ) {
+                    alert( "Handler for .submit() called." );
+                });*/
+
+
+
+                Dropzone.options.imageUpload = {
+                    //autoProcessQueue: false,
+                    parallelUploads: 100,
+//                    previewsContainer: '#dropzonePreview',
+                    //previewTemplate: document.querySelector('#preview-template').innerHTML,
+                    dictFileTooBig: 'Image is bigger than 8MB',
+                    dictDefaultMessage: "Click 또는  File을 Drop 하실 수 있습니다!-나는 마스터 ",
+                    addRemoveLinks: true,
+                    dictRemoveFile: 'Remove',
+                    maxFilesize: 500,
+                    acceptedFiles: ".txt,.jpeg,.jpg,.png,.gif",
+                    createImageThumbnails: "true",
+
+                    init: function () {
+                        var myDropzone = this;
+                        /*$('#submitfiles').on("click", function (e) {
+
+                            e.preventDefault();
+                            e.stopPropagation();
+
+                            if (myDropzone.getQueuedFiles().length > 0) {
+                                myDropzone.processQueue();
+                            } else {
+                                alert('No Files to upload!');
+                            }
+                        });*/
+                    },
+                    success: function (file, response) {
+                        var imgName = response.success;
+                        file.previewElement.classList.add("dz-success");
+
+                        var $hiddenInput = $('<input/>',{type:'hidden',name:'addfile[]',value:imgName});
+                        $hiddenInput.appendTo('#postForm');
+                        console.log("Successfully uploaded :" + imgName);
+                    },
+                    error: function (file, response) {
+                        file.previewElement.classList.add("dz-error");
+                    }
+                };
             </script>
 
-            <script src="{{ asset('js/summernote.min.js')}}"></script>
+
+          {{--  <script type="text/javascript">
+
+                $(document).ready(function() {
+                    Dropzone.autoDiscover = false;
+                    $("#dropzonePreview").dropzone({
+                        //autoProcessQueue: false,
+                        url: "/dropzone/store",
+                        addRemoveLinks: true,
+                        dictRemoveFile: 'Remove',
+                        maxFilesize: 5,
+                        dictFileTooBig: '10MB 보다 클수 없습니다.',
+                        dictDefaultMessage: "Click or Drop files here to upload",
+                        acceptedFiles: ".txt,.jpeg,.jpg,.png,.gif",
+                        init: function () {
+
+                            var myDropzone = this;
+
+                            $('#submitfiles').on("click", function (e) {
+
+                                e.preventDefault();
+                                e.stopPropagation();
+
+                                if (myDropzone.getQueuedFiles().length > 0) {
+                                    myDropzone.processQueue();
+                                } else {
+                                    alert('No Files to upload!');
+                                }
+                            });
+                        },
+                        success: function (file, response) {
+                            var imgName = response;
+                            file.previewElement.classList.add("dz-success");
+                            console.log("Successfully uploaded :" + imgName);
+                        },
+                        error: function (file, response) {
+                            file.previewElement.classList.add("dz-error");
+                        }
+                    });
+                });
+
+
+                $(".select2-multi").select2();
+
+            </script>--}}
+            {{--<script type="text/javascript">
+
+                Dropzone.options.imageUpload = {
+                    autoProcessQueue: false,
+                    parallelUploads: 100,
+                    clickable: ["#btnFileAdd"],
+                    uploadMultiple: true,
+                    previewsContainer: '#dropzonePreview',
+//                    previewTemplate: document.querySelector('#preview-template').innerHTML,
+                    dictFileTooBig: 'Image is bigger than 8MB',
+                    dictDefaultMessage: "Click 또는  File을 Drop 하실 수 있습니다!-나는 마스터 ",
+                    addRemoveLinks: true,
+                    dictRemoveFile: 'Remove',
+                    maxFilesize: 500,
+//                    acceptedFiles: ".txt,.jpeg,.jpg,.png,.gif",
+
+                    createImageThumbnails: "true",
+                    // The setting up of the dropzone
+
+                    init: function () {
+                        var myDropzone = this;
+
+
+
+                        $('#submit-all').on("click", function (e) {
+//                            if (myDropzone.getQueuedFiles().length > 0) {
+                            if (myDropzone.files.length > 0) {
+
+                                e.preventDefault();
+                                e.stopPropagation();
+                                myDropzone.processQueue();
+                            }
+
+                            /*if (myDropzone.getQueuedFiles().length > 0) {
+                                myDropzone.processQueue();
+                            } else {
+                                alert('No Files to upload!');
+                            }*/
+                        });
+
+//                        this.on("complete", function(file) {
+//                            myDropzone.removeFile(file);
+//                        });
+
+                        this.on("successmultiple", function(files, response) {
+                            window.location.href="/posts";
+                        });
+                    },
+
+
+                    success: function (file, response) {
+                        var imgName = response;
+                        file.previewElement.classList.add("dz-success");
+                        console.log("Successfully uploaded :" + imgName);
+                    },
+                    error: function (file, response) {
+                        file.previewElement.classList.add("dz-error");
+                        $(file.previewElement).find('.dz-error-message').text(response);
+                    }
+                };
+            </script>--}}
 @endsection
 
 

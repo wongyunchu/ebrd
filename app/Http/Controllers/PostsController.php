@@ -61,14 +61,14 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
-
         $this->validate($request, [
             'title'         => 'required|max:255',
             'slug'          => 'required|alpha_dash|max:255|min:5',
-            'category_id'   => 'required|integer',
-            'body'          => 'required'
+            'category_id'   => 'required|integer'
         ]);
+        //return response()->json(['success'=>$request->slug]);
+
+//        dd($request);
 
         $posts = new Post();
         $posts->title = $request->title;
@@ -78,14 +78,25 @@ class PostsController extends Controller
         $posts->thumbnail = '';
 
         //save our Image
-        if($request->hasFile('featured_img')) {
+/*        if($request->hasFile('featured_img')) {
             $image = $request->file('featured_img');
             $filename = time().'.'. $image->getClientOriginalExtension();
             $location = public_path('images/'.$filename);
             Image::make($image)->resize(800, 400)->save($location);
-
             $posts->image = $filename;
+        }*/
+        if($request->hasFile('file')) {
+            $files = $request->file('file');
+            foreach ($files as $file) {
+                $imageName = time().$file->getClientOriginalName();
+                $file->move(public_path('images'),$imageName);
+            }
         }
+
+        //return response()->json(['success'=>$request->title]);
+
+
+
 
         $posts->save();
 
@@ -93,10 +104,8 @@ class PostsController extends Controller
 
         //$posts->tags = $request->tags;
 
-        Session::flash('success', 'The blog post was successfully save!!'); //put은 영구적
-
-
-        return redirect()->route('posts.show', $posts->id);
+//        Session::flash('success', 'The blog post was successfully save!!'); //put은 영구적
+        return redirect()->route('posts.index');
     }
 
     /**

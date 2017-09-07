@@ -1,5 +1,7 @@
 @extends('main')
 @section('title', '| Main')
 @section('content')
-    index
+1112
+
+{{--{{phpinfo()}}--}}
 @endsection

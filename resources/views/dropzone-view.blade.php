@@ -1,15 +1,18 @@
-<!DOCTYPE html>
+
+
 <html>
 <head>
     <title>Upload Multiple Images using dropzone.js and Laravel</title>
 
-    <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
-    <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
+    {{--<script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>--}}
+    {{--<link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">--}}
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet">--}}
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>--}}
-    <script src="{{ asset('js/dropzone.js')}}"></script>
     {{--{!! (Html::style('css/basic.css')) !!}--}}
+    <script src="{{ asset('js/dropzone.js')}}"></script>
     {!! (Html::style('css/dropzone.css')) !!}
+
+
 </head>
 <body>
 
@@ -26,17 +29,9 @@
 </div>
 
 
-<div class="jumbotron how-to-create">
-    <ul>
-        <li>Images are uploaded as soon as you drop them</li>
-        <li>Maximum allowed size of image is 8MB</li>
-    </ul>
-
-</div>
-
 
 <!-- Dropzone Preview Template -->
-<div id="preview-template">
+{{--<div id="preview-template">
 
     <div class="dz-preview dz-file-preview" >
         <div class="dz-image"><img data-dz-thumbnail=""></div>
@@ -81,15 +76,15 @@
         </div>
 
     </div>
-</div>
+</div>--}}
 
 <script type="text/javascript">
 
     Dropzone.options.imageUpload = {
-        autoProcessQueue: false,
+        //autoProcessQueue: false,
         parallelUploads: 100,
         previewsContainer: '#dropzonePreview',
-        previewTemplate: document.querySelector('#preview-template').innerHTML,
+        //previewTemplate: document.querySelector('#preview-template').innerHTML,
         dictFileTooBig: 'Image is bigger than 8MB',
         dictDefaultMessage: "Click 또는  File을 Drop 하실 수 있습니다!-나는 마스터 ",
         addRemoveLinks: true,
