@@ -15,6 +15,9 @@ class Post extends Model
         return $this->belongsTo('App\Category');
     }
 
+    public function atcfiles(){
+        return $this->belongsToMany('App\atcfile');
+    }
     public function tags(){
         return $this->belongsToMany('App\Tag');
     }

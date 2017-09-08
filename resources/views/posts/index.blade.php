@@ -64,14 +64,23 @@
                 {!! $posts->links(); !!}
             </div>
 
-            <hr>
+            <div class="form_group">
+                <hr>
+                <div class="row">
+                    <div class="col-sm-6">
 
-
-
-
-            <div class="text-center">
-                <a href="{{route('posts.create')}}" class="btn btn-primary btn-block btn-h1-spacing">Create New Post</a>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="end-xs">
+                            {{--<button type="submit" id="submit-all" class="btn btn-primary btn-lg right">저장</button>--}}
+                            <a href="{{route('posts.create')}}" class="btn btn-lg btn-primary">작성</a>
+                        </div>
+                    </div>
+                    {{--<div class="col-md-8">col-md-8</div>--}}
+                    {{--<div class="col-md-4 "></div>--}}
+                </div>
             </div>
+
         </div>
     </div>
 

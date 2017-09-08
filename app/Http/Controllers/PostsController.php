@@ -66,9 +66,6 @@ class PostsController extends Controller
             'slug'          => 'required|alpha_dash|max:255|min:5',
             'category_id'   => 'required|integer'
         ]);
-        //return response()->json(['success'=>$request->slug]);
-
-//        dd($request);
 
         $posts = new Post();
         $posts->title = $request->title;
@@ -93,15 +90,11 @@ class PostsController extends Controller
             }
         }
 
-        //return response()->json(['success'=>$request->title]);
-
-
 
 
         $posts->save();
-
-        $posts->tags()->sync($request->tags, false);
-
+        $posts->atcfiles()->sync(array(1, 2), false);
+        //$posts->tags()->sync(array(3, 4, 5), false);
         //$posts->tags = $request->tags;
 
 //        Session::flash('success', 'The blog post was successfully save!!'); //put은 영구적
