@@ -4,7 +4,10 @@
     {!! (Html::style('css/parsly.css')) !!}
     {!! Html::style('css/select2.min.css') !!}
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=sryyzpozg7u0t3ffpr85qz3eq02lpqdf54kfbvs28rmfez4c"></script>
-    <script>tinymce.init({ selector:'textarea' });</script>
+    <script>tinymce.init({
+            selector:'textarea',
+            branding: false
+    });</script>
 @endsection
 @section('content')
     <div class="row">
@@ -17,7 +20,7 @@
             {{--{{Form::Label('slug', 'Slug:')}}--}}
             {{--{{Form::text('slug', null, ['class'=>'form-control input-lg'])}}--}}
                 <div class="md-form-group float-label">
-                    {{Form::text('slug', null, ['class'=>'md-input', 'required', 'min-length'=>'5'])}}
+                    {{Form::text('slug', null, ['class'=>'md-input', 'required', 'readonly',  'min-length'=>'5'])}}
                     <label>slug</label>
                 </div>
             </div>

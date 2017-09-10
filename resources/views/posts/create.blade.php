@@ -5,11 +5,35 @@
     {!! (Html::style('css/parsley.css')) !!}
     {!! Html::style('css/select2.min.css') !!}
 
-    {{--x-editor--}}
-    {{--<script src="{{ asset('js/dropzone.js')}}"></script>--}}
-    {{--{!! (Html::script('js/dropzone.js')) !!}--}}
+    <?php
+        if($isReadonly == 'readonly') {
+            $editable = 'false';
+
+        }
+        else {
+            $editable = 'true';
+        }
+    ?>
+    @if ($isReadonly == 'readonly')
+        <style>
+            .mce-tinymce.mce-container.mce-panel {
+                border: 0px dashed !important;
+            }
+        </style>
+    @endif
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=sryyzpozg7u0t3ffpr85qz3eq02lpqdf54kfbvs28rmfez4c"></script>
-    <script>tinymce.init({selector: 'textarea'});</script>
+    <script>tinymce.init({
+            selector: 'textarea',
+            branding: false,
+            elementpath: false,
+            readonly:   {{$editable=='false'?'true':'false'}},
+            menubar:    {{$editable}},
+            statusbar:  {{$editable}},
+            @if ($isReadonly == 'readonly')
+            toolbar:false
+            @endif
+
+        });</script>
 
     {{--dropzone--}}
 
@@ -22,75 +46,38 @@
         {{--{{phpinfo()}}--}}
         <div class="col-xs-offset-0 col-xs-12">
 
-            {!! Form::open(['route' => ['posts.store'],  'files' => true, 'enctype' => 'multipart/form-data', 'data-parsley-validate'=>'', 'id' => 'postForm']) !!}
-
-            {{--{{Form::label('title', 'Title:')}}--}}
-            {{--{{Form::text('title', null, ['class'=>'form-control'])}}--}}
-
-            {{--<div class="form_group">--}}
-            {{--{{Form::label('slug', 'Slug:')}}--}}
-            {{--{{Form::text('slug', null, ['class'=>'form-control', 'required', 'min-length'=>'5'])}}--}}
-            {{--</div>--}}
+            {!! Form::model($post, ['route' => ['posts.store'],  'files' => true, 'enctype' => 'multipart/form-data', 'data-parsley-validate'=>'', 'id' => 'postForm']) !!}
 
             <div class="md-form-group float-label">
-                {{Form::text('title', null, ['class'=>'md-input', 'required', 'min-length'=>'5'])}}
+                {{Form::text('title', null, ['class'=>'md-input', $isReadonly, 'required', 'min-length'=>'5'])}}
                 <label>Title: </label>
             </div>
 
             <div class="md-form-group float-label">
-                {{Form::text('slug', null, ['class'=>'md-input', 'required', 'min-length'=>'5'])}}
+                {{Form::text('slug', null, ['class'=>'md-input', $isReadonly,'required', 'min-length'=>'5'])}}
                 <label>Slug : </label>
             </div>
 
 
             <div class="md-form-group">
                 {{Form::label('category_id', 'Category:',['class'=>'md-input'])}}
-                <select class="form-control" id="category_id" name="category_id">
+
+                <select class="form-control" id="category_id"  name="category_id">
                     @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        <option value="{{$category->id}}"
+                                @if (old('category_id') == $category->id)  selected="selected" @endif>{{$category->name}}</option>
                     @endforeach
                 </select>
             </div>
-            {{--
-
-                        <div class="form_group">
-                            {{Form::label('tags', 'Tags:')}}
-                            <select class="form-control select2-multi" name="tags[]" multiple="multiple">
-                                @foreach($tags as $tag)
-                                    <option value="{{$tag->id}}">{{$tag->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-            --}}
-            {{--'class' => 'dropzone', 'id' => 'image-upload'--}}
-            {{--
-                        <div class="md-form-group" >
-                            {{Form::label('featured_img', 'featured Image :')}}
-                            --}}
-            {{--{{Form::file('featured_img', null, ['class'=>'form-control'])}}--}}{{--
-
-
-                            --}}
-            {{--{!! Form::open([ 'route' => [ 'dropzone.store' ], 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'image-upload' ]) !!}--}}{{--
-
-                            <div class="dropzone-previews" id="dropzonePreview"></div>
-                            <a id="btnFileAdd" class="btn btn-primary btn-xs">파일첨부</a>
-                            --}}
-            {{--{!! Form::close() !!}--}}{{--
-
-                        </div>
-            --}}
 
             <div class="form_group">
                 {{Form::label('body', 'Post Body:')}}
-                {{Form::textarea('body', null, ['class'=>'form-control'])}}
+                {{Form::textarea('body', null,['class'=>'form-control', $isReadonly])}}
             </div>
-
-            {{--{{Form::submit('Create Post', ['id'=>'submit-all','class'=>'btn btn-success btn-lg btn-block', 'style'=> 'margin-top:20px'])}}--}}
             {!! Form::close() !!}
 
             {!! Form::open([ 'route' => [ 'dropzone.store' ], 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'image-upload' ]) !!}
-            <div class="dropzone-previews" id="dropzonePreview"></div>
+            <div class="dropzone-previews" $isReadonly, id="dropzonePreview"></div>
             {!! Form::close() !!}
 
             <div class="form_group">
@@ -124,168 +111,81 @@
                     </div>
                 </div>
             </div>--}}
-        @stop
-        @section('scripts')
-            {!! (Html::script('js/select2.min.js')) !!}
-            {!! (Html::script('js/dropzone.js')) !!}
+@stop
+@section('scripts')
+    {!! (Html::script('js/select2.min.js')) !!}
+    {!! (Html::script('js/dropzone.js')) !!}
 
-            <script type="text/javascript">
-                $("#submit-all").click(function () {
-                    $("#postForm").submit();
-                });
+    <script type="text/javascript">
+        @if ($isReadonly == 'readonly')
+            $("#category_id option").not(":selected").remove();
+        @endif
 
-                /*                $( "#postForm" ).submit(function( event ) {
-                                    alert( "Handler for .submit() called." );
-                                });*/
-
-
-                Dropzone.options.imageUpload = {
-                    //autoProcessQueue: false,
-                    parallelUploads: 100,
-//                    previewsContainer: '#dropzonePreview',
-                    //previewTemplate: document.querySelector('#preview-template').innerHTML,
-                    dictFileTooBig: 'Image is bigger than 8MB',
-                    dictDefaultMessage: "Click 또는  File을 Drag&Drop 하실 수 있습니다 ",
-                    addRemoveLinks: true,
-                    dictRemoveFile: 'Remove',
-                    maxFilesize: 500,
-                    acceptedFiles: ".txt,.jpeg,.jpg,.png,.gif",
-                    createImageThumbnails: "true",
-
-                    init: function () {
-                        var myDropzone = this;
-                        /*$('#submitfiles').on("click", function (e) {
-
-                            e.preventDefault();
-                            e.stopPropagation();
-
-                            if (myDropzone.getQueuedFiles().length > 0) {
-                                myDropzone.processQueue();
-                            } else {
-                                alert('No Files to upload!');
-                            }
-                        });*/
-                    },
-                    success: function (file, response) {
-                        var imgName = response.success;
-                        file.previewElement.classList.add("dz-success");
-
-                        var $hiddenInput = $('<input/>', {type: 'hidden', name: 'addfile[]', value: imgName});
-                        $hiddenInput.appendTo('#postForm');
-                        console.log("Successfully uploaded :" + imgName);
-                    },
-                    error: function (file, response) {
-                        file.previewElement.classList.add("dz-error");
-                    }
-                };
-            </script>
-
-
-    {{--  <script type="text/javascript">
-
-          $(document).ready(function() {
-              Dropzone.autoDiscover = false;
-              $("#dropzonePreview").dropzone({
-                  //autoProcessQueue: false,
-                  url: "/dropzone/store",
-                  addRemoveLinks: true,
-                  dictRemoveFile: 'Remove',
-                  maxFilesize: 5,
-                  dictFileTooBig: '10MB 보다 클수 없습니다.',
-                  dictDefaultMessage: "Click or Drop files here to upload",
-                  acceptedFiles: ".txt,.jpeg,.jpg,.png,.gif",
-                  init: function () {
-
-                      var myDropzone = this;
-
-                      $('#submitfiles').on("click", function (e) {
-
-                          e.preventDefault();
-                          e.stopPropagation();
-
-                          if (myDropzone.getQueuedFiles().length > 0) {
-                              myDropzone.processQueue();
-                          } else {
-                              alert('No Files to upload!');
-                          }
-                      });
-                  },
-                  success: function (file, response) {
-                      var imgName = response;
-                      file.previewElement.classList.add("dz-success");
-                      console.log("Successfully uploaded :" + imgName);
-                  },
-                  error: function (file, response) {
-                      file.previewElement.classList.add("dz-error");
-                  }
-              });
-          });
-
-
-          $(".select2-multi").select2();
-
-      </script>--}}
-    {{--<script type="text/javascript">
+        $("#submit-all").click(function () {
+            $("#postForm").submit();
+        });
 
         Dropzone.options.imageUpload = {
-            autoProcessQueue: false,
+            //autoProcessQueue: false,
             parallelUploads: 100,
-            clickable: ["#btnFileAdd"],
-            uploadMultiple: true,
-            previewsContainer: '#dropzonePreview',
-//                    previewTemplate: document.querySelector('#preview-template').innerHTML,
+            @if ($isReadonly == 'readonly')
+                clickable: false,
+            @endif
             dictFileTooBig: 'Image is bigger than 8MB',
-            dictDefaultMessage: "Click 또는  File을 Drop 하실 수 있습니다!-나는 마스터 ",
+            dictDefaultMessage: "Click 또는  File을 Drag&Drop 하실 수 있습니다 ",
             addRemoveLinks: true,
             dictRemoveFile: 'Remove',
             maxFilesize: 500,
-//                    acceptedFiles: ".txt,.jpeg,.jpg,.png,.gif",
-
+            acceptedFiles: ".txt,.jpeg,.jpg,.png,.gif",
             createImageThumbnails: "true",
-            // The setting up of the dropzone
 
             init: function () {
                 var myDropzone = this;
+                <?php
+                    // 업로드 되었고 리스트업 된 상태 ( 그중에 인풋 오류로 되돌아온 상태 old에 값이 있는)
+                    $file_names = old('file_name');
+                    if($file_names != null ) {
+                    foreach($file_names as $file_name){
+                        $ar = explode('|', $file_name);
+                        $ar_file_org_name = $ar[0];
+                        $ar_file_name = $ar[1];
+                        $ar_file_id = $ar[2];
+                ?>
+                        var mockFile = {name: '{{$ar[0]}}', size: 100};
+                        myDropzone.emit("addedfile", mockFile);
+                        //myDropzone.emit("thumbnail", mockFile, "/image/url");
+                        //myDropzone.options.addedfile.call(myDropzone, file);
+                        myDropzone.createThumbnailFromUrl(mockFile, '/images/' + '{{$ar_file_name}}');
+                        myDropzone.emit("complete", mockFile);
 
+                        var $hiddenInput = $('<input/>', {
+                            type: 'hidden',
+                            name: 'file_name[]',
+                            value: '{{$ar_file_org_name.'|'.$ar_file_name.'|'.$ar_file_id}}'
+                        });
+                        $hiddenInput.appendTo('#postForm');
 
-
-                $('#submit-all').on("click", function (e) {
-//                            if (myDropzone.getQueuedFiles().length > 0) {
-                    if (myDropzone.files.length > 0) {
-
-                        e.preventDefault();
-                        e.stopPropagation();
-                        myDropzone.processQueue();
+                        {{--var $hiddenFileId = $('<input/>', {type: 'hidden', name: 'file_id[]', value:'{{$ar_file_id}}' });--}}
+                        {{--$hiddenFileId.appendTo('#postForm');--}}
+                <?php
                     }
-
-                    /*if (myDropzone.getQueuedFiles().length > 0) {
-                        myDropzone.processQueue();
-                    } else {
-                        alert('No Files to upload!');
-                    }*/
-                });
-
-//                        this.on("complete", function(file) {
-//                            myDropzone.removeFile(file);
-//                        });
-
-                this.on("successmultiple", function(files, response) {
-                    window.location.href="/posts";
-                });
+                //                            echo 'myDropzone.emit("complete", mockFile)';
+                }
+                ?>
             },
-
-
             success: function (file, response) {
-                var imgName = response;
+                var file_name = response.success.file_name;
                 file.previewElement.classList.add("dz-success");
-                console.log("Successfully uploaded :" + imgName);
+                var $hiddenInputName = $('<input/>', {type: 'hidden', name: 'file_name[]', value: file_name});
+                $hiddenInputName.appendTo('#postForm');
             },
             error: function (file, response) {
                 file.previewElement.classList.add("dz-error");
-                $(file.previewElement).find('.dz-error-message').text(response);
+                $(file.previewElement).find('.dz-error-message').text(response.message);
             }
         };
-    </script>--}}
+    </script>
+
 @endsection
 
 

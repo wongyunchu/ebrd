@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAtcFilesTable extends Migration
+class CreateAtcfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAtcFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('atcFiles', function (Blueprint $table) {
+        Schema::create('atcfiles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('org_name');
@@ -21,7 +21,6 @@ class CreateAtcFilesTable extends Migration
             $table->float('size');
             $table->timestamps();
         });
-
     }
 
     /**
@@ -31,6 +30,6 @@ class CreateAtcFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('atcFiles');
+        Schema::dropIfExists('atcfiles');
     }
 }

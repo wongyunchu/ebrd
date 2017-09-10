@@ -9,14 +9,14 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @mixin \Eloquent
  */
-class Post extends Model
+class  Post extends Model
 {
     public function category() {
         return $this->belongsTo('App\Category');
     }
 
     public function atcfiles(){
-        return $this->belongsToMany('App\atcfile');
+        return $this->hasMany('App\atcfile');
     }
     public function tags(){
         return $this->belongsToMany('App\Tag');

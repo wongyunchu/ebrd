@@ -1,5 +1,6 @@
 @extends('main')
-@section('title', '| View Post')
+@section('title', '| 공지사항')
+@section('title_sub', 'show Posts...')
 
 @section('content')
     <div class="row">
@@ -56,7 +57,7 @@
             <div class="well">
                 <dl class="dl-horizontal">
                     <label>Url:</label>
-                    <p><a href="{{route('blog.single',$post->slug)}}">{{route('blog.single',$post->slug)}}</a></p>
+                    {{--<p><a href="{{route('blog.single',$post->slug)}}">{{route('blog.single',$post->slug)}}</a></p>--}}
                 </dl>
 
                 <dl class="dl-horizontal">

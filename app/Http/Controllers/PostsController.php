@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Atcfile;
 use App\Category;
 use App\Post;
 use App\Tag;
@@ -48,10 +49,66 @@ class PostsController extends Controller
      */
     public function create()
     {
+        $isReadonly = '';
         $categories = Category::all();
-        $tags = Tag::all();
-        return view('posts.create')->with('categories', $categories)->with('tags', $tags);
+        //$tags = Tag::all();
+        return view('posts.create')->with('post', null)->with('categories', $categories)->with('isReadonly', $isReadonly);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $isReadonly = 'readonly';
+        $post = Post::find($id);
+        $aaa = $post->atcfiles;
+
+/*        $post = Post::find($id)->atcfiles;
+        foreach ($post as $item) {
+            $aa = $item;
+        }*/
+
+        $categories = Category::all();
+        return view('posts.create')->with('post', $post)->with('categories', $categories)->with('isReadonly', $isReadonly);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $isReadonly = '';
+        $post = Post::find($id);
+        $categories = Category::all();
+//        $cats = [];
+//        foreach ($categories as $category) {
+//            $cats[$category->id] = $category->name;
+//        }
+
+        $tags = Tag::all();
+//        $tags2 = [];
+//        foreach ($tags as $tag) {sss
+//            $tags2[$tag->id] = $tag->name;
+//        }
+
+        return view('posts.create')->withPost($post)->with('categories', $categories)->with('isReadonly', $isReadonly);
+        //return the view and pass in the var  we previously created
+    }
+
+    /*public function getSingle($id) {
+        // fetch from the DB based on slug
+        $post = Post::where('id','=', $id)->first(); // first 는 하나의 vo만 가져온다 . get()은 array로
+
+        // return the view and pass in the post object
+        return view('post.single')->with('post', $post);
+    }*/
 
     /**
      * Store a newly created resource in storage.
@@ -73,27 +130,33 @@ class PostsController extends Controller
         $posts->category_id = $request->category_id;
         $posts->body = Purifier::clean($request->body);
         $posts->thumbnail = '';
+        $posts->save();
 
-        //save our Image
-/*        if($request->hasFile('featured_img')) {
-            $image = $request->file('featured_img');
-            $filename = time().'.'. $image->getClientOriginalExtension();
-            $location = public_path('images/'.$filename);
-            Image::make($image)->resize(800, 400)->save($location);
-            $posts->image = $filename;
-        }*/
-        if($request->hasFile('file')) {
-            $files = $request->file('file');
+        $files = $request->file_name;
+        if($files !=null) {
+            $arFileId = [];
             foreach ($files as $file) {
-                $imageName = time().$file->getClientOriginalName();
-                $file->move(public_path('images'),$imageName);
+                $file_id = explode('|', $file)[2];
+                array_push($arFileId,$file_id);
             }
+
+
+            //$atcfiles2 = Atcfile::find([207, 206]);
+            Atcfile::whereIn('id', $arFileId)
+                ->update(['post_id'=>$posts->id]);
+
+
+/*            App\Flight::where('active', 1)
+                ->where('destination', 'San Diego')
+                ->update(['delayed' => 1]);*/
+
+            /*if(count($arFileId) >0 ) {
+                $posts->atcfiles()->sync($arFileId, false);
+            }*/
+
         }
 
 
-
-        $posts->save();
-        $posts->atcfiles()->sync(array(1, 2), false);
         //$posts->tags()->sync(array(3, 4, 5), false);
         //$posts->tags = $request->tags;
 
@@ -101,44 +164,9 @@ class PostsController extends Controller
         return redirect()->route('posts.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $post = Post::find($id);
-        $categories = Category::all();
-        return view('posts.show')->with('post', $post)->with('categories', $categories);
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //find the post in the database and save as a var
-        $post = Post::find($id);
-        $categories = Category::all();
-        $cats = [];
-        foreach ($categories as $category) {
-            $cats[$category->id] = $category->name;
-        }
 
-        $tags = Tag::all();
-        $tags2 = [];
-        foreach ($tags as $tag) {
-            $tags2[$tag->id] = $tag->name;
-        }
 
-        return view('posts.edit')->withPost($post)->with('categories', $cats)->with('tags', $tags2);
-        //return the view and pass in the var  we previously created
-    }
 
     /**
      * Update the specified resource in storage.
