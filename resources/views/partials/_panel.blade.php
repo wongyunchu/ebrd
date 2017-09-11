@@ -1,6 +1,7 @@
 <div id="content" class="app-content" class="app-content box-shadow-z0" role="main">
     <div ui-view class="app-body" id="view">
         <div class="padding">
+            @include('partials._messages')
             <div class="row">
                 <!-- BEGIN Portlet PORTLET-->
                 <div class="portlet portlet-bordered">

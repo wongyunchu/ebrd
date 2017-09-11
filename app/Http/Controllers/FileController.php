@@ -48,11 +48,12 @@ class FileController extends Controller
             return response()->json(['fail'=>$e->errorInfo]);
         }
 
-
-
-
-
         //return response()->json(['success'=>['file_id'=>$atcFile->id, 'file_name'=>$atcFile->org_name]]);
         return response()->json(['success'=>['file_name'=>$atcFile->org_name.'|'.$atcFile->name.'|'.$atcFile->id]]);
     }
+
+    public function dropzoneRemove()
+    {
+        
+    } 
 }

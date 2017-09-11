@@ -49,6 +49,7 @@ class PostsController extends Controller
      */
     public function create()
     {
+
         $isReadonly = '';
         $categories = Category::all();
         //$tags = Tag::all();
@@ -140,27 +141,22 @@ class PostsController extends Controller
                 array_push($arFileId,$file_id);
             }
 
-
-            //$atcfiles2 = Atcfile::find([207, 206]);
             Atcfile::whereIn('id', $arFileId)
                 ->update(['post_id'=>$posts->id]);
-
 
 /*            App\Flight::where('active', 1)
                 ->where('destination', 'San Diego')
                 ->update(['delayed' => 1]);*/
 
-            /*if(count($arFileId) >0 ) {
+            //$atcfiles2 = Atcfile::find([207, 206]);
+
+            /* 다대다 관계일때
+             * if(count($arFileId) >0 ) {
                 $posts->atcfiles()->sync($arFileId, false);
             }*/
 
         }
-
-
-        //$posts->tags()->sync(array(3, 4, 5), false);
-        //$posts->tags = $request->tags;
-
-//        Session::flash('success', 'The blog post was successfully save!!'); //put은 영구적
+        Session::flash('success', 'The blog post was successfully save!!'); //put은 영구적
         return redirect()->route('posts.index');
     }
 
