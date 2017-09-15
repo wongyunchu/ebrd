@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Atcfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
 
 class FileController extends Controller
@@ -52,8 +55,22 @@ class FileController extends Controller
         return response()->json(['success'=>['file_name'=>$atcFile->org_name.'|'.$atcFile->name.'|'.$atcFile->id]]);
     }
 
-    public function dropzoneRemove()
+    public function dropzoneRemove(Request $request)
     {
-        
+        $filename = Input::get('val');
+        $originalFilename = $filename;
+        $sFilePath = public_path('images').'\\'.$originalFilename;
+
+
+        if ( File::exists($sFilePath) )
+        {
+            File::delete( $sFilePath );
+        }
+        $deleteRow = Atcfile::where('name', $filename)->delete();
+        return Response::json([
+            'resut'=> $deleteRow,
+            'error' => false,
+            'code'  => 200
+        ], 200);
     } 
 }

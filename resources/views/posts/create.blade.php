@@ -84,6 +84,13 @@
             <div class="dropzone-previews" $isReadonly, id="dropzonePreview"></div>
             {!! Form::close() !!}
 
+            {!! Form::open([ 'route' => [ 'dropzone.remove' ],  'id' => 'testRemove' ]) !!}
+            <input type="hidden"  value="filenameTEst" id="filename"/>
+            {{--{{csrf_field()}}--}}
+            {{--{!! Form::hidden('csrf-token', csrf_token(), ['id' => 'csrf-token']) !!}--}}
+            {!! Form::close() !!}
+            {!! Form::hidden('csrf-token', csrf_token(), ['id' => 'csrf-token']) !!}
+
             <div class="form_group">
                 <hr>
                 <div class="row">
@@ -204,26 +211,27 @@
                 ?>
 
                 this.on("removedfile", function(file) {
+                    //$("#testRemove").submit();
+                    $.ajax({
+                        type: 'POST',
+                        url: '/dropzone/remove',
+                        //$("#testRemove").find('[name=_token]').val()
 
-                $.ajax({
-                    type: 'POST',
-                    url: 'upload/delete',
-                    data: {id: file.name, _token: $('#csrf-token').val()},
-                    dataType: 'html',
-                    success: function(data){
-                        var rep = JSON.parse(data);
-                        if(rep.code == 200)
-                        {
-                            alert('삭제 성공');
+                        data: {id: file.name,val:JSON.parse(file.xhr.response).success.file_name.split("|")[1], _token: $('#csrf-token').val()},
+                        //data: {id: file.name},
+                        dataType: 'html',
+                        success: function(data){
+                            var rep = JSON.parse(data);
+                            if(rep.code == 200)
+                            {
+                                alert('삭제 성공');
+                            }
+                        },
+                        error:function(data) {
+                            alert('create.blade Err: ' + data.statusText+'@@'+data.msg);
                         }
-                    },
-                    error:function(data) {
-                        alert(data.statusText);
 
-                    }
-
-                });
-
+                    });
             } );
             },
             success: function (file, response) {
