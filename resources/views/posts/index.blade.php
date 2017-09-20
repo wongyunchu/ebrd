@@ -6,11 +6,11 @@
         <div class="col-xs-offset-0 col-xs-12">
             <table class="table table-hover">
                 <thead>
-                <th>#</th>
+                <th style="width:100px">#</th>
                 <th>Title</th>
                 <th>Body</th>
-                <th>Create At</th>
-                <th></th>
+                <th style="width:140px">Create At</th>
+                <th style="width:140px"></th>
                 </thead>
                 <tbody>
                 @foreach($posts as $post)
@@ -66,19 +66,13 @@
 
             <div class="form_group">
                 <hr>
-                <div class="row">
-                    <div class="col-sm-6">
 
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="end-xs">
-                            {{--<button type="submit" id="submit-all" class="btn btn-primary btn-lg right">저장</button>--}}
+                    <div class="row col-sm-12 end-xs">
                             <a href="{{route('posts.create')}}" class="btn btn-lg btn-primary">작성</a>
-                        </div>
                     </div>
                     {{--<div class="col-md-8">col-md-8</div>--}}
                     {{--<div class="col-md-4 "></div>--}}
-                </div>
+
             </div>
 
         </div>

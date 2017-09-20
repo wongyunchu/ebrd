@@ -12,11 +12,16 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/font-awesome/css/font-awesome.min.css') }}" type="text/css" />
+    @yield('stylesheets')
 </head>
+
 <body>
+
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
+
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -42,7 +47,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        @if (Auth::guest())
+                        @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
@@ -65,7 +70,7 @@
                                     </li>
                                 </ul>
                             </li>
-                        @endif
+                        @endguest
                     </ul>
                 </div>
             </div>
@@ -76,5 +81,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('libs/jquery/jquery/dist/jquery.js') }}"></script>
+    <!-- Bootstrap -->
+    <script src="{{ asset('libs/jquery/tether/dist/js/tether.min.js') }}"></script>
+
+    @yield('scripts')
 </body>
 </html>

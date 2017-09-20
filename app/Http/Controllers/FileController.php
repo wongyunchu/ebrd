@@ -33,6 +33,7 @@ class FileController extends Controller
         $filename = time()."_".uniqid('file_').".".$image->getClientOriginalExtension();
 
         $ext = strtoupper($image->getClientOriginalExtension());
+        $file_size = ($image->getClientSize())/1000000;
         if($ext == 'JPG' || $ext == 'GIF'|| $ext == 'PNG') {
             $location = public_path('images\tb_'.$filename);
             //Image::make($image)->resize(800, 400)->save($location);
@@ -45,6 +46,9 @@ class FileController extends Controller
         $atcFile = new Atcfile();
         $atcFile->name      = $filename;
         $atcFile->org_name  = $org_name;
+        $atcFile->size      = $file_size;
+        $atcFile->path      = '';
+
         try {
             $aa = $atcFile->save();
         } catch (\Exception $e) {

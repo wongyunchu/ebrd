@@ -14,16 +14,16 @@
                     <i class="material-icons">&#xe7f5;</i>
                     <span class="label label-sm up warn">3</span>
                 </a>
-                <div ui-include="'../views/blocks/dropdown.notification.html'"></div>
+                <div ui-include="'/views/blocks/dropdown.notification.html'"></div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link clear" href data-toggle="dropdown">
             <span class="avatar w-32">
-            <img src="../assets/images/a0.jpg" alt="...">
+            <img src="/assets/images/a0.jpg" alt="...">
             <i class="on b-white bottom"></i>
             </span>
                 </a>
-                <div ui-include="'../views/blocks/dropdown.user.html'"></div>
+                <div ui-include="'/views/blocks/dropdown.user.html'"></div>
             </li>
             <li class="nav-item hidden-md-up">
                 <a class="nav-link" data-toggle="collapse" data-target="#collapse">

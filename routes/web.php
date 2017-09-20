@@ -35,3 +35,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('dropzone', 'FileController@dropzone');
 Route::post('dropzone/store', ['as'=>'dropzone.store','uses'=>'FileController@dropzoneStore']);
 Route::post('dropzone/remove', ['as'=>'dropzone.remove','uses'=>'FileController@dropzoneRemove']);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

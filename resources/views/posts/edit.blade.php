@@ -1,5 +1,6 @@
 @extends('main')
-@section('title', '| Edit Blog Post')
+@section('title', '| 공지사항 수정')
+@section('title_sub', 'Edit form...')
 @section('stylesheets')
     {!! (Html::style('css/parsly.css')) !!}
     {!! Html::style('css/select2.min.css') !!}
