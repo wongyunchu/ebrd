@@ -11,20 +11,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-
-    <link rel="stylesheet" href="{{ asset('css/flexboxgrid.css') }} " type="text/css" />
-    <link rel="stylesheet" href="{{ asset('assets/font-awesome/css/font-awesome.min.css') }}" type="text/css" />
-    <link href="{{ asset('assets/styles/app.css') }}" rel="stylesheet">
-
-    @yield('stylesheets')
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-
 <body>
-{{--
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
-
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -81,14 +73,8 @@
 
         @yield('content')
     </div>
-    --}}
-@yield('content')
-<!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('libs/jquery/jquery/dist/jquery.js') }}"></script>
-<!-- Bootstrap -->
-<script src="{{ asset('libs/jquery/tether/dist/js/tether.min.js') }}"></script>
 
-@yield('scripts')
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
