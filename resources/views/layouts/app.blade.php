@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('css/flexboxgrid.css') }} " type="text/css" />
     <link rel="stylesheet" href="{{ asset('assets/font-awesome/css/font-awesome.min.css') }}" type="text/css" />
     <link href="{{ asset('assets/styles/app.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('css/exentriq-bootstrap-material-ui.css') }} " type="text/css" />
     @yield('stylesheets')
 </head>
 

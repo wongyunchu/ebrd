@@ -1164,30 +1164,30 @@ a.list-group-item {
     padding-right: 0; }
 
 .row {
-  margin-left: -12px;
-  margin-right: -12px; }
+  /*margin-left: -12px;
+  margin-right: -12px;*/ }
   .row [class*="col-"] {
     padding-left: 12px;
     padding-right: 12px; }
 
 .row-sm {
-  margin-left: -8px;
-  margin-right: -8px; }
+/*  margin-left: -8px;
+  margin-right: -8px; */}
   .row-sm [class*="col-"] {
     padding-left: 8px;
     padding-right: 8px; }
 
 .row-xs {
-  margin-left: -4px;
-  margin-right: -4px; }
+/*  margin-left: -4px;
+  margin-right: -4px;*/ }
   .row-xs [class*="col-"] {
     padding-left: 4px;
     padding-right: 4px; }
 
 @media (max-width: 991px) {
   .row {
-    margin-left: -8px;
-    margin-right: -8px; }
+/*    margin-left: -8px;
+    margin-right: -8px; */}
     .row [class*="col-"] {
       padding-left: 8px;
       padding-right: 8px; }
@@ -1202,8 +1202,8 @@ a.list-group-item {
 
 @media (max-width: 767px) {
   .row {
-    margin-left: -4px;
-    margin-right: -4px; }
+/*    margin-left: -4px;
+    margin-right: -4px;*/ }
     .row [class*="col-"] {
       padding-left: 4px;
       padding-right: 4px; } }
@@ -4061,7 +4061,7 @@ a.text-blue:hover {
   color: rgba(255, 255, 255, 0.87); }
 
 .text-black {
-  color: black; }
+  color: black !important;}
 
 .text-black-lt {
   color: rgba(0, 0, 0, 0.54); }
