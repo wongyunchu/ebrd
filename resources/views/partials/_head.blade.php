@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="{{ asset('css/ui-panel.css') }} " type="text/css" />
 
     <link rel="stylesheet" href="{{ asset('css/flexboxgrid.css') }} " type="text/css" />
-    <link rel="stylesheet" href="{{ asset('css/exentriq-bootstrap-material-ui.css') }} " type="text/css" />
+    {{--<link rel="stylesheet" href="{{ asset('css/exentriq-bootstrap-material-ui.css') }} " type="text/css" />--}}
 
 
     {{--{{Html::style('css/font-awesome.min.css')}}--}}

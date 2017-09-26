@@ -1,7 +1,5 @@
 @extends('layouts.app')
-@section('stylesheets')
 
-@endsection
 @section('content')
     {{--logo--}}
     <div class="row center-xs p-a-sm">
@@ -31,22 +29,22 @@
                 {{ csrf_field() }}
 
                 <div class="eq-ui-form-group eq-ui-input-field">
-                    <input id="name" type="text" name="name" class="form-control eq-ui-input" required="">
+                    <input id="name" type="text" name="name" class="form-control eq-ui-input" value="{{ old('name') }}" required="">
                     <label for="name" >Name</label>
                 </div>
 
                 <div class="eq-ui-form-group eq-ui-input-field">
-                    <input id="email" type="email" name="email" class="form-control eq-ui-input" required="">
+                    <input id="email" type="email" name="email" class="form-control eq-ui-input" value="{{ old('email') }}" required="">
                     <label for="email" data-error="Email not valid">E-mail</label>
                 </div>
 
-
                 <div class="eq-ui-form-group eq-ui-input-field">
-                    <input id="password" type="password" data-parsley-minlength="6" class="form-control eq-ui-input invalid" required="" data-parsley-id="10">
+                    <input id="password"  type="password" name="password" data-parsley-minlength="6" class="form-control eq-ui-input" required="">
                     <label for="password" data-error="Min length 6" class="active">Password</label>
                 </div>
                 <div class="eq-ui-form-group eq-ui-input-field">
-                    <input id="password-confirm" type="password" data-parsley-minlength="6" data-parsley-equalto="#password" class="form-control eq-ui-input invalid" required="" data-parsley-id="12">
+                    <input id="password-confirm" name="password_confirmation" type="password" class="form-control eq-ui-input"
+                           data-parsley-minlength="6" data-parsley-equalto="#password"  required="">
                     <label for="password-confirm" data-error="Min length 6 or Password not equal" class="">Confirm Password</label>
                 </div>
 {{--
@@ -123,5 +121,5 @@
     </div>--}}
 @endsection
 @section('scripts')
-    <script type="text/javascript" src="js/exentriq-bootstrap-material-ui.min.js"></script>
+
 @endsection

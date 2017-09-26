@@ -4,6 +4,8 @@
 @endsection
 @section('content')
 
+
+
     {{--logo--}}
     <div class="row center-xs p-a-sm">
         <div class=p-l-md">
@@ -32,7 +34,7 @@
                 {{ csrf_field() }}
 
                 <div class="eq-ui-form-group eq-ui-input-field">
-                    <input id="email" type="email" name="email" class="form-control eq-ui-input" required="">
+                    <input id="email" type="email" name="email" class="form-control eq-ui-input" value="{{ old('email') }}" required="">
                     <label for="email" data-error="Email not valid">E-mail</label>
                 </div>
 
@@ -43,12 +45,10 @@
                 </div>
 
 
-                <div class="eq-ui-form-group eq-ui-input-field">
-
+                <div class="eq-ui-form-group eq-ui-input-field row middle-xs"  >
                     <input type="checkbox" id="test7" class="eq-ui-input filled-in"
                            name="remember" {{ old('remember') ? 'checked' : '' }}>
-                    <label class="text-black" for="test7">Keep me signed in</label>
-
+                    <label class="text-black" for="test7"  >Keep me signed in</label>
                 </div>
 
                 <div class="eq-ui-form-group eq-ui-input-field">
@@ -57,8 +57,6 @@
                     </button>
                 </div>
             </form>
-
-
         </div>
     </div>
 
@@ -72,5 +70,5 @@
 @endsection
 
 @section('scripts')
-    <script type="text/javascript" src="js/exentriq-bootstrap-material-ui.min.js"></script>
+
 @endsection
