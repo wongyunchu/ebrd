@@ -62,7 +62,7 @@
             <div class="md-form-group">
                 {{Form::label('category_id', 'Category:',['class'=>'md-input'])}}
 
-                <select class="form-control" id="category_id"  name="category_id">
+                <select class="form-control input-c" id="category_id"  name="category_id">
                     @foreach($categories as $category)
                         <option value="{{$category->id}}"
                                 @if (old('category_id') == $category->id)  selected="selected" @endif
@@ -73,6 +73,10 @@
                     @endforeach
                 </select>
             </div>
+
+
+
+
 
             <div class="form_group">
                 {{Form::label('body', 'Post Body:')}}
@@ -100,7 +104,7 @@
                     @if ($isReadonly != 'readonly')
                     <div class="col-sm-6">
                         <div class="row end-xs">
-                            <button type="submit" id="submit-all" class="btn btn-primary btn-lg right">저장</button>
+                            <button type="submit" id="submit-all" class="btn btn-primary btn-lg right" >저장</button>
                         </div>
                     </div>
                     @endif
@@ -135,7 +139,12 @@
             $("#category_id option").not(":selected").remove();
         @endif
 
-        $("#submit-all").click(function () {
+        $("#submit-all").click(function (e) {
+            if ($("#postForm")["0"].submitted ) {
+                alert('등록중입니다..');
+                return false;
+            }
+            $("#postForm")["0"].submitted = true;
             $("#postForm").submit();
         });
 

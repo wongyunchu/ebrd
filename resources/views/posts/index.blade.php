@@ -68,7 +68,7 @@
                 <hr>
 
                     <div class="row col-sm-12 end-xs">
-                            <a href="{{route('posts.create')}}" class="btn btn-lg btn-primary">작성</a>
+                            <a href="{{route('posts.create')}}" class="md-btn md-raised m-b-sm w-xs blue">작성</a>
                     </div>
                     {{--<div class="col-md-8">col-md-8</div>--}}
                     {{--<div class="col-md-4 "></div>--}}
