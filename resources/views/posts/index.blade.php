@@ -20,8 +20,8 @@
                         <td>{{substr(strip_tags($post->body), 0, 50)}} {{strlen($post->body) > 50 ? "...":""}}</td>
                         <td>{{date('M j, Y', strtotime($post->updated_at) )}}</td>
                         <td>
-                            <a href="{{route('posts.show', $post->id)}}" class="btn btn-default btn-sm">View</a>
-                            <a href="{{route('posts.edit', $post->id)}}" class="btn btn-default btn-sm">Edit</a>
+                            <a href="{{route('posts.show', $post->id)}}" class="btn btn-outline b-info text-info btn-sm">View</a>
+                            <a href="{{route('posts.edit', $post->id)}}" class="btn btn-outline b-warning text-warning btn-sm">Edit</a>
                         </td>
                     </tr>
 
@@ -68,7 +68,7 @@
                 <hr>
 
                     <div class="row col-sm-12 end-xs">
-                            <a href="{{route('posts.create')}}" class="md-btn md-raised m-b-sm w-xs blue">작성</a>
+                            <a href="{{route('posts.create')}}" class="md-btn md-raised m-b-sm btn-lg w-sm indigo">작성</a>
                     </div>
                     {{--<div class="col-md-8">col-md-8</div>--}}
                     {{--<div class="col-md-4 "></div>--}}

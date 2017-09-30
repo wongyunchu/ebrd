@@ -1,8 +1,27 @@
 {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>--}}
 {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>--}}
 
-<script src="{{ asset('libs/jquery/jquery/dist/jquery.js') }}"></script>
+
 <!-- Bootstrap -->
+<script src="{{ asset('libs/jquery/jquery/dist/jquery.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        if($('#success-alert').length > 0) {
+            $("#success-alert").fadeTo(3000, 500).slideUp(500, function(){
+                $("#success-alert").slideUp(500);
+            });
+        }
+
+    });
+</script>
+
+
+
+
+
+
+
 <script src="{{ asset('libs/jquery/tether/dist/js/tether.min.js') }}"></script>
 
 <script src="{{ asset('libs/jquery/bootstrap/dist/js/bootstrap.js')}}"></script>

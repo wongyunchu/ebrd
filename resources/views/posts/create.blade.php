@@ -26,9 +26,9 @@
             selector: 'textarea',
             branding: false,
             elementpath: false,
-            readonly:   {{$editable=='false'?'true':'false'}},
-            menubar:    {{$editable}},
-            statusbar:  {{$editable}},
+            readonly:{{$editable=='false'?'true':'false'}},
+            menubar: {{$editable}},
+            statusbar:{{$editable}},
             @if ($isReadonly == 'readonly')
             toolbar:false
             @endif
@@ -97,14 +97,14 @@
 
             <div class="form_group">
                 <hr>
-                <div class="row">
+                <div class="row no-gutter">
                     <div class="col-sm-6">
-                        {!! Html::linkRoute('posts.index','Back', array(), ['class'=>'btn btn-info btn-lg'] ) !!}
+                        {!! Html::linkRoute('posts.index','Back', array(), ['class'=>'md-btn md-raised m-b-sm btn-lg w-sm green'] ) !!}
                     </div>
                     @if ($isReadonly != 'readonly')
                     <div class="col-sm-6">
                         <div class="row end-xs">
-                            <button type="submit" id="submit-all" class="btn btn-primary btn-lg right" >저장</button>
+                            <button type="submit" id="submit-all" class="md-btn md-raised m-b-sm btn-lg w-sm blue" >저장</button>
                         </div>
                     </div>
                     @endif
