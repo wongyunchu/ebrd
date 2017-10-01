@@ -49,3 +49,5 @@
 <script src="{{ asset('libs/jquery/jquery-pjax/jquery.pjax.js')}}"></script>
 <script src="{{ asset('scripts/ajax.js')}}"></script>
 {{--<script src="{{ asset('js/exentriq-bootstrap-material-ui.min.js')}}"></script>--}}
+
+<script src="{{ asset('js/datatables.min.js')}}"></script>
