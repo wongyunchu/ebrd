@@ -1,5 +1,5 @@
 @extends('main')
-@section('title', '공지사항')
+@section('title', '의료비')
 @section('title_sub', 'All Posts...')
 @section('content')
     <div class="row">
@@ -15,22 +15,7 @@
                 <th style="width:140px"></th>
                 </thead>
                 <tbody>
-                @foreach($posts as $post)
-                    <tr>
-                        <td>{{$post->id}}</td>
-                        <td>{{$post->slug}}</td>
-                        <td>{{strip_tags($post->title)}}</td>
-                        <td>{{substr(strip_tags($post->body), 0, 50)}} {{strlen($post->body) > 50 ? "...":""}}</td>
-                        <td>{{date('M j, Y', strtotime($post->updated_at) )}}</td>
-                        <td>
-                            <a href="{{route('posts.show', $post->id)}}"
-                               class="btn btn-outline b-info text-info btn-sm">View</a>
-                            <a href="{{route('posts.edit', $post->id)}}"
-                               class="btn btn-outline b-warning text-warning btn-sm">Edit</a>
-                        </td>
-                    </tr>
 
-                @endforeach
                 </tbody>
 
 
@@ -44,16 +29,20 @@
                 <hr>
                 <div class="row col-sm-12 end-xs">
                     {{--<button id="addRow">Add new row</button>--}}
-                    <a href="{{route('posts.create')}}" class="md-btn md-raised m-b-sm btn-lg w-sm indigo">작성</a>
+                    <a href="{{route('medicineCreate')}}" class="md-btn md-raised m-b-sm btn-lg w-sm indigo">작성</a>
                 </div>
             </div>
         </div>
     </div>
 
 @stop
-@section('scripts')
-    <script type="text/javascript">
 
+@section('scripts')
+
+
+
+
+    <script type="text/javascript">
 
         $(document).ready(function () {
 

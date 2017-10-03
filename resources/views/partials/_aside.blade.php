@@ -26,9 +26,9 @@
                             {{--<span class="nav-text">Dashboard</span>--}}
                         {{--</a>--}}
                     {{--</li>--}}
-                    <li >
+                    {{--<li >
                         <a>
-                            {{--Menu명 앱스--}}
+                            --}}{{--Menu명 앱스--}}{{--
                             <span class="nav-caret">
                             <i class="fa fa-caret-down"></i>
                           </span>
@@ -40,7 +40,7 @@
                             </span>
                             <span class="nav-text">개인정보</span>
                         </a>
-                        {{--sub 메뉴--}}
+                        --}}{{--sub 메뉴--}}{{--
                         <ul class="nav-sub ">
                             <li><a href="inbox.html"><span class="nav-text">개인정보</span></a></li>
                             <li><a href="inbox.html"><span class="nav-text">급여정보</span></a></li>
@@ -51,9 +51,29 @@
                             <li><a href="inbox.html"><span class="nav-text">개인정보</span></a></li>
                         </ul>
                     </li>
-
+--}}
                     <li class="active">
-                        <a href="#">
+                        <a href="/posts">
+                            <span class="nav-icon">
+                                <i class="material-icons">&#xe23b;<span ui-include="'/assets/images/i_0.svg'"></span></i>
+                            </span>
+                            <span class="nav-text">공지사항</span>
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="/medicine">
+                            <span class="nav-icon">
+                                <i class="material-icons">&#xe23b;<span ui-include="'/assets/images/i_0.svg'"></span></i>
+                            </span>
+                            <span class="nav-text">의료비</span>
+                        </a>
+                    </li>
+
+
+                    <li >
+                        <a href="/medicineTest">
                             <span class="nav-icon">
                                 <i class="material-icons">&#xe23b;<span ui-include="'/assets/images/i_0.svg'"></span></i>
                             </span>

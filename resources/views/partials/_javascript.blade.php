@@ -21,11 +21,11 @@
 
 
 
+<script src="{{ asset('libs/jquery/bootstrap/dist/js/bootstrap.js')}}"></script>
 
 <script src="{{ asset('libs/jquery/tether/dist/js/tether.min.js') }}"></script>
-
-<script src="{{ asset('libs/jquery/bootstrap/dist/js/bootstrap.js')}}"></script>
 <!-- core -->
+
 <script src="{{ asset('libs/jquery/underscore/underscore-min.js')}}"></script>
 <script src="{{ asset('libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js')}}"></script>
 <script src="{{ asset('libs/jquery/PACE/pace.min.js')}}"></script>
@@ -42,12 +42,14 @@
 <script src="{{ asset('scripts/ui-screenfull.js')}}"></script>
 <script src="{{ asset('scripts/ui-scroll-to.js')}}"></script>
 <script src="{{ asset('scripts/ui-toggle-class.js')}}"></script>
-
 <script src="{{ asset('scripts/app.js')}}"></script>
 
 <!-- ajax -->
-<script src="{{ asset('libs/jquery/jquery-pjax/jquery.pjax.js')}}"></script>
-<script src="{{ asset('scripts/ajax.js')}}"></script>
+{{--메뉴 클릭시 jquery가 반응을 안하는 현상이 발생 --}}
+{{--<script src="{{ asset('libs/jquery/jquery-pjax/jquery.pjax.js')}}"></script>
+<script src="{{ asset('scripts/ajax.js')}}"></script>--}}
+
+
 {{--<script src="{{ asset('js/exentriq-bootstrap-material-ui.min.js')}}"></script>--}}
 
 <script src="{{ asset('js/datatables.min.js')}}"></script>
