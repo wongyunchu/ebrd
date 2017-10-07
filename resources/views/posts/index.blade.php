@@ -42,7 +42,7 @@
             --}}
             <div class="form_group">
                 <hr>
-                <div class="row col-sm-12 end-xs">
+                <div class="end-xs">
                     {{--<button id="addRow">Add new row</button>--}}
                     <a href="{{route('posts.create')}}" class="md-btn md-raised m-b-sm btn-lg w-sm indigo">작성</a>
                 </div>
