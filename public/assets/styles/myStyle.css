@@ -1,5 +1,7 @@
 table.blueTable {
   width: 100%; }
+  table.blueTable tr {
+    height: 39px; }
   table.blueTable td {
     border: 2px solid #C8D7E3;
     padding: 4px 10px;
@@ -10,6 +12,16 @@ table.blueTable {
     color: #58849E;
     font-weight: 500;
     text-align: center; }
+
+.pTitle {
+  padding-top: 10px;
+  padding-bottom: 10px; }
+  .pTitle i {
+    color: steelblue; }
+  .pTitle label {
+    padding-left: 10px;
+    font-size: 1.1rem;
+    color: dimgrey; }
 
 .blue_grid {
   width: 100%;

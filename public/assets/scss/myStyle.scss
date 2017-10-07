@@ -1,6 +1,9 @@
 
 table.blueTable {
-  width: 1000px;
+  width: 100%;
+  tr {
+    height:39px;
+  }
   td {
     border: 2px solid #C8D7E3;
     padding: 4px 10px;
@@ -15,7 +18,18 @@ table.blueTable {
   }
 }
 
-
+.pTitle {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  i {
+    color: steelblue;
+  }
+  label {
+    padding-left: 10px;
+    font-size: 1.1rem;
+    color: dimgrey;
+  }
+}
 
 
 

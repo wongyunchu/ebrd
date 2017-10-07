@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('medicine', 'medicine.index');
+Route::view('medicine', 'medicine.index')->name('medicine.index');
 Route::view('medicineCreate', 'medicine.create')->name('medicineCreate');
 
 
