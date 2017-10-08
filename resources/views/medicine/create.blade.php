@@ -37,6 +37,11 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
     <div class="col-xs-offset-0 col-xs-12 ">
 
         {!! Form::hidden('csrf-token', csrf_token(), ['id' => 'csrf-token']) !!}
+
+        {{--의료비 신청--}}
+        <div class="pTitle">
+            <i class="fa fa-dot-circle-o" ></i><label>의료비 신청</label>
+        </div>
         <table class="blueTable">
             <tr>
                 <td width="20%">의료비 지원대상자</td>
@@ -82,10 +87,44 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
              </tr>
         </table>
 
-        <div class="pTitle">
-            <i class="fa fa-dot-circle-o" ></i><label>의료비 사용내역</label>
+        {{--의료비 사용내역 입력 --}}
+        <div id="insertArea" >
+            <div class="pTitle">
+                <i class="fa fa-dot-circle-o" ></i><label>의료비 사용내역 입력</label>
+            </div>
+            <table class="blueTable">
+                <tr>
+                    <td width="20%">사용일자</td>
+                    <td width="30%">
+                        <input type="text" class="form-control">
+                    </td>
+
+                    <td width="20%">금액</td>
+                    <td width="30%"><input type="text" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td >병원 / 약국명</td>
+                    <td colspan="3"><input type="text" class="form-control"></td>
+                </tr>
+            </table>
         </div>
-        <table id="example" cellspacing="0" class="table table-striped table-bordered table-hover row-border p-b-md">
+        <div class="row end-xs p-a-sm">
+            <button class="md-btn md-raised m-b-sm w-xs indigo m-a-xs">추가</button>
+            <button class="md-btn md-raised m-b-sm w-xs green m-a-xs">취소</button>
+        </div>
+        <hr>
+        {{--의료비 사용내역--}}
+        <div class="row bottom-xs">
+            <div class="pTitle col-xs-2" style="display: inline">
+                <i class="fa fa-dot-circle-o" ></i><label>의료비 사용내역</label>
+            </div>
+            <div class="col-xs-10 row end-xs p-r-0">
+                <button class="md-btn md-raised m-b-sm w-xs blue m-a-xs">추가</button>
+                <button class="md-btn md-raised m-b-sm w-xs blue m-a-xs">수정</button>
+                <button class="md-btn md-raised m-b-sm w-xs red m-a-xs">삭제</button>
+            </div>
+        </div>
+        <table id="example" cellspacing="0" width="100%" class="table table-striped table-bordered table-hover row-border p-b-md">
             <thead>
             <th style="width:100px">#</th>
             <th>사용일자</th>
@@ -93,9 +132,7 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
             <th>금액</th>
             </thead>
             <tbody>
-
             </tbody>
-
         </table>
         <div class="row">
             <div class="col-sm-8"></div>
@@ -115,7 +152,8 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
 
 
 
-        <div class="pTitle">
+        {{--하단 계좌정보--}}
+        <div class="pTitle p-t -0">
             <i class="fa fa-dot-circle-o" ></i><label>입금/계좌 정보</label>
         </div>
         <table class="blueTable">
@@ -139,7 +177,7 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
             <hr>
             <div class="row ">
                 <div class="col-sm-6">
-                    {!! Html::linkRoute('medicine.index','Back', array(), ['class'=>'md-btn md-raised m-b-sm btn-lg w-sm green'] ) !!}
+                    {!! Html::linkRoute('medicine.index','뒤로', array(), ['class'=>'md-btn md-raised m-b-sm btn-lg w-sm green'] ) !!}
                 </div>
 
                 <div class="col-sm-6">
@@ -160,13 +198,28 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
     </div>
 --}}
 
-
+<div id="app">
+    <h1>@{{ message }}</h1>
+</div>
 
 @stop
 @section('scripts')
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+            message: 'Greetings your Majesty!'
+            }
+        });
+    </script>
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>--}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenLite.min.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
+            alert('3');
+            TweenLite.to('#insertArea', 2, {backgroundColor:"#ff0000"});
+
             $.extend( true, $.fn.dataTable.defaults, {
                 "searching": false,
                 "ordering": false

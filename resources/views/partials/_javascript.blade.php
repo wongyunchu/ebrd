@@ -42,7 +42,9 @@
 <script src="{{ asset('scripts/ui-screenfull.js')}}"></script>
 <script src="{{ asset('scripts/ui-scroll-to.js')}}"></script>
 <script src="{{ asset('scripts/ui-toggle-class.js')}}"></script>
+
 <script src="{{ asset('scripts/app.js')}}"></script>
+
 
 <!-- ajax -->
 {{--메뉴 클릭시 jquery가 반응을 안하는 현상이 발생 --}}
@@ -53,3 +55,4 @@
 {{--<script src="{{ asset('js/exentriq-bootstrap-material-ui.min.js')}}"></script>--}}
 
 <script src="{{ asset('js/datatables.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>

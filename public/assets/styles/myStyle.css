@@ -14,13 +14,13 @@ table.blueTable {
     text-align: center; }
 
 .pTitle {
-  padding-top: 10px;
-  padding-bottom: 10px; }
+  padding-top: 30px; }
   .pTitle i {
     color: steelblue; }
   .pTitle label {
     padding-left: 10px;
     font-size: 1.1rem;
+    font-weight: 500;
     color: dimgrey; }
 
 .blue_grid {

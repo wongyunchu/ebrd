@@ -4,7 +4,7 @@
 @section('content')
     <div class="row">
         <div class="col-xs-offset-0 col-xs-12">
-            <table id="example" cellspacing="0" class="table table-striped table-bordered table-hover row-border p-b-md">
+            <table id="example" width="100%" cellspacing="0" class="table table-striped table-bordered table-hover row-border p-b-md">
 
                 <thead>
                 <th style="width:100px">#</th>

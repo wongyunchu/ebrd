@@ -18,8 +18,8 @@ input[type=text], textarea {
 }
 
 input[type=text]:focus, textarea:focus {
-  border:             1px solid rgba(81, 203, 238, 1);
-  box-shadow:         0 0 2px rgba(81, 203, 238, 1);
+  border:             1px solid rgb(155, 196, 238);
+  box-shadow:         0 0 2px rgb(166, 214, 238);
   margin:             5px 1px 3px 0px;
   padding:            3px 0px 3px 3px;
 }
