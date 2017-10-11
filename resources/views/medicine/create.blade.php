@@ -34,7 +34,7 @@
 $nowYear = date("Y");
 $subjects = ['이비인후과', '안과', '치과','소아과']
 @endphp
-    <div class="col-xs-offset-0 col-xs-12 ">
+    <div id="vuejs" class="col-xs-offset-0 col-xs-12 ">
 
         {!! Form::hidden('csrf-token', csrf_token(), ['id' => 'csrf-token']) !!}
 
@@ -88,7 +88,7 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
         </table>
 
         {{--의료비 사용내역 입력 --}}
-        <div id="insertArea" >
+        <div id="insertArea" style="height: 0px; overflow: hidden;">
             <div class="pTitle">
                 <i class="fa fa-dot-circle-o" ></i><label>의료비 사용내역 입력</label>
             </div>
@@ -110,7 +110,7 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
         </div>
         <div class="row end-xs p-a-sm">
             <button class="md-btn md-raised m-b-sm w-xs indigo m-a-xs">추가</button>
-            <button class="md-btn md-raised m-b-sm w-xs green m-a-xs">취소</button>
+            <button @click="cancelForm" class="md-btn md-raised m-b-sm w-xs green m-a-xs">취소</button>
         </div>
         <hr>
         {{--의료비 사용내역--}}
@@ -119,7 +119,7 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
                 <i class="fa fa-dot-circle-o" ></i><label>의료비 사용내역</label>
             </div>
             <div class="col-xs-10 row end-xs p-r-0">
-                <button class="md-btn md-raised m-b-sm w-xs blue m-a-xs">추가</button>
+                <button @click="addForm" class="md-btn md-raised m-b-sm w-xs blue m-a-xs">추가</button>
                 <button class="md-btn md-raised m-b-sm w-xs blue m-a-xs">수정</button>
                 <button class="md-btn md-raised m-b-sm w-xs red m-a-xs">삭제</button>
             </div>
@@ -198,27 +198,39 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
     </div>
 --}}
 
-<div id="app">
-    <h1>@{{ message }}</h1>
-</div>
+{{--    <h1>@{{ message }}</h1>
+    <button  @click="addFor--}}m" class="md-btn md-raised m-b-sm w-xs blue m-a-xs">추가!</button>
 
 @stop
 @section('scripts')
     <script>
         new Vue({
-            el: '#app',
+            el: '#vuejs',
             data: {
-            message: 'Greetings your Majesty!'
+                message: 'Greetings your Majesty!'
+            },
+            methods:{
+                addForm:function() {
+                    //var pp = $('#insertArea');//document.getElementById("insertArea");
+                    TweenMax.to($('#insertArea'), 0.4, {delay:"0",  height:"158"});
+                },
+                cancelForm:function() {
+                    TweenMax.to($('#insertArea'), 0.2, {delay:"0",  height:"0"});
+                }
+
             }
         });
     </script>
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>--}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenLite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
-            alert('3');
-            TweenLite.to('#insertArea', 2, {backgroundColor:"#ff0000"});
+//            TweenMax.to($('#insertArea'), 0, {scaleY:"0", height:"0",  onComplete:timelineDone});
+            function timelineDone() {
+                //TweenMax.to(pp, 1, {delay:"3", scaleY:"1", height:"158"});
+            }
+            //TweenMax.to(pp, 1, {scaleX:"1",height:"158", opacity:"1"});
 
             $.extend( true, $.fn.dataTable.defaults, {
                 "searching": false,
