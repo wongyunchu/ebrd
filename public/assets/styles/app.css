@@ -370,7 +370,7 @@ input[type=text], textarea {
   -ms-transition: all 0.20s ease-in-out;
   -o-transition: all 0.20s ease-in-out; }
 
-input[type=text]:focus, textarea:focus {
+input[type=text]:focus:not(.dateComp), textarea:focus {
   border: 1px solid #9bc4ee;
   box-shadow: 0 0 2px #a6d6ee;
   margin: 5px 1px 3px 0px;

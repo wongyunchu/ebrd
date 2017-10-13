@@ -43,6 +43,14 @@
 <script src="{{ asset('scripts/ui-scroll-to.js')}}"></script>
 <script src="{{ asset('scripts/ui-toggle-class.js')}}"></script>
 
+{{--for datetimepicker--}}
+<script src="{{ asset('libs/js/moment/moment.js')}}"></script>
+<script src="{{ asset('js/bootstrap-datepicker.js')}}"></script>
+<script src="{{ asset('js/bootstrap-datepicker.kr.min.js')}}"></script>
+
+{{--<script src="{{ asset('libs/jquery/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>--}}
+{{--<script src="../libs/jquery/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>--}}
+
 <script src="{{ asset('scripts/app.js')}}"></script>
 
 

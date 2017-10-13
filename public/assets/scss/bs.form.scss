@@ -17,7 +17,7 @@ input[type=text], textarea {
   -o-transition: all 0.20s ease-in-out;
 }
 
-input[type=text]:focus, textarea:focus {
+input[type=text]:focus:not(.dateComp), textarea:focus {
   border:             1px solid rgb(155, 196, 238);
   box-shadow:         0 0 2px rgb(166, 214, 238);
   margin:             5px 1px 3px 0px;

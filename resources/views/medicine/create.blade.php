@@ -4,25 +4,25 @@
 @section('stylesheets')
     {!! (Html::style('css/parsley.css')) !!}
     {!! Html::style('css/select2.min.css') !!}
- {{--   <style>
-        input[type=text], textarea {
-            border:             1px solid #DDDDDD;
-            margin:             5px 1px 3px 0px;
-            outline:            none;
-            padding:            3px 0px 3px 3px;
-            -webkit-transition: all 0.20s ease-in-out;
-            -moz-transition: all 0.20s ease-in-out;
-            -ms-transition: all 0.20s ease-in-out;
-            -o-transition: all 0.20s ease-in-out;
-        }
+    {{--   <style>
+           input[type=text], textarea {
+               border:             1px solid #DDDDDD;
+               margin:             5px 1px 3px 0px;
+               outline:            none;
+               padding:            3px 0px 3px 3px;
+               -webkit-transition: all 0.20s ease-in-out;
+               -moz-transition: all 0.20s ease-in-out;
+               -ms-transition: all 0.20s ease-in-out;
+               -o-transition: all 0.20s ease-in-out;
+           }
 
-        input[type=text]:focus, textarea:focus {
-            border:             1px solid rgba(81, 203, 238, 1);
-            box-shadow:         0 0 2px rgba(81, 203, 238, 1);
-            margin:             5px 1px 3px 0px;
-            padding:            3px 0px 3px 3px;
-        }
-    </style>--}}
+           input[type=text]:focus, textarea:focus {
+               border:             1px solid rgba(81, 203, 238, 1);
+               box-shadow:         0 0 2px rgba(81, 203, 238, 1);
+               margin:             5px 1px 3px 0px;
+               padding:            3px 0px 3px 3px;
+           }
+       </style>--}}
 @endsection
 
 @section('content')
@@ -30,93 +30,115 @@
 
 
 
-@php
-$nowYear = date("Y");
-$subjects = ['이비인후과', '안과', '치과','소아과']
-@endphp
+    @php
+        $nowYear = date("Y");
+        $subjects = ['이비인후과', '안과', '치과','소아과']
+    @endphp
     <div id="vuejs" class="col-xs-offset-0 col-xs-12 ">
 
         {!! Form::hidden('csrf-token', csrf_token(), ['id' => 'csrf-token']) !!}
 
         {{--의료비 신청--}}
         <div class="pTitle">
-            <i class="fa fa-dot-circle-o" ></i><label>의료비 신청</label>
+            <i class="fa fa-dot-circle-o"></i><label>의료비 신청</label>
         </div>
+
         <table class="blueTable">
             <tr>
-                <td width="20%">의료비 지원대상자</td>
+                <td width="20%">의료비 지원대상자
+                </td>
                 <td width="30%">김남오(342221)</td>
                 <td width="20%">의료비 지원가능 금액</td>
                 <td width="30%">30,000원</td>
             </tr>
-             <tr>
-                 <td>대상년월</td>
-                 <td >
-                     <div class="form-group" style="display: inline;">
-                         <select class="form-control form-control-sm p-l-2" style="width: 100px;  display: inline" id="category_id"  name="category_id" >
-                             @for($i=0; $i<10; $i++)
-                                 <option value="{{$nowYear+$i}}">
-                                     {{$nowYear+$i}}년
-                                 </option>
-                             @endfor
-                         </select>
+            <tr>
+                <td>대상년월</td>
+                <td>
+                    <div class="form-group" style="display: inline;">
+                        <select class="form-control form-control-sm p-l-2" style="width: 100px;  display: inline"
+                                id="category_id" name="category_id">
+                            @for($i=0; $i<10; $i++)
+                                <option value="{{$nowYear+$i}}">
+                                    {{$nowYear+$i}}년
+                                </option>
+                            @endfor
+                        </select>
 
-                         <select class="form-control form-control-sm p-l-2" style="width: 100px; display: inline" id="category_id"  name="category_id" >
-                             @for($i=0; $i<12; $i++)
-                                 <option value="{{$i+1}}" style="text-align-last: center">
-                                     {{$i+1}}월
-                                 </option>
-                             @endfor
-                         </select>
-                     </div>
-                 </td>
-                 <td>신청금액</td>
-                 <td>10,000원</td>
-             </tr>
-             <tr>
-                 <td>진료과목</td>
-                 <td><select class="form-control form-control-sm p-l-2" style="width: 204px;  display: inline" id="category_id"  name="category_id" >
-                         @foreach($subjects as $subject)
-                             <option value="{{$subject}}">
-                                 {{$subject}}
-                             </option>
-                         @endforeach
-                     </select></td>
-                 <td>잔여금액</td>
-                 <td>30,000원</td>
-             </tr>
+                        <select class="form-control form-control-sm p-l-2" style="width: 100px; display: inline"
+                                id="category_id" name="category_id">
+                            @for($i=0; $i<12; $i++)
+                                <option value="{{$i+1}}" style="text-align-last: center">
+                                    {{$i+1}}월
+                                </option>
+                            @endfor
+                        </select>
+                    </div>
+                </td>
+                <td>신청금액</td>
+                <td>10,000원</td>
+            </tr>
+            <tr>
+                <td>진료과목</td>
+                <td><select class="form-control form-control-sm p-l-2" style="width: 204px;  display: inline"
+                            id="category_id" name="category_id">
+                        @foreach($subjects as $subject)
+                            <option value="{{$subject}}">
+                                {{$subject}}
+                            </option>
+                        @endforeach
+                    </select></td>
+                <td>잔여금액</td>
+                <td>30,000원</td>
+            </tr>
         </table>
 
         {{--의료비 사용내역 입력 --}}
-        <div id="insertArea" style="height: 0px; overflow: hidden;">
-            <div class="pTitle">
-                <i class="fa fa-dot-circle-o" ></i><label>의료비 사용내역 입력</label>
+        <div id="insertArea" style="height: 0px; overflow: hidden">
+            <div class="pTitle" >
+                <i class="fa fa-dot-circle-o"></i><label>의료비 사용내역 입력</label>
+
             </div>
-            <table class="blueTable">
+            <table class="blueTable" style="position: relative; z-index: 9999; " >
                 <tr>
                     <td width="20%">사용일자</td>
                     <td width="30%">
-                        <input type="text" class="form-control">
+                        <div class="input-group date">
+                            <input type="text" class="form-control dateComp" readonly value="{{@date("Y-m-d")}}"/>
+                            <span class="input-group-addon" >
+                                <i class="glyphicon glyphicon-th"></i>
+                            </span>
+                        </div>
+                        {{-- datetime 컴포넌트 --}}
+{{--                        <div id="datetimepicker1" class="input-group date">
+                            <input type="text" class="form-control">
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>--}}
+                        {{--<input id="tiDate" type="text" class="form-control">--}}
                     </td>
 
                     <td width="20%">금액</td>
-                    <td width="30%"><input type="text" class="form-control"></td>
+                    <td width="30%">
+                        <input type="text" id="tiAmt" class="form-control"></td>
                 </tr>
                 <tr>
-                    <td >병원 / 약국명</td>
-                    <td colspan="3"><input type="text" class="form-control"></td>
+                    <td>병원 / 약국명</td>
+                    <td colspan="3">
+                        <input type="text" id="tiHsptName" class="form-control"></td>
                 </tr>
             </table>
         </div>
         <div class="row end-xs p-a-sm">
-            <button class="md-btn md-raised m-b-sm w-xs indigo m-a-xs">추가</button>
+            {{--https://stackoverflow.com/questions/683498/calling-javascript-from-a-html-form--}}
+            <button @click="addList" class="md-btn md-raised m-b-sm w-xs indigo m-a-xs">추가</button>
             <button @click="cancelForm" class="md-btn md-raised m-b-sm w-xs green m-a-xs">취소</button>
         </div>
         <hr>
         {{--의료비 사용내역--}}
         <div class="row bottom-xs">
             <div class="pTitle col-xs-2" style="display: inline">
-                <i class="fa fa-dot-circle-o" ></i><label>의료비 사용내역</label>
+                <i class="fa fa-dot-circle-o"></i><label>의료비 사용내역</label>
             </div>
             <div class="col-xs-10 row end-xs p-r-0">
                 <button @click="addForm" class="md-btn md-raised m-b-sm w-xs blue m-a-xs">추가</button>
@@ -124,7 +146,8 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
                 <button class="md-btn md-raised m-b-sm w-xs red m-a-xs">삭제</button>
             </div>
         </div>
-        <table id="example" cellspacing="0" width="100%" class="table table-striped table-bordered table-hover row-border p-b-md">
+        <table id="example" cellspacing="0" width="100%"
+               class="table table-striped table-bordered table-hover row-border p-b-md">
             <thead>
             <th style="width:100px">#</th>
             <th>사용일자</th>
@@ -151,10 +174,9 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
         </div>
 
 
-
         {{--하단 계좌정보--}}
         <div class="pTitle p-t -0">
-            <i class="fa fa-dot-circle-o" ></i><label>입금/계좌 정보</label>
+            <i class="fa fa-dot-circle-o"></i><label>입금/계좌 정보</label>
         </div>
         <table class="blueTable">
             <tr>
@@ -168,9 +190,6 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
                 <td colspan="3" width="30%">김남오</td>
             </tr>
         </table>
-
-
-
 
 
         <div class="form_group">
@@ -190,16 +209,16 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
             </div>
         </div>
     </div>
-{{--
+    {{--
 
-    <div class="input-group">
-        <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
-        <span class="input-group-addon" id="basic-addon2">@example.com</span>
-    </div>
---}}
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
+            <span class="input-group-addon" id="basic-addon2">@example.com</span>
+        </div>
+    --}}
 
-{{--    <h1>@{{ message }}</h1>
-    <button  @click="addFor--}}m" class="md-btn md-raised m-b-sm w-xs blue m-a-xs">추가!</button>
+    {{--    <h1>@{{ message }}</h1>
+        <button  @click="addForm" class="md-btn md-raised m-b-sm w-xs blue m-a-xs">추가!</button>--}}
 
 @stop
 @section('scripts')
@@ -209,13 +228,19 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
             data: {
                 message: 'Greetings your Majesty!'
             },
-            methods:{
-                addForm:function() {
+            methods: {
+                addForm: function () {
                     //var pp = $('#insertArea');//document.getElementById("insertArea");
-                    TweenMax.to($('#insertArea'), 0.4, {delay:"0",  height:"158"});
+                    TweenMax.to($('#insertArea'), 0.4, {delay: "0", height: "158"});
+                    //TweenMax.to($('#insertArea'), 0.2, {delay: "0", scaleY: "1"});
+                    $('#tiDate').focus();
                 },
-                cancelForm:function() {
-                    TweenMax.to($('#insertArea'), 0.2, {delay:"0",  height:"0"});
+                cancelForm: function () {
+                    TweenMax.to($('#insertArea'), 0.2, {delay: "0", height: "0"});
+                    //TweenMax.to($('#insertArea'), 0.2, {delay: "0", scaleY: "0"});
+                },
+                addList:function () {
+                    alert(tiHsptName.value);
                 }
 
             }
@@ -226,23 +251,44 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
     <script type="text/javascript">
 
         $(document).ready(function () {
+            $('.input-group.date').datepicker({
+                format: "yyyy-mm-dd",
+                maxViewMode: 0,
+                todayBtn: true,
+                language: "kr",
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true,
+                todayHighlight: true,
+                toggleActive: true
+            });
+/*            $(function () {
+                $('#datetimepicker1').datetimepicker(
+                    {
+                        format:'YYYY년 MM월 DD일',
+                        viewMode: 'days'
+                    }
+                );
+            });*/
+
 //            TweenMax.to($('#insertArea'), 0, {scaleY:"0", height:"0",  onComplete:timelineDone});
             function timelineDone() {
                 //TweenMax.to(pp, 1, {delay:"3", scaleY:"1", height:"158"});
             }
+
             //TweenMax.to(pp, 1, {scaleX:"1",height:"158", opacity:"1"});
 
-            $.extend( true, $.fn.dataTable.defaults, {
+            $.extend(true, $.fn.dataTable.defaults, {
                 "searching": false,
                 "ordering": false
-            } );
+            });
 
             var table = $('#example').DataTable(
                 {
-                    "info":     false,
+                    "info": false,
                     "paging": false,
-                    "createdRow": function ( row, data, index ) {
-                        if ( data[0].replace(/[\$,]/g, '') * 1 > 55 ) {
+                    "createdRow": function (row, data, index) {
+                        if (data[0].replace(/[\$,]/g, '') * 1 > 55) {
                             $('td', row).eq(1).addClass('text-primary'); //
                         }
                     }
@@ -264,9 +310,9 @@ $subjects = ['이비인후과', '안과', '치과','소아과']
 
 
             // 이벤트
-            $('#example tbody').on( 'click', 'tr', function () {
+            $('#example tbody').on('click', 'tr', function () {
                 $(this).toggleClass('selected');
-            } );
+            });
 
             /*            $('#example tbody').on('click', 'tr', function () {
                             var data = table.row( this ).data();
