@@ -1,35 +1,13 @@
+
 @extends('main')
 @section('title', '의료비')
 @section('title_sub', '의료비 신청')
 @section('stylesheets')
     {!! (Html::style('css/parsley.css')) !!}
     {!! Html::style('css/select2.min.css') !!}
-    {{--   <style>
-           input[type=text], textarea {
-               border:             1px solid #DDDDDD;
-               margin:             5px 1px 3px 0px;
-               outline:            none;
-               padding:            3px 0px 3px 3px;
-               -webkit-transition: all 0.20s ease-in-out;
-               -moz-transition: all 0.20s ease-in-out;
-               -ms-transition: all 0.20s ease-in-out;
-               -o-transition: all 0.20s ease-in-out;
-           }
-
-           input[type=text]:focus, textarea:focus {
-               border:             1px solid rgba(81, 203, 238, 1);
-               box-shadow:         0 0 2px rgba(81, 203, 238, 1);
-               margin:             5px 1px 3px 0px;
-               padding:            3px 0px 3px 3px;
-           }
-       </style>--}}
 @endsection
 
 @section('content')
-
-
-
-
     @php
         $nowYear = date("Y");
         $subjects = ['이비인후과', '안과', '치과','소아과']
@@ -93,6 +71,7 @@
         </table>
 
         {{--의료비 사용내역 입력 --}}
+        <form id="formMedicine" @submit.prevent="addList" data-parsley-validate="" >
         <div id="insertArea" style="height: 0px; overflow: hidden">
             <div class="pTitle" >
                 <i class="fa fa-dot-circle-o"></i><label>의료비 사용내역 입력</label>
@@ -103,37 +82,32 @@
                     <td width="20%">사용일자</td>
                     <td width="30%">
                         <div class="input-group date">
-                            <input type="text" class="form-control dateComp" readonly value="{{@date("Y-m-d")}}"/>
+                            <input id="tiDate" type="text" class="form-control dateComp" readonly value="{{@date("Y-m-d")}}"/>
                             <span class="input-group-addon" >
                                 <i class="glyphicon glyphicon-th"></i>
                             </span>
                         </div>
-                        {{-- datetime 컴포넌트 --}}
-{{--                        <div id="datetimepicker1" class="input-group date">
-                            <input type="text" class="form-control">
-                            <span class="input-group-addon">
-                                <span class="fa fa-calendar"></span>
-                            </span>
-                        </div>--}}
-                        {{--<input id="tiDate" type="text" class="form-control">--}}
                     </td>
 
                     <td width="20%">금액</td>
                     <td width="30%">
-                        <input type="text" id="tiAmt" class="form-control"></td>
+                        <input type="text" id="tiAmt" class="form-control" required data-parsley-type="digits"></td>
                 </tr>
                 <tr>
                     <td>병원 / 약국명</td>
                     <td colspan="3">
-                        <input type="text" id="tiHsptName" class="form-control"></td>
+                        <input type="text" id="tiHsptName" class="form-control" required></td>
                 </tr>
             </table>
+
         </div>
         <div class="row end-xs p-a-sm">
             {{--https://stackoverflow.com/questions/683498/calling-javascript-from-a-html-form--}}
-            <button @click="addList" class="md-btn md-raised m-b-sm w-xs indigo m-a-xs">추가</button>
+            {{--@submit.prevent="addList" --}}
+            <button type="submit" class="md-btn md-raised m-b-sm w-xs indigo m-a-xs">추가</button>
             <button @click="cancelForm" class="md-btn md-raised m-b-sm w-xs green m-a-xs">취소</button>
         </div>
+        </form>
         <hr>
         {{--의료비 사용내역--}}
         <div class="row bottom-xs">
@@ -227,30 +201,57 @@
             el: '#vuejs',
             data: {
                 message: 'Greetings your Majesty!'
+
             },
             methods: {
                 addForm: function () {
                     //var pp = $('#insertArea');//document.getElementById("insertArea");
-                    TweenMax.to($('#insertArea'), 0.4, {delay: "0", height: "158"});
+                    TweenMax.to($('#insertArea'), 0.4, {delay: "0", height: "184"});
                     //TweenMax.to($('#insertArea'), 0.2, {delay: "0", scaleY: "1"});
-                    $('#tiDate').focus();
+                    //$('#tiDate').focus();
                 },
                 cancelForm: function () {
                     TweenMax.to($('#insertArea'), 0.2, {delay: "0", height: "0"});
                     //TweenMax.to($('#insertArea'), 0.2, {delay: "0", scaleY: "0"});
                 },
                 addList:function () {
-                    alert(tiHsptName.value);
+                    $('#formMedicine').parsley().on('field:validated', function() {
+                        var ok = $('.parsley-error').length === 0;
+                        if(ok ===true) {
+                            rowCnt++;
+                            medicineListTable.row.add( [
+                                rowCnt.toString(),
+                                tiDate.value,
+                                tiHsptName.value,
+                                tiAmt.value
+                            ] ).draw( false );
+                            tiDate.value = '';
+                            tiHsptName.value = '';
+                            tiAmt.value = '';
+                        }
+                    })
+                    .on('form:submit', function() {
+                        return false; // Don't submit form for this demo
+                    });
+
+
                 }
 
             }
         });
     </script>
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>--}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
-    <script type="text/javascript">
 
+    <script type="text/javascript">
+        var medicineListTable;
+        var rowCnt=0;
         $(document).ready(function () {
+            $('#formMedicine').parsley()
+                .on('form:submit', function() {
+                    alert('3');
+                    return false; // Don't submit form for this demo
+                });
+
             $('.input-group.date').datepicker({
                 format: "yyyy-mm-dd",
                 maxViewMode: 0,
@@ -283,7 +284,7 @@
                 "ordering": false
             });
 
-            var table = $('#example').DataTable(
+             medicineListTable = $('#example').DataTable(
                 {
                     "info": false,
                     "paging": false,

@@ -48,6 +48,14 @@
 <script src="{{ asset('js/bootstrap-datepicker.js')}}"></script>
 <script src="{{ asset('js/bootstrap-datepicker.kr.min.js')}}"></script>
 
+<script src="js/TweenMax.min.js"></script>
+
+{{--parsley--}}
+<script src="js/parsley.min.js"></script>
+<script src="js/ko.js"></script>
+
+
+
 {{--<script src="{{ asset('libs/jquery/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>--}}
 {{--<script src="../libs/jquery/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>--}}
 
