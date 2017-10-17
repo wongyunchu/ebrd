@@ -1,4 +1,5 @@
 table.blueTable:not(#datetimepicker1) {
+  text-align: center;
   width: 100%; }
   table.blueTable:not(#datetimepicker1) tr {
     height: 39px; }
@@ -12,6 +13,9 @@ table.blueTable:not(#datetimepicker1) {
     color: #58849E;
     font-weight: 500;
     text-align: center; }
+
+table th, td {
+  text-align: center !important; }
 
 .form-control.dateComp {
   margin: 0 2px;

@@ -71,43 +71,47 @@
         </table>
 
         {{--의료비 사용내역 입력 --}}
-        <form id="formMedicine" @submit.prevent="addList" data-parsley-validate="" >
+        {{--
+        onsubmit="return checkForm()"
+         @submit="addList"
+        --}}
         <div id="insertArea" style="height: 0px; overflow: hidden">
-            <div class="pTitle" >
-                <i class="fa fa-dot-circle-o"></i><label>의료비 사용내역 입력</label>
+            <form id="formMedicine" action="#" data-parsley-validate="">
+                <div class="pTitle" >
+                    <i class="fa fa-dot-circle-o"></i><label>의료비 사용내역 입력1</label>
+                </div>
+                <table class="blueTable" >
+                    <tr>
+                        <td width="20%">사용일자</td>
+                        <td width="30%">
+                            <div class="input-group date">
+                                <input id="tiDate" type="text" class="form-control dateComp" readonly value="{{@date("Y-m-d")}}"/>
+                                <span class="input-group-addon" >
+                                    <i class="glyphicon glyphicon-th"></i>
+                                </span>
+                            </div>
+                        </td>
 
+                        <td width="20%">금액</td>
+                        <td width="30%">
+                            <input type="text" id="tiAmt" class="form-control" required data-parsley-type="digits"></td>
+                    </tr>
+                    <tr>
+                        <td>병원 / 약국명</td>
+                        <td colspan="3">
+                            <input type="text" id="tiHsptName" class="form-control" required></td>
+                    </tr>
+                </table>
+
+
+            <div class="row end-xs p-a-sm">
+                {{--https://stackoverflow.com/questions/683498/calling-javascript-from-a-html-form--}}
+                {{--@submit.prevent="addList" --}}
+                <button type="submit" class="md-btn md-raised m-b-sm w-xs indigo m-a-xs">추가</button>
+                <button type="button" @click="cancelForm" class="md-btn md-raised m-b-sm w-xs green m-a-xs">취소</button>
             </div>
-            <table class="blueTable" style="position: relative; z-index: 9999; " >
-                <tr>
-                    <td width="20%">사용일자</td>
-                    <td width="30%">
-                        <div class="input-group date">
-                            <input id="tiDate" type="text" class="form-control dateComp" readonly value="{{@date("Y-m-d")}}"/>
-                            <span class="input-group-addon" >
-                                <i class="glyphicon glyphicon-th"></i>
-                            </span>
-                        </div>
-                    </td>
-
-                    <td width="20%">금액</td>
-                    <td width="30%">
-                        <input type="text" id="tiAmt" class="form-control" required data-parsley-type="digits"></td>
-                </tr>
-                <tr>
-                    <td>병원 / 약국명</td>
-                    <td colspan="3">
-                        <input type="text" id="tiHsptName" class="form-control" required></td>
-                </tr>
-            </table>
-
+            </form>
         </div>
-        <div class="row end-xs p-a-sm">
-            {{--https://stackoverflow.com/questions/683498/calling-javascript-from-a-html-form--}}
-            {{--@submit.prevent="addList" --}}
-            <button type="submit" class="md-btn md-raised m-b-sm w-xs indigo m-a-xs">추가</button>
-            <button @click="cancelForm" class="md-btn md-raised m-b-sm w-xs green m-a-xs">취소</button>
-        </div>
-        </form>
         <hr>
         {{--의료비 사용내역--}}
         <div class="row bottom-xs">
@@ -116,14 +120,14 @@
             </div>
             <div class="col-xs-10 row end-xs p-r-0">
                 <button @click="addForm" class="md-btn md-raised m-b-sm w-xs blue m-a-xs">추가</button>
-                <button class="md-btn md-raised m-b-sm w-xs blue m-a-xs">수정</button>
-                <button class="md-btn md-raised m-b-sm w-xs red m-a-xs">삭제</button>
+                <button @click="editForm" class="md-btn md-raised m-b-sm w-xs blue m-a-xs">수정</button>
+                <button @click="delList" class="md-btn md-raised m-b-sm w-xs red m-a-xs">삭제</button>
             </div>
         </div>
         <table id="example" cellspacing="0" width="100%"
                class="table table-striped table-bordered table-hover row-border p-b-md">
             <thead>
-            <th style="width:100px">#</th>
+            <th style="width:100px">선택</th>
             <th>사용일자</th>
             <th>병원 / 약국명</th>
             <th>금액</th>
@@ -183,142 +187,136 @@
             </div>
         </div>
     </div>
-    {{--
-
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
-            <span class="input-group-addon" id="basic-addon2">@example.com</span>
-        </div>
-    --}}
-
-    {{--    <h1>@{{ message }}</h1>
-        <button  @click="addForm" class="md-btn md-raised m-b-sm w-xs blue m-a-xs">추가!</button>--}}
 
 @stop
 @section('scripts')
     <script>
-        new Vue({
+        function resetForm() {
+            $('#formMedicine').each(function() {
+                this.reset();
+            })
+        }
+
+        vue = new Vue({
             el: '#vuejs',
             data: {
                 message: 'Greetings your Majesty!'
 
             },
             methods: {
+                openInsertView:function() {
+                    TweenMax.to($('#insertArea'), 0.4, {delay: "0", height: "230"});
+                },
+                // 하단 추가, 수정, 삭제
                 addForm: function () {
-                    //var pp = $('#insertArea');//document.getElementById("insertArea");
-                    TweenMax.to($('#insertArea'), 0.4, {delay: "0", height: "184"});
-                    //TweenMax.to($('#insertArea'), 0.2, {delay: "0", scaleY: "1"});
+                    this.openInsertView();
                     //$('#tiDate').focus();
                 },
+                editForm:function() {
+                    this.openInsertView();
+                    var sltdData = medicineListTable.row( { selected: true } ).data();
+                    tiDate.value = sltdData[1];
+                    tiAmt.value = sltdData[2];
+                    tiHsptName.value = sltdData[3];
+                },
+                delList:function() {
+                    //var count = medicineListTable.rows( { selected: true } ).data();
+                    var count = medicineListTable.row( { selected: true } ).remove().draw();
+                },
+
+
+
                 cancelForm: function () {
                     TweenMax.to($('#insertArea'), 0.2, {delay: "0", height: "0"});
-                    //TweenMax.to($('#insertArea'), 0.2, {delay: "0", scaleY: "0"});
+                    resetForm();
                 },
                 addList:function () {
-                    $('#formMedicine').parsley().on('field:validated', function() {
-                        var ok = $('.parsley-error').length === 0;
-                        if(ok ===true) {
-                            rowCnt++;
-                            medicineListTable.row.add( [
-                                rowCnt.toString(),
-                                tiDate.value,
-                                tiHsptName.value,
-                                tiAmt.value
-                            ] ).draw( false );
-                            tiDate.value = '';
-                            tiHsptName.value = '';
-                            tiAmt.value = '';
-                        }
-                    })
-                    .on('form:submit', function() {
-                        return false; // Don't submit form for this demo
-                    });
+                    rowCnt++;
+                    medicineListTable.row.add( [
+                        "",//rowCnt.toString(),
+                        tiDate.value,
+                        tiHsptName.value,
+                        tiAmt.value
+                    ] ).draw( false );
 
+                    tiDate.value = '{{@date("Y-m-d")}}';
+                    tiHsptName.value = '';
+                    tiAmt.value = '';
+                    this.cancelForm();
 
                 }
 
             }
         });
     </script>
-    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>--}}
 
     <script type="text/javascript">
         var medicineListTable;
         var rowCnt=0;
         $(document).ready(function () {
-            $('#formMedicine').parsley()
-                .on('form:submit', function() {
-                    alert('3');
-                    return false; // Don't submit form for this demo
-                });
+              $('#formMedicine').parsley()
+                  .on('form:success', function() {
+                      vue.addList();
+                      $('#formMedicine').parsley().reset();
+                  });
+                  /*.on('form:error', function() {
+                      alert('6');
+                  })*/
 
-            $('.input-group.date').datepicker({
-                format: "yyyy-mm-dd",
-                maxViewMode: 0,
-                todayBtn: true,
-                language: "kr",
-                keyboardNavigation: false,
-                forceParse: false,
-                autoclose: true,
-                todayHighlight: true,
-                toggleActive: true
-            });
-/*            $(function () {
-                $('#datetimepicker1').datetimepicker(
-                    {
-                        format:'YYYY년 MM월 DD일',
-                        viewMode: 'days'
-                    }
-                );
-            });*/
+
+              $('.input-group.date').datepicker({
+                  format: "yyyy-mm-dd",
+                  maxViewMode: 0,
+                  todayBtn: true,
+                  language: "kr",
+                  keyboardNavigation: false,
+                  forceParse: false,
+                  autoclose: true,
+                  todayHighlight: true,
+                  toggleActive: true
+              });
 
 //            TweenMax.to($('#insertArea'), 0, {scaleY:"0", height:"0",  onComplete:timelineDone});
             function timelineDone() {
                 //TweenMax.to(pp, 1, {delay:"3", scaleY:"1", height:"158"});
             }
 
-            //TweenMax.to(pp, 1, {scaleX:"1",height:"158", opacity:"1"});
-
             $.extend(true, $.fn.dataTable.defaults, {
                 "searching": false,
                 "ordering": false
+                //select: true,
             });
 
              medicineListTable = $('#example').DataTable(
                 {
+                    select:false,
                     "info": false,
                     "paging": false,
                     "createdRow": function (row, data, index) {
                         if (data[0].replace(/[\$,]/g, '') * 1 > 55) {
                             $('td', row).eq(1).addClass('text-primary'); //
                         }
+                    },
+                    "columnDefs": [{
+                        //orderable: false,
+                        className: 'select-checkbox',
+                        targets: 0
+                    }],
+                    select: {
+                        style:    'os',
+                        selector: 'td:first-child'
                     }
                 }
             );
-            // 테이블 셋팅완료
-            /*var counter = 1;
-            $('#addRow').on( 'click', function () {
-                table.row.add( [
-                    '.1',
-                    '.2',
-                    '.3'
-
-                ] ).draw( false );
-
-                counter++;
-            } );
-            $('#addRow').click();*/
-
 
             // 이벤트
-            $('#example tbody').on('click', 'tr', function () {
-                $(this).toggleClass('selected');
-            });
-
-            /*            $('#example tbody').on('click', 'tr', function () {
-                            var data = table.row( this ).data();
-                            alert( 'You clicked on '+data[0]+'\'s row' );
-                        } );*/
+            /*
+           $('#example tbody').on('click', 'tr', function () {
+               $(this).toggleClass('selected');
+                   var data = table.row( this ).data();
+                   alert( 'You clicked on '+data[0]+'\'s row' );
+           });
+            */
         });
     </script>
 @endsection

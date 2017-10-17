@@ -2,6 +2,7 @@
 {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>--}}
 
 
+
 <!-- Bootstrap -->
 <script src="{{ asset('libs/jquery/jquery/dist/jquery.js') }}"></script>
 <script type="text/javascript">
@@ -18,6 +19,8 @@
 
 
 
+{{-- table grid관련 순서 중요 --}}
+<script src="{{ asset('js/datatables.js')}}"></script>
 
 
 <script src="{{ asset('libs/jquery/tether/dist/js/tether.min.js') }}"></script>
@@ -25,7 +28,6 @@
 
 
 <!-- core -->
-
 <script src="{{ asset('libs/jquery/underscore/underscore-min.js')}}"></script>
 <script src="{{ asset('libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js')}}"></script>
 <script src="{{ asset('libs/jquery/PACE/pace.min.js')}}"></script>
@@ -48,11 +50,12 @@
 <script src="{{ asset('js/bootstrap-datepicker.js')}}"></script>
 <script src="{{ asset('js/bootstrap-datepicker.kr.min.js')}}"></script>
 
+{{-- greensock --}}
 <script src="js/TweenMax.min.js"></script>
 
 {{--parsley--}}
-<script src="js/parsley.min.js"></script>
-<script src="js/ko.js"></script>
+<script src="{{ asset('js/parsley.min.js')}}"></script>
+<script src="{{ asset('js/ko.js')}}"></script>
 
 
 
@@ -70,5 +73,5 @@
 
 {{--<script src="{{ asset('js/exentriq-bootstrap-material-ui.min.js')}}"></script>--}}
 
-<script src="{{ asset('js/datatables.min.js')}}"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>

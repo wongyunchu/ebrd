@@ -7,6 +7,7 @@
             <table id="example" width="100%" cellspacing="0" class="table table-striped table-bordered table-hover row-border p-b-md">
 
                 <thead>
+                <th></th>
                 <th style="width:100px">#</th>
                 <th>slug</th>
                 <th>Title</th>
@@ -17,6 +18,7 @@
                 <tbody>
                 @foreach($posts as $post)
                     <tr>
+                        <td></td>
                         <td>{{$post->id}}</td>
                         <td>{{$post->slug}}</td>
                         <td>{{strip_tags($post->title)}}</td>
@@ -59,6 +61,7 @@
 
             var table = $('#example').DataTable(
                 {
+                    select: false,
                     "paging": true,
                     "info": true,
                     "ordering": true,
@@ -67,19 +70,15 @@
                     stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
                     "pagingType": "full_numbers", //first_last_number
                     // obj 순서대로 칼럼 정의 할수 있음
-                    "columnDefs": [
-                        {
-                          /*  "render": function ( data, type, row ) {
-                                return data +' ('+ row[1]+')';
-                            },
-                            "targets": 0*/
-                        },
-                        {
-                            "targets": [1],
-                            "visible": false,
-                            "searchable": false
-                        }
-                    ],
+                    "columnDefs": [{
+                            orderable: false,
+                            className: 'select-checkbox',
+                            targets: 0
+                        }],
+                    select: {
+                            style:    'os',
+                            selector: 'td:first-child'
+                    },
                     "createdRow": function ( row, data, index ) {
                         if ( data[0].replace(/[\$,]/g, '') * 1 > 55 ) {
                             $('td', row).eq(1).addClass('text-primary'); //
@@ -104,7 +103,7 @@
 
             // 이벤트
             $('#example tbody').on( 'click', 'tr', function () {
-                $(this).toggleClass('selected');
+               // $(this).toggleClass('selected');
             } );
 
 /*            $('#example tbody').on('click', 'tr', function () {
