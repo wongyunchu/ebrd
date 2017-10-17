@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="onC()">
+	<mx:Script>
+		<![CDATA[
+			import com.adobe.serialization.json.JSON;
+			import mx.controls.Alert;
+			public function onC():void {
+//				Alert.show("2");
+//				
+//				var messages:Array = new Array ();
+//				var header:Object = {"version":"1.0.1", "client":0};
+//				var body:Object = {"user_id":"1101107", "type":2};
+//				var v:Object = {"header":header, "body":body};
+		        //messages.push(header, body);
+		
+//		        var JsonObj:String = JSON.encode(v);
+//		        trace(JsonObj);
+		
+		
+				var head:Object = {"version":"1.0.1", "client":0};
+				var body:Object = {"user_id":"1101107", "type":2};
+				var obj:Object = {"head":head, "body":body};
+				var sValues:String = JSON.encode(obj);
+				
+				
+				
+		        //var variables:URLVariables=new URLVariables(JsonObj);
+				var requestVars:URLVariables = new URLVariables();
+				requestVars.req = sValues;
+//				requestVars.header = header;
+//				requestVars.body = body;
+//				requestVars.version = "1.0.1";
+//				requestVars.client = "0";
+//				requestVars.user_id = "1101107";
+//				requestVars.type = "2";
+				
+		        var RequestURL:String = "https://i-net.networkons.com/TalkOn/SendByLegacyAlarmCnt";
+		
+		        var JSONLoader:URLLoader = new URLLoader();
+		        //JSONLoader.dataFormat=URLLoaderDataFormat.VARIABLES;
+		        JSONLoader.dataFormat=URLLoaderDataFormat.TEXT;
+		
+		        JSONLoader.addEventListener(IOErrorEvent.IO_ERROR, GetBookmarkURLError, false, 0, true);
+		        JSONLoader.addEventListener(Event.COMPLETE, parseBookmarkURLResult, false, 0, true);
+		
+		
+		        //var hdr:URLRequestHeader = new URLRequestHeader("Content-type", "application/json");
+		        //var hdr:URLRequestHeader = new URLRequestHeader("Content-Type", "application/json; charset=UTF-8");
+		        var hdr:URLRequestHeader = new URLRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+		
+		        var request:URLRequest = new URLRequest(RequestURL);
+		        //request.requestHeaders.push(hdr);
+		        request.data=requestVars;//JsonObj//requestVars;
+		        request.method = URLRequestMethod.POST;
+			
+		        try 
+		        {
+		            JSONLoader.load(request);
+		        }
+		        catch (error:ArgumentError) 
+		        { 
+		            trace("An ArgumentError has occurred."+error.errorID.toString()); 
+		        } 
+		        catch (error:SecurityError) 
+		        { 
+		            trace("A SecurityError has occurred."); 
+		        }
+		        catch (error:Error) 
+		        {
+		            trace("Unable to load requested document.");
+		        }
+			}
+			
+			public function GetBookmarkURLError(e:*):void {
+				trace("d");
+			}
+			
+			public function parseBookmarkURLResult(e:*):void {
+				trace("ddd");
+			}
+		]]>
+	</mx:Script>
+</mx:Application>
