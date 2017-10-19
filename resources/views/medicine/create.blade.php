@@ -78,7 +78,7 @@
         <div id="insertArea" style="height: 0px; overflow: hidden">
             <form id="formMedicine" action="#" data-parsley-validate="">
                 <div class="pTitle" >
-                    <i class="fa fa-dot-circle-o"></i><label>의료비 사용내역 입력1</label>
+                    <i class="fa fa-dot-circle-o"></i><label>의료비 사용내역 입력</label>
                 </div>
                 <table class="blueTable" >
                     <tr>
@@ -129,12 +129,12 @@
         </div>
         <table id="example" cellspacing="0" width="100%"
                class="table table-striped table-bordered table-hover row-border p-b-md">
-            <thead>
-            <th style="width:100px">선택</th>
+{{--            <thead>
+            <th>선택</th>
             <th>사용일자</th>
             <th>병원 / 약국명</th>
             <th>금액</th>
-            </thead>
+            </thead>--}}
             <tbody>
             </tbody>
         </table>
@@ -225,9 +225,9 @@
                     }
                     this.openInsertView();
                     vue.sltdData = medicineListTable.row( { selected: true } ).data();
-                    tiDate.value = vue.sltdData.tiDate;
-                    tiAmt.value = vue.sltdData.tiAmt;
-                    tiHsptName.value = vue.sltdData.tiHsptName;
+                    $('#tiDate').val(vue.sltdData.tiDate);
+                    $('#tiAmt').val(vue.sltdData.tiAmt);
+                    $('#tiHsptName').val(vue.sltdData.tiHsptName) ;
                 },
                 delList:function() {
                     //var count = medicineListTable.rows( { selected: true } ).data();
