@@ -99,15 +99,18 @@
                     <tr>
                         <td>병원 / 약국명</td>
                         <td colspan="3">
-                            <input type="text" id="tiHsptName" class="form-control" required></td>
+                            <input type="text" id="tiHsptName" class="form-control" required>
+                        </td>
                     </tr>
                 </table>
-
 
             <div class="row end-xs p-a-sm">
                 {{--https://stackoverflow.com/questions/683498/calling-javascript-from-a-html-form--}}
                 {{--@submit.prevent="addList" --}}
-                <button type="submit" class="md-btn md-raised m-b-sm w-xs indigo m-a-xs">추가</button>
+                <button type="submit" class="md-btn md-raised m-b-sm w-xs indigo m-a-xs">
+                    <div v-if="sltdData==null">추가</div>
+                    <div v-else>수정</div>
+                </button>
                 <button type="button" @click="cancelForm" class="md-btn md-raised m-b-sm w-xs green m-a-xs">취소</button>
             </div>
             </form>
@@ -200,7 +203,7 @@
         vue = new Vue({
             el: '#vuejs',
             data: {
-                message: 'Greetings your Majesty!'
+                sltdData: null
 
             },
             methods: {
@@ -209,41 +212,63 @@
                 },
                 // 하단 추가, 수정, 삭제
                 addForm: function () {
+                    medicineListTable.rows().deselect();
+                    vue.sltdData = null;
+                    resetForm();
                     this.openInsertView();
                     //$('#tiDate').focus();
                 },
                 editForm:function() {
+                    if(medicineListTable.row( { selected: true } ).count() === 0) {
+                        alert('수정할 대상을 선택하세요');
+                        return;
+                    }
                     this.openInsertView();
-                    var sltdData = medicineListTable.row( { selected: true } ).data();
-                    tiDate.value = sltdData[1];
-                    tiAmt.value = sltdData[2];
-                    tiHsptName.value = sltdData[3];
+                    vue.sltdData = medicineListTable.row( { selected: true } ).data();
+                    tiDate.value = vue.sltdData.tiDate;
+                    tiAmt.value = vue.sltdData.tiAmt;
+                    tiHsptName.value = vue.sltdData.tiHsptName;
                 },
                 delList:function() {
                     //var count = medicineListTable.rows( { selected: true } ).data();
                     var count = medicineListTable.row( { selected: true } ).remove().draw();
                 },
 
-
-
+                /////////////////////////////////////////////////////////////////////////////////
+                // 상단
                 cancelForm: function () {
+                    vue.sltdData = null;
+                    medicineListTable.rows().deselect();
                     TweenMax.to($('#insertArea'), 0.2, {delay: "0", height: "0"});
                     resetForm();
+
                 },
                 addList:function () {
-                    rowCnt++;
-                    medicineListTable.row.add( [
-                        "",//rowCnt.toString(),
-                        tiDate.value,
-                        tiHsptName.value,
-                        tiAmt.value
-                    ] ).draw( false );
+                    // 신규 추가시
+                    if(vue.sltdData == null) {
+                        rowCnt++;
+                        medicineListTable.row.add(
+                            {
+                                "select":     "",
+                                "tiDate":tiDate.value,
+                                "tiHsptName":tiHsptName.value,
+                                "tiAmt": tiAmt.value
+                            }
+                        ).draw( false );
 
-                    tiDate.value = '{{@date("Y-m-d")}}';
-                    tiHsptName.value = '';
-                    tiAmt.value = '';
-                    this.cancelForm();
-
+                        tiDate.value = '{{@date("Y-m-d")}}';
+                        tiHsptName.value = '';
+                        tiAmt.value = '';
+                        vue.cancelForm();
+                    }
+                    // 수정시
+                    else {
+                        vue.sltdData.tiDate = tiDate.value;
+                        vue.sltdData.tiHsptName = tiHsptName.value;
+                        vue.sltdData.tiAmt = tiAmt.value;
+                        medicineListTable.rows().invalidate().draw();
+                        vue.cancelForm();
+                    }
                 }
 
             }
@@ -253,6 +278,7 @@
     <script type="text/javascript">
         var medicineListTable;
         var rowCnt=0;
+
         $(document).ready(function () {
               $('#formMedicine').parsley()
                   .on('form:success', function() {
@@ -292,11 +318,11 @@
                     select:false,
                     "info": false,
                     "paging": false,
-                    "createdRow": function (row, data, index) {
+/*                    "createdRow": function (row, data, index) {
                         if (data[0].replace(/[\$,]/g, '') * 1 > 55) {
                             $('td', row).eq(1).addClass('text-primary'); //
                         }
-                    },
+                    },*/
                     "columnDefs": [{
                         //orderable: false,
                         className: 'select-checkbox',
@@ -305,7 +331,28 @@
                     select: {
                         style:    'os',
                         selector: 'td:first-child'
-                    }
+                    },
+
+                    "data": [
+                        {
+                            "select":     "",
+                            "tiDate":       "",
+                            "tiHsptName":   "System Architect",
+                            "tiAmt": "2345"
+                        },
+                        {
+                            "select":     "",
+                            "tiDate":       "",
+                            "tiHsptName":   "System Architect",
+                            "tiAmt": "5545"
+                        },
+                    ],
+                    "columns": [
+                        { "data": "select" },
+                        { "data": "tiDate" },
+                        { "data": "tiHsptName" },
+                        { "data": "tiAmt" }
+                    ]
                 }
             );
 
