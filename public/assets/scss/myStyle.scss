@@ -18,6 +18,11 @@ table.blueTable:not(#datetimepicker1) {
     text-align: center ;
   }
 }
+
+.parsley-required { // parsley error label
+  text-align: left;
+}
+
 table th, td{
   text-align: center !important;
 }

@@ -57,7 +57,8 @@
 <script src="{{ asset('js/parsley.min.js')}}"></script>
 <script src="{{ asset('js/ko.js')}}"></script>
 
-
+{{--통화관련 / 소숫점 --}}
+<script src="{{ asset('js/accounting.js')}}"></script>
 
 {{--<script src="{{ asset('libs/jquery/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>--}}
 {{--<script src="../libs/jquery/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>--}}

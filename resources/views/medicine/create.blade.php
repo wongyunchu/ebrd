@@ -76,7 +76,7 @@
          @submit="addList"
         --}}
         <div id="insertArea" style="height: 0px; overflow: hidden">
-            <form id="formMedicine" action="#" data-parsley-validate="">
+            <form id="formMedicine" onsubmit="return false"  data-parsley-validate="">
                 <div class="pTitle" >
                     <i class="fa fa-dot-circle-o"></i><label>의료비 사용내역 입력</label>
                 </div>
@@ -118,10 +118,12 @@
         <hr>
         {{--의료비 사용내역--}}
         <div class="row bottom-xs">
-            <div class="pTitle col-xs-2" style="display: inline">
+
+            <div class="pTitle col-xs-5" style="display: inline">
                 <i class="fa fa-dot-circle-o"></i><label>의료비 사용내역</label>
             </div>
-            <div class="col-xs-10 row end-xs p-r-0">
+
+            <div class="col-xs-7 row end-xs p-r-0">
                 <button @click="addForm" class="md-btn md-raised m-b-sm w-xs blue m-a-xs">추가</button>
                 <button @click="editForm" class="md-btn md-raised m-b-sm w-xs blue m-a-xs">수정</button>
                 <button @click="delList" class="md-btn md-raised m-b-sm w-xs red m-a-xs">삭제</button>
@@ -129,12 +131,12 @@
         </div>
         <table id="example" cellspacing="0" width="100%"
                class="table table-striped table-bordered table-hover row-border p-b-md">
-{{--            <thead>
+            <thead>
             <th>선택</th>
             <th>사용일자</th>
             <th>병원 / 약국명</th>
             <th>금액</th>
-            </thead>--}}
+            </thead>
             <tbody>
             </tbody>
         </table>
@@ -142,14 +144,14 @@
             <div class="col-sm-8"></div>
             <div class="col-sm-2">
                 <div class="md-form-group float-label">
-                    {{Form::text('title', null, ['class'=>'md-input has-value','readonly', '', 'min-length'=>'5'])}}
-                    <label>건수 </label>
+                    {{Form::text('title', null, ['id'=>'idCount', 'class'=>'md-input text-right','readonly', '', 'min-length'=>'5'])}}
+                    <label class="w-full text-right p-r-0" >건수 </label>
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="md-form-group float-label">
-                    {{Form::text('title', null, ['class'=>'md-input'])}}
-                    <label>금액계 </label>
+                    {{Form::text('title', null, ['id'=>'idAmount','class'=>'md-input text-right '])}}
+                    <label class="w-full text-right p-r-xs" >금액계 </label>
                 </div>
             </div>
         </div>
@@ -175,13 +177,13 @@
 
         <div class="form_group">
             <hr>
-            <div class="row ">
+            <div class="row no-gutter">
                 <div class="col-sm-6">
                     {!! Html::linkRoute('medicine.index','뒤로', array(), ['class'=>'md-btn md-raised m-b-sm btn-lg w-sm green'] ) !!}
                 </div>
 
                 <div class="col-sm-6">
-                    <div class="end-xs">
+                    <div class="row end-xs no-gutter">
                         <button type="submit" id="submit-all" class="md-btn md-raised m-b-sm btn-lg w-sm blue">저장
                         </button>
                     </div>
@@ -194,6 +196,22 @@
 @stop
 @section('scripts')
     <script>
+
+        //table sum함수
+        jQuery.fn.dataTable.Api.register( 'sum()', function ( ) {
+            return this.flatten().reduce( function ( a, b ) {
+                if ( typeof a === 'string' ) {
+                    a = a.replace(/[^\d.-]/g, '') * 1;
+                }
+                if ( typeof b === 'string' ) {
+                    b = b.replace(/[^\d.-]/g, '') * 1;
+                }
+
+                return a + b;
+            }, 0 );
+        } );
+
+
         function resetForm() {
             $('#formMedicine').each(function() {
                 this.reset();
@@ -250,25 +268,28 @@
                         medicineListTable.row.add(
                             {
                                 "select":     "",
-                                "tiDate":tiDate.value,
-                                "tiHsptName":tiHsptName.value,
-                                "tiAmt": tiAmt.value
+                                "tiDate":$('#tiDate').val(),
+                                "tiHsptName":$('#tiHsptName').val(),
+                                "tiAmt": $('#tiAmt').val()
                             }
                         ).draw( false );
-
-                        tiDate.value = '{{@date("Y-m-d")}}';
-                        tiHsptName.value = '';
-                        tiAmt.value = '';
                         vue.cancelForm();
                     }
                     // 수정시
                     else {
-                        vue.sltdData.tiDate = tiDate.value;
-                        vue.sltdData.tiHsptName = tiHsptName.value;
-                        vue.sltdData.tiAmt = tiAmt.value;
+                        vue.sltdData.tiDate = $('#tiDate').val();
+                        vue.sltdData.tiHsptName = $('#tiHsptName').val();
+                        vue.sltdData.tiAmt = $('#tiAmt').val();
                         medicineListTable.rows().invalidate().draw();
                         vue.cancelForm();
                     }
+                    var count = medicineListTable.rows().count();
+                    $('#idCount').val(count);
+                    $('#idCount').addClass("has-value hover");
+
+                    var totalAmount = medicineListTable.column( 3 ).data().sum();
+                    $('#idAmount').val(accounting.formatMoney(totalAmount));
+                    $('#idAmount').addClass("has-value hover");
                 }
 
             }
@@ -284,6 +305,10 @@
                   .on('form:success', function() {
                       vue.addList();
                       $('#formMedicine').parsley().reset();
+                      return;
+                  })
+                  .on('form:init', function() {
+                      alert('3');
                   });
                   /*.on('form:error', function() {
                       alert('6');
