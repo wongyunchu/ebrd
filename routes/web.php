@@ -14,6 +14,9 @@ Route::view('medicine', 'medicine.index')->name('medicine.index');
 Route::view('medicineCreate', 'medicine.create')->name('medicineCreate');
 
 
+Route::resource('medicals', 'MedicalController');
+
+
 Route::get('/', 'PagesController@index');
 Route::get('test', 'PagesController@test');
 Route::get('about', 'PagesController@getAbout');

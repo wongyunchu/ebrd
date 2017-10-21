@@ -16,6 +16,8 @@
 
         {!! Form::hidden('csrf-token', csrf_token(), ['id' => 'csrf-token']) !!}
 
+        {{ Form::open(['url' => '/', 'method' => '']) }}
+        {{ Form::close() }}
         {{--의료비 신청--}}
         <div class="pTitle">
             <i class="fa fa-dot-circle-o"></i><label>의료비 신청</label>
@@ -184,7 +186,7 @@
 
                 <div class="col-sm-6">
                     <div class="row end-xs no-gutter">
-                        <button type="submit" id="submit-all" class="md-btn md-raised m-b-sm btn-lg w-sm blue">저장
+                        <button id="submit-all" type="submit"  class="md-btn md-raised m-b-sm btn-lg w-sm blue">저장
                         </button>
                     </div>
                 </div>
@@ -196,22 +198,6 @@
 @stop
 @section('scripts')
     <script>
-
-        //table sum함수
-        jQuery.fn.dataTable.Api.register( 'sum()', function ( ) {
-            return this.flatten().reduce( function ( a, b ) {
-                if ( typeof a === 'string' ) {
-                    a = a.replace(/[^\d.-]/g, '') * 1;
-                }
-                if ( typeof b === 'string' ) {
-                    b = b.replace(/[^\d.-]/g, '') * 1;
-                }
-
-                return a + b;
-            }, 0 );
-        } );
-
-
         function resetForm() {
             $('#formMedicine').each(function() {
                 this.reset();
@@ -361,13 +347,13 @@
                     "data": [
                         {
                             "select":     "",
-                            "tiDate":       "",
-                            "tiHsptName":   "System Architect",
+                            "tiDate":       "2017-11-21",
+                            "tiHsptName":   "하나병원",
                             "tiAmt": "2345"
                         },
                         {
                             "select":     "",
-                            "tiDate":       "",
+                            "tiDate":       "2017-05-01",
                             "tiHsptName":   "System Architect",
                             "tiAmt": "5545"
                         },
