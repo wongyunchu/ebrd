@@ -25,7 +25,7 @@ class PagesController extends Controller
 
     public function getAbout(Request $request){
         $data = $request->session()->all();
-        dd($data);
+        //dd($data);
 
         $first = 'baek';
         $last = 'kwang hyoun';

@@ -16,62 +16,63 @@
 
         {!! Form::hidden('csrf-token', csrf_token(), ['id' => 'csrf-token']) !!}
 
-        {{ Form::open(['url' => '/', 'method' => '']) }}
-        {{ Form::close() }}
+{{--        {{ Form::model(['url' => '/', 'method' => 'post']) }}
+        {{ Form::close() }}--}}
         {{--의료비 신청--}}
         <div class="pTitle">
             <i class="fa fa-dot-circle-o"></i><label>의료비 신청</label>
         </div>
 
-        <table class="blueTable">
-            <tr>
-                <td width="20%">의료비 지원대상자
-                </td>
-                <td width="30%">김남오(342221)</td>
-                <td width="20%">의료비 지원가능 금액</td>
-                <td width="30%">30,000원</td>
-            </tr>
-            <tr>
-                <td>대상년월</td>
-                <td>
-                    <div class="form-group" style="display: inline;">
-                        <select class="form-control form-control-sm p-l-2" style="width: 100px;  display: inline"
-                                id="category_id" name="category_id">
-                            @for($i=0; $i<10; $i++)
-                                <option value="{{$nowYear+$i}}">
-                                    {{$nowYear+$i}}년
-                                </option>
-                            @endfor
-                        </select>
+        <form id="formMedicalMain" action="/medicals">
+            <table class="blueTable">
+                <tr>
+                    <td width="20%">의료비 지원대상자
+                    </td>
+                    <td width="30%">김남오(342221)</td>
+                    <td width="20%">의료비 지원가능 금액</td>
+                    <td width="30%">30,000원</td>
+                </tr>
+                <tr>
+                    <td>대상년월</td>
+                    <td>
+                        <div class="form-group" style="display: inline;">
+                            <select class="form-control form-control-sm p-l-2" style="width: 100px;  display: inline"
+                                    id="targetYear" name="targetYear">
+                                @for($i=0; $i<10; $i++)
+                                    <option value="{{$nowYear+$i}}">
+                                        {{$nowYear+$i}}년
+                                    </option>
+                                @endfor
+                            </select>
 
-                        <select class="form-control form-control-sm p-l-2" style="width: 100px; display: inline"
-                                id="category_id" name="category_id">
-                            @for($i=0; $i<12; $i++)
-                                <option value="{{$i+1}}" style="text-align-last: center">
-                                    {{$i+1}}월
+                            <select class="form-control form-control-sm p-l-2" style="width: 100px; display: inline"
+                                    id="targetMonth" name="targetMonth">
+                                @for($i=0; $i<12; $i++)
+                                    <option value="{{$i+1}}" style="text-align-last: center">
+                                        {{$i+1}}월
+                                    </option>
+                                @endfor
+                            </select>
+                        </div>
+                    </td>
+                    <td>신청금액</td>
+                    <td>10,000원</td>
+                </tr>
+                <tr>
+                    <td>진료과목</td>
+                    <td><select class="form-control form-control-sm p-l-2" style="width: 204px;  display: inline"
+                                id="categorySubject" name="categorySubject">
+                            @foreach($subjects as $subject)
+                                <option value="{{$subject}}">
+                                    {{$subject}}
                                 </option>
-                            @endfor
-                        </select>
-                    </div>
-                </td>
-                <td>신청금액</td>
-                <td>10,000원</td>
-            </tr>
-            <tr>
-                <td>진료과목</td>
-                <td><select class="form-control form-control-sm p-l-2" style="width: 204px;  display: inline"
-                            id="category_id" name="category_id">
-                        @foreach($subjects as $subject)
-                            <option value="{{$subject}}">
-                                {{$subject}}
-                            </option>
-                        @endforeach
-                    </select></td>
-                <td>잔여금액</td>
-                <td>30,000원</td>
-            </tr>
-        </table>
-
+                            @endforeach
+                        </select></td>
+                    <td>잔여금액</td>
+                    <td>30,000원</td>
+                </tr>
+            </table>
+        </form>
         {{--의료비 사용내역 입력 --}}
         {{--
         onsubmit="return checkForm()"
@@ -186,7 +187,7 @@
 
                 <div class="col-sm-6">
                     <div class="row end-xs no-gutter">
-                        <button id="submit-all" type="submit"  class="md-btn md-raised m-b-sm btn-lg w-sm blue">저장
+                        <button id="submit-all" type="submit" @click="saveForm"  class="md-btn md-raised m-b-sm btn-lg w-sm blue">저장
                         </button>
                     </div>
                 </div>
@@ -195,9 +196,40 @@
         </div>
     </div>
 
+
+    {{--
+    modal 창
+    <button class="btn white" data-toggle="modal" data-target="#m-b-b">Dark style</button>
+    <div id="m-b-b" class="modal black-overlay" data-backdrop="false" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal</h5>
+                </div>
+                <div class="modal-body text-center p-lg">
+                    <p>Are you sure to execute this action?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"  class="btn dark-white p-x-md"  data-dismiss="modal">No</button>
+                    <button type="button" id="yesCloser" class="btn danger p-x-md"   data-dismiss="modal">Yes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div>
+    </div>--}}
 @stop
 @section('scripts')
     <script>
+        /*
+        $('#m-b-b').on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        })
+
+      $('#m-b-b').on('hidden.bs.modal',function (e) {
+            var button = $(e.relatedTarget);
+            if (!data) return e.preventDefault() // stops modal from being shown
+        })*/
+
         function resetForm() {
             $('#formMedicine').each(function() {
                 this.reset();
@@ -208,11 +240,72 @@
             el: '#vuejs',
             data: {
                 sltdData: null
-
             },
             methods: {
                 openInsertView:function() {
                     TweenMax.to($('#insertArea'), 0.4, {delay: "0", height: "230"});
+                },
+                // 최종 전체 저장
+                saveForm:function () {
+
+
+                    /*
+                    // bootbox confirm
+                    bootbox.confirm({
+                        message: "This is a confirm with custom button text and color! Do you like it?",
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-success'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-danger'
+                            }
+                        },
+                        callback: function (result) {
+                            console.log('This was logged in the callback: ' + result);
+                        }
+                    });
+*/
+                    //var formDatas = $('#formMedicalMain').serializeArray();
+                    var formDatas = $('#formMedicalMain').serialize();
+                    axios.post('/medicals',formDatas)
+/*                    axios.post('/medicals', {
+                        firstName: 'Fred',
+                        lastName: 'Flintstone'
+                    })*/
+                    .then(function (response) {
+                        console.log(response);
+                        bootbox.alert({
+                            title:'Success',
+                            message:'저장되었습니다.',
+                            callback: function (result) {
+                                window.location.href ='/medicine';
+                            }
+                        });
+                    })
+                    .catch(function (error) {
+                        msg = JSON.parse(error.request.responseText).message;
+                        exeption = JSON.parse(error.request.responseText).exception;
+                        bootbox.alert({
+                            title: exeption,
+                            message: msg
+                        })
+                        /*bootbox.confirm({
+                            title: exeption,
+                            message: msg,
+                            buttons: {
+                                confirm: {
+                                    label: '<i class="fa fa-check"></i> Confirm'
+                                }
+                            },
+                            callback: function (result) {
+                                console.log('This was logged in the callback: ' + result);
+                            }
+                        });*/
+
+                    });
                 },
                 // 하단 추가, 수정, 삭제
                 addForm: function () {
@@ -280,6 +373,7 @@
 
             }
         });
+        Vue.config.devtools = true;
     </script>
 
     <script type="text/javascript">

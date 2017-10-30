@@ -21,7 +21,7 @@
 
 {{-- table grid관련 순서 중요 --}}
 <script src="{{ asset('js/datatables.js')}}"></script>
-
+<script src="{{ asset('js/bootbox.min.js')}}"></script>
 
 <script src="{{ asset('libs/jquery/tether/dist/js/tether.min.js') }}"></script>
 <script src="{{ asset('libs/jquery/bootstrap/dist/js/bootstrap.js')}}"></script>
@@ -75,4 +75,8 @@
 {{--<script src="{{ asset('js/exentriq-bootstrap-material-ui.min.js')}}"></script>--}}
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+{{--<script src="/node_modules/vue/dist/vue.min.js"></script>--}}
+<script src="{{ asset('js/vue.min.js')}}"></script>
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>

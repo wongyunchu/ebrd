@@ -2,7 +2,7 @@
 @section('title', '| About')
 
 @section('content')
-
+{{phpinfo()}}
     <li>
         <a href="{{ route('logout') }}"
            onclick="event.preventDefault();
