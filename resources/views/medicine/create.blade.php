@@ -24,6 +24,7 @@
         </div>
 
         <form id="formMedicalMain" action="/medicals">
+            <input id="medicalList" name="medicalList" type="text" >
             <table class="blueTable">
                 <tr>
                     <td width="20%">의료비 지원대상자
@@ -247,8 +248,6 @@
                 },
                 // 최종 전체 저장
                 saveForm:function () {
-
-
                     /*
                     // bootbox confirm
                     bootbox.confirm({
@@ -269,7 +268,12 @@
                     });
 */
                     //var formDatas = $('#formMedicalMain').serializeArray();
+                    var medicneTableList = JSON.stringify(medicineListTable.rows().data().toArray());
+                    $('#medicalList').val(medicneTableList);
+
+
                     var formDatas = $('#formMedicalMain').serialize();
+
                     axios.post('/medicals',formDatas)
 /*                    axios.post('/medicals', {
                         firstName: 'Fred',

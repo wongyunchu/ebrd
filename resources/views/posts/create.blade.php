@@ -83,15 +83,17 @@
             </div>
             {!! Form::close() !!}
 
+            {{--저장--}}
             {!! Form::open([ 'route' => [ 'dropzone.store' ], 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'image-upload' ]) !!}
             <div class="dropzone-previews" $isReadonly, id="dropzonePreview"></div>
             {!! Form::close() !!}
 
-            {!! Form::open([ 'route' => [ 'dropzone.remove' ],  'id' => 'testRemove' ]) !!}
-            <input type="hidden"  value="filenameTEst" id="filename"/>
-            {{--{{csrf_field()}}--}}
-            {{--{!! Form::hidden('csrf-token', csrf_token(), ['id' => 'csrf-token']) !!}--}}
-            {!! Form::close() !!}
+                {{--삭제 --}}
+                {!! Form::open([ 'route' => [ 'dropzone.remove' ],  'id' => 'testRemove' ]) !!}
+                <input type="hidden"  value="filenameTEst" id="filename"/>
+                {{--{{csrf_field()}}--}}
+                {{--{!! Form::hidden('csrf-token', csrf_token(), ['id' => 'csrf-token']) !!}--}}
+                {!! Form::close() !!}
             {!! Form::hidden('csrf-token', csrf_token(), ['id' => 'csrf-token']) !!}
 
             <div class="form_group">

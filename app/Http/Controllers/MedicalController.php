@@ -49,6 +49,11 @@ class MedicalController extends Controller
      */
     public function store(Request $request)
     {
+        $p = $request->all();
+        $oo = $p['medicalList'];
+        $medicalList = json_decode ($oo, true);
+        $medicalTargetYeaer = $p['targetYear'].'-'.$p['targetMonth'];
+
         $medical = new medical();
         $medical->pernr = 12313;
         //$medical->tagetdate = $request->targetYear.$request->targetMonth;
