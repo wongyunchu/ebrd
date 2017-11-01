@@ -89,7 +89,7 @@
                         <td width="20%">사용일자</td>
                         <td width="30%">
                             <div class="input-group date">
-                                <input id="tiDate" type="text" class="form-control dateComp" readonly value="{{@date("Y-m-d")}}"/>
+                                <input id="usedate" type="text" class="form-control dateComp" readonly value="{{@date("Y-m-d")}}"/>
                                 <span class="input-group-addon" >
                                     <i class="glyphicon glyphicon-th"></i>
                                 </span>
@@ -98,12 +98,12 @@
 
                         <td width="20%">금액</td>
                         <td width="30%">
-                            <input type="text" id="tiAmt" class="form-control" required data-parsley-type="digits"></td>
+                            <input type="text" id="amount" class="form-control" required data-parsley-type="digits"></td>
                     </tr>
                     <tr>
                         <td>병원 / 약국명</td>
                         <td colspan="3">
-                            <input type="text" id="tiHsptName" class="form-control" required>
+                            <input type="text" id="hospitalname" class="form-control" required>
                         </td>
                     </tr>
                 </table>
@@ -268,7 +268,15 @@
                     });
 */
                     //var formDatas = $('#formMedicalMain').serializeArray();
-                    var medicneTableList = JSON.stringify(medicineListTable.rows().data().toArray());
+                    ar_medicineList = medicineListTable.rows().data().toArray();
+                    for (var key in ar_medicineList) {
+                        delete ar_medicineList[key].select;
+                    }
+                    var medicneTableList = JSON.stringify(ar_medicineList);
+//                    var medicneTableList = JSON.stringify(medicineListTable.rows().data().toArray());
+
+
+
                     $('#medicalList').val(medicneTableList);
 
 
@@ -317,7 +325,7 @@
                     vue.sltdData = null;
                     resetForm();
                     this.openInsertView();
-                    //$('#tiDate').focus();
+                    //$('#usedate').focus();
                 },
                 editForm:function() {
                     if(medicineListTable.row( { selected: true } ).count() === 0) {
@@ -326,9 +334,9 @@
                     }
                     this.openInsertView();
                     vue.sltdData = medicineListTable.row( { selected: true } ).data();
-                    $('#tiDate').val(vue.sltdData.tiDate);
-                    $('#tiAmt').val(vue.sltdData.tiAmt);
-                    $('#tiHsptName').val(vue.sltdData.tiHsptName) ;
+                    $('#usedate').val(vue.sltdData.usedate);
+                    $('#amount').val(vue.sltdData.amount);
+                    $('#hospitalname').val(vue.sltdData.hospitalname) ;
                 },
                 delList:function() {
                     //var count = medicineListTable.rows( { selected: true } ).data();
@@ -351,18 +359,18 @@
                         medicineListTable.row.add(
                             {
                                 "select":     "",
-                                "tiDate":$('#tiDate').val(),
-                                "tiHsptName":$('#tiHsptName').val(),
-                                "tiAmt": $('#tiAmt').val()
+                                "usedate":$('#usedate').val(),
+                                "hospitalname":$('#hospitalname').val(),
+                                "amount": $('#amount').val()
                             }
                         ).draw( false );
                         vue.cancelForm();
                     }
                     // 수정시
                     else {
-                        vue.sltdData.tiDate = $('#tiDate').val();
-                        vue.sltdData.tiHsptName = $('#tiHsptName').val();
-                        vue.sltdData.tiAmt = $('#tiAmt').val();
+                        vue.sltdData.usedate = $('#usedate').val();
+                        vue.sltdData.hospitalname = $('#hospitalname').val();
+                        vue.sltdData.amount = $('#amount').val();
                         medicineListTable.rows().invalidate().draw();
                         vue.cancelForm();
                     }
@@ -445,22 +453,22 @@
                     "data": [
                         {
                             "select":     "",
-                            "tiDate":       "2017-11-21",
-                            "tiHsptName":   "하나병원",
-                            "tiAmt": "2345"
+                            "usedate":       "2017-11-21",
+                            "hospitalname":   "하나병원",
+                            "amount": "2345"
                         },
                         {
                             "select":     "",
-                            "tiDate":       "2017-05-01",
-                            "tiHsptName":   "System Architect",
-                            "tiAmt": "5545"
+                            "usedate":       "2017-05-01",
+                            "hospitalname":   "System Architect",
+                            "amount": "5545"
                         },
                     ],
                     "columns": [
                         { "data": "select" },
-                        { "data": "tiDate" },
-                        { "data": "tiHsptName" },
-                        { "data": "tiAmt" }
+                        { "data": "usedate" },
+                        { "data": "hospitalname" },
+                        { "data": "amount" }
                     ]
                 }
             );
