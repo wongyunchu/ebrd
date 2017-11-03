@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Session;
 
 class MedicalController extends Controller
 {
+
+
+    public $_medical;
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->_medical = new medical();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,22 +24,14 @@ class MedicalController extends Controller
      */
     public function index()
     {
-      /*  $medical = new medical();
-        $medical->pernr = 12313;
-        //$medical->tagetdate = $request->targetYear.$request->targetMonth;
-        //$medicalTargetYeaer = $request->targetYear.'-'.$request->targetMonth;
-        //echo "@@@@@@@@@@@@@@".$medicalTargetYeaer;
-        //$medical_tagetdate = date_create($medicalTargetYeaer.'-01');
-        $medical_tagetdate = date_create('2010-10-01');
-        //dd($medical_tagetdate);
-        echo "#################";
-        $medical->tagetdate = $medical_tagetdate->format('Y-m-d H:i:s');
-        //$medical->categorySubject = $request->categorySubject;
-        $medical->save();
-        Session::flash('success', '의료비가 저장되었습니다.'); //put은 영구적
-        return redirect()->route('medicals.index');*/
+        $list = $this->_medical->orderByDesc('id')->get();
+        return view('medicine.index')->with("list", $list);
+//        return view('posts.index')->with('posts', $posts);
     }
 
+    public function medicalDetails() {
+        return view('medicine.create');
+    }
     /**
      * Show the form for creating a new resource.
      *

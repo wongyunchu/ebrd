@@ -24,7 +24,7 @@
         </div>
 
         <form id="formMedicalMain" action="/medicals">
-            <input id="medicalList" name="medicalList" type="text" >
+            <input id="medicalList" name="medicalList" type="hidden" >
             <table class="blueTable">
                 <tr>
                     <td width="20%">의료비 지원대상자
@@ -183,7 +183,7 @@
             <hr>
             <div class="row no-gutter">
                 <div class="col-sm-6">
-                    {!! Html::linkRoute('medicine.index','뒤로', array(), ['class'=>'md-btn md-raised m-b-sm btn-lg w-sm green'] ) !!}
+                    {!! Html::linkRoute('medicals.index','뒤로', array(), ['class'=>'md-btn md-raised m-b-sm btn-lg w-sm green'] ) !!}
                 </div>
 
                 <div class="col-sm-6">
@@ -293,7 +293,7 @@
                             title:'Success',
                             message:'저장되었습니다.',
                             callback: function (result) {
-                                window.location.href ='/medicine';
+                                window.location.href ='/medicals';
                             }
                         });
                     })
@@ -389,6 +389,7 @@
     </script>
 
     <script type="text/javascript">
+
         var medicineListTable;
         var rowCnt=0;
 

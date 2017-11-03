@@ -7,15 +7,35 @@
             <table id="example" cellspacing="0" width="100%" class="table table-striped table-bordered table-hover row-border p-b-md">
 
                 <thead>
-                <th style="width:100px">#</th>
-                <th>slug</th>
-                <th>Title</th>
-                <th>Body</th>
-                <th style="width:140px">Create At</th>
-                <th style="width:140px"></th>
+                <th>대상년월</th>
+                <th>신청일</th>
+                <th>진료과목</th>
+                <th >사용일</th>
+                <th>지원건수</th>
+                <th>지원금액</th>
+                <th>품의상태</th>
+                <th>전표상태</th>
+                <th>변경/삭제</th>
                 </thead>
                 <tbody>
-
+                @foreach($list as $item)
+                    <tr>
+                        <th>{{\Illuminate\Support\Carbon::parse($item->tagetdate)->format('Y-m-d')}}</th>
+                        <th>{{\Illuminate\Support\Carbon::parse($item->created_at)->format('Y-m-d')}}</th>
+                        <th>{{$item->categorySubject}}</th>
+                        <th >-</th>
+                        <th >-</th>
+                        <th>-</th>
+                        <th>접수</th>
+                        <th>-</th>
+                        <th>
+                            <a href=""
+                               class="btn btn-outline b-info text-info btn-sm">View</a>
+                            <a href=""
+                               class="btn btn-outline b-warning text-warning btn-sm">Edit</a>
+                        </th>
+                    </tr>
+                @endforeach
                 </tbody>
 
 
@@ -29,7 +49,7 @@
                 <hr>
                 <div class="end-xs">
                     {{--<button id="addRow">Add new row</button>--}}
-                    <a href="{{route('medicineCreate')}}" class="md-btn md-raised m-b-sm btn-lg w-sm indigo">작성</a>
+                    <a href="{{route('medicalDetails')}}" class="md-btn md-raised m-b-sm btn-lg w-sm indigo">작성</a>
                 </div>
             </div>
         </div>
@@ -46,7 +66,7 @@
                 {
                     "paging": true,
                     "info": true,
-                    "ordering": true,
+                    "ordering": false,
                     "order": [[0, "desc"]],
                     "deferRender": true,
                     stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
@@ -60,9 +80,9 @@
                             "targets": 0*/
                         },
                         {
-                            "targets": [1],
+/*                            "targets": [1],
                             "visible": false,
-                            "searchable": false
+                            "searchable": false*/
                         }
                     ],
                     "createdRow": function ( row, data, index ) {

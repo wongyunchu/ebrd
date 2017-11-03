@@ -63,7 +63,7 @@
 
 
                     <li>
-                        <a href="/medicine">
+                        <a href="/medicals">
                             <span class="nav-icon">
                                 <i class="material-icons">&#xe23b;<span ui-include="'/assets/images/i_0.svg'"></span></i>
                             </span>
