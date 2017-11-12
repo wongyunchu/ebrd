@@ -25,13 +25,31 @@ class MedicalController extends Controller
     public function index()
     {
         $list = $this->_medical->orderByDesc('id')->get();
+        
+        //한번 불러야 셋팅됨
+        foreach ($list as $item) {
+            $item->medicaldetail;
+        }
+
         return view('medicine.index')->with("list", $list);
 //        return view('posts.index')->with('posts', $posts);
     }
 
-    public function medicalDetails() {
-        return view('medicine.create');
+    public function medicalDetails($item=null) {
+        $p = null;
+        return view('medicine.create')->with('p', $p);
     }
+
+    public function medicalDetailsView(Request $request) {
+        $p = $request->all();
+        $p = json_decode($p['item']);
+        foreach ($p->medicaldetail as $item) {
+            $item->select = "";
+        }
+
+        return view('medicine.create')->with('p', $p);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

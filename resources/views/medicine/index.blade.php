@@ -2,6 +2,14 @@
 @section('title', '의료비')
 @section('title_sub', 'All Posts...')
 @section('content')
+
+@section('stylesheets')
+    <style type="text/css">
+        tbody>tr>th {
+            font-weight: normal;
+        }
+    </style>
+@endsection
     <div class="row">
         <div class="col-xs-offset-0 col-xs-12">
             <table id="example" cellspacing="0" width="100%" class="table table-striped table-bordered table-hover row-border p-b-md">
@@ -19,20 +27,24 @@
                 </thead>
                 <tbody>
                 @foreach($list as $item)
-                    <tr>
+
+                    <tr >
                         <th>{{\Illuminate\Support\Carbon::parse($item->tagetdate)->format('Y-m-d')}}</th>
                         <th>{{\Illuminate\Support\Carbon::parse($item->created_at)->format('Y-m-d')}}</th>
                         <th>{{$item->categorySubject}}</th>
                         <th >-</th>
                         <th >-</th>
-                        <th>-</th>
+                        <th></th>
                         <th>접수</th>
                         <th>-</th>
                         <th>
-                            <a href=""
-                               class="btn btn-outline b-info text-info btn-sm">View</a>
-                            <a href=""
-                               class="btn btn-outline b-warning text-warning btn-sm">Edit</a>
+                            <form action="{{route('medicalDetailsView')}}" method="post">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="item" value="{{json_encode($item)}}">
+                                <button type="submit" class="btn btn-outline b-info text-info btn-sm" >View</button>
+                            </form>
+{{--                            <a href=""
+                               class="btn btn-outline b-warning text-warning btn-sm">Edit</a>--}}
                         </th>
                     </tr>
                 @endforeach
@@ -61,7 +73,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-
+            //alert("의료비");
             var table = $('#example').DataTable(
                 {
                     "paging": true,
@@ -107,10 +119,10 @@
             $('#addRow').click();*/
 
 
-            // 이벤트
+/*            // 이벤트
             $('#example tbody').on( 'click', 'tr', function () {
                 $(this).toggleClass('selected');
-            } );
+            } );*/
 
 /*            $('#example tbody').on('click', 'tr', function () {
                 var data = table.row( this ).data();

@@ -18,7 +18,7 @@
 </script>
 
 
-
+<script src="{{ asset('js/vue.min.js')}}"></script>
 {{-- table grid관련 순서 중요 --}}
 <script src="{{ asset('js/datatables.js')}}"></script>
 <script src="{{ asset('js/bootbox.min.js')}}"></script>
@@ -51,7 +51,7 @@
 <script src="{{ asset('js/bootstrap-datepicker.kr.min.js')}}"></script>
 
 {{-- greensock --}}
-<script src="js/TweenMax.min.js"></script>
+<script src="/js/TweenMax.min.js"></script>
 
 {{--parsley--}}
 <script src="{{ asset('js/parsley.min.js')}}"></script>
@@ -76,7 +76,7 @@
 
 
 {{--<script src="/node_modules/vue/dist/vue.min.js"></script>--}}
-<script src="{{ asset('js/vue.min.js')}}"></script>
+
 
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

@@ -13,7 +13,9 @@
 //Route::view('medicine', 'medicine.index')->name('medicine.index');
 //Route::view('medicineCreate', 'medicine.create')->name('medicineCreate');
 
-Route::get('medicalDetails', 'MedicalController@medicalDetails')->name('medicalDetails');
+Route::get('medicalDetails/{id?}', 'MedicalController@medicalDetails')->name('medicalDetails');
+Route::post('medicalDetailsView', 'MedicalController@medicalDetailsView')->name('medicalDetailsView');
+
 Route::resource('medicals', 'MedicalController');
 
 
@@ -43,22 +45,5 @@ Route::get('dropzone', 'FileController@dropzone');
 Route::post('dropzone/store', ['as'=>'dropzone.store','uses'=>'FileController@dropzoneStore']);
 Route::post('dropzone/remove', ['as'=>'dropzone.remove','uses'=>'FileController@dropzoneRemove']);
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

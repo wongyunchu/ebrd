@@ -291,6 +291,7 @@
                 $(file.previewElement).find('.dz-error-message').text(response.message);
             }
         };
+
     </script>
 
 @endsection

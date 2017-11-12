@@ -7,6 +7,7 @@
         if($("#view").length == 0 || $(this).hasClass('no-ajax')){
           return;
         }
+        // view id를 찾아서 그 부분만 로딩함
         $.pjax.click(event, {container: container, timeout: 6000, fragment: '#view'});
       });
 

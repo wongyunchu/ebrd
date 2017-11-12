@@ -14,7 +14,7 @@
         </div>
         <div flex class="hide-scroll">
             <nav class="scroll nav-light">
-                <ul class="nav" ui-nav>
+                <ul class="nav leftMenu" ui-nav>
                     <li class="nav-header hidden-folded">
                         <small class="text-success">인사/급여</small>
                     </li>
@@ -52,17 +52,18 @@
                         </ul>
                     </li>
 --}}
-                    <li class="active">
+                    <li>
+
                         <a href="/posts">
                             <span class="nav-icon">
                                 <i class="material-icons">&#xe23b;<span ui-include="'/assets/images/i_0.svg'"></span></i>
                             </span>
-                            <span class="nav-text">공지사항</span>
+                            <span class="nav-text" >공지사항</span>
                         </a>
                     </li>
 
 
-                    <li>
+                    <li >
                         <a href="/medicals">
                             <span class="nav-icon">
                                 <i class="material-icons">&#xe23b;<span ui-include="'/assets/images/i_0.svg'"></span></i>
@@ -73,7 +74,7 @@
 
 
                     <li >
-                        <a href="/medicineTest">
+                        <a href="/posts">
                             <span class="nav-icon">
                                 <i class="material-icons">&#xe23b;<span ui-include="'/assets/images/i_0.svg'"></span></i>
                             </span>
@@ -208,3 +209,5 @@
         </div>
     </div>
 </div>
+
+

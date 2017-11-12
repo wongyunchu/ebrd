@@ -1,7 +1,8 @@
 
 @extends('main')
 @section('title', '의료비')
-@section('title_sub', '의료비 신청')
+@section('title_sub', $p!=null?'의료비 조회':'의료비 신청' )
+
 @section('stylesheets')
     {!! (Html::style('css/parsley.css')) !!}
     {!! Html::style('css/select2.min.css') !!}
@@ -9,8 +10,18 @@
 
 @section('content')
     @php
+    use Carbon\Carbon;
         $nowYear = date("Y");
-        $subjects = ['이비인후과', '안과', '치과','소아과']
+        $subjects = ['이비인후과', '안과', '치과','소아과'];
+        $isNew = true;
+        if($p!=null) {
+            $isNew = false;
+            $p_year = Carbon::createFromFormat('Y-m-d H:i:s', $p->tagetdate)->year;
+            $p_month = Carbon::createFromFormat('Y-m-d H:i:s', $p->tagetdate)->month;
+            $p_carbon = Carbon::createFromFormat('Y-m-d H:i:s', $p->tagetdate);
+            //print_r($p->medicaldetail);
+            //echo json_encode($p->medicaldetail);
+        }
     @endphp
     <div id="vuejs" class="col-xs-offset-0 col-xs-12 ">
 
@@ -37,19 +48,23 @@
                     <td>대상년월</td>
                     <td>
                         <div class="form-group" style="display: inline;">
-                            <select class="form-control form-control-sm p-l-2" style="width: 100px;  display: inline"
+                            <select class="form-control form-control-sm p-l-2" style="width: 100px;  display: inline" {{$isNew?'':'disabled'}}
                                     id="targetYear" name="targetYear">
                                 @for($i=0; $i<10; $i++)
-                                    <option value="{{$nowYear+$i}}">
+                                    <option value="{{$nowYear+$i}}"
+                                        @if ($isNew == false && $nowYear+$i == $p_year)  selected="selected" @endif
+                                    >
                                         {{$nowYear+$i}}년
                                     </option>
                                 @endfor
                             </select>
 
-                            <select class="form-control form-control-sm p-l-2" style="width: 100px; display: inline"
+                            <select class="form-control form-control-sm p-l-2" style="width: 100px; display: inline" {{$isNew?'':'disabled'}}
                                     id="targetMonth" name="targetMonth">
                                 @for($i=0; $i<12; $i++)
-                                    <option value="{{$i+1}}" style="text-align-last: center">
+                                    <option value="{{$i+1}}" style="text-align-last: center"
+                                        @if ($isNew == false && $i== $p_month)  selected="selected" @endif
+                                    >
                                         {{$i+1}}월
                                     </option>
                                 @endfor
@@ -61,10 +76,12 @@
                 </tr>
                 <tr>
                     <td>진료과목</td>
-                    <td><select class="form-control form-control-sm p-l-2" style="width: 204px;  display: inline"
+                    <td><select class="form-control form-control-sm p-l-2" style="width: 204px;  display: inline" {{$isNew?'':'disabled'}}
                                 id="categorySubject" name="categorySubject">
                             @foreach($subjects as $subject)
-                                <option value="{{$subject}}">
+                                <option value="{{$subject}}"
+                                    @if ($isNew == false && $subject== $p->categorySubject)  selected="selected" @endif
+                                >
                                     {{$subject}}
                                 </option>
                             @endforeach
@@ -127,11 +144,13 @@
                 <i class="fa fa-dot-circle-o"></i><label>의료비 사용내역</label>
             </div>
 
+            @if($isNew)
             <div class="col-xs-7 row end-xs p-r-0">
                 <button @click="addForm" class="md-btn md-raised m-b-sm w-xs blue m-a-xs">추가</button>
                 <button @click="editForm" class="md-btn md-raised m-b-sm w-xs blue m-a-xs">수정</button>
                 <button @click="delList" class="md-btn md-raised m-b-sm w-xs red m-a-xs">삭제</button>
             </div>
+            @endif
         </div>
         <table id="example" cellspacing="0" width="100%"
                class="table table-striped table-bordered table-hover row-border p-b-md">
@@ -185,14 +204,14 @@
                 <div class="col-sm-6">
                     {!! Html::linkRoute('medicals.index','뒤로', array(), ['class'=>'md-btn md-raised m-b-sm btn-lg w-sm green'] ) !!}
                 </div>
-
+                @if($isNew)
                 <div class="col-sm-6">
                     <div class="row end-xs no-gutter">
                         <button id="submit-all" type="submit" @click="saveForm"  class="md-btn md-raised m-b-sm btn-lg w-sm blue">저장
                         </button>
                     </div>
                 </div>
-
+                @endif
             </div>
         </div>
     </div>
@@ -218,6 +237,7 @@
         </div>
     </div>--}}
 @stop
+
 @section('scripts')
     <script>
         /*
@@ -451,7 +471,12 @@
                         selector: 'td:first-child'
                     },
 
-                    "data": [
+                    "data":
+                    @if ($isNew == false) {!! json_encode($p->medicaldetail)  !!}
+                    @else []
+                    @endif
+                    ,
+                    /*[
                         {
                             "select":     "",
                             "usedate":       "2017-11-21",
@@ -464,7 +489,7 @@
                             "hospitalname":   "System Architect",
                             "amount": "5545"
                         },
-                    ],
+                    ],*/
                     "columns": [
                         { "data": "select" },
                         { "data": "usedate" },

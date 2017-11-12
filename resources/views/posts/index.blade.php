@@ -46,7 +46,7 @@
                 <hr>
                 <div class="end-xs">
                     {{--<button id="addRow">Add new row</button>--}}
-                    <a href="{{route('posts.create')}}" class="md-btn md-raised m-b-sm btn-lg w-sm indigo">작성</a>
+                    <a href="{{route('posts.create')}}" class="md-btn md-raised m-b-sm btn-lg w-sm indigo" >작성</a>
                 </div>
             </div>
         </div>
@@ -55,10 +55,8 @@
 @stop
 @section('scripts')
     <script type="text/javascript">
-
-
         $(document).ready(function () {
-
+            //alert("공지사항");
             var table = $('#example').DataTable(
                 {
                     select: false,

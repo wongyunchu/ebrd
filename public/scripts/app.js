@@ -1,7 +1,8 @@
-
 (function ($) {
 
 	'use strict';
+
+
 
 	  window.app = {
       name: 'Flatkit',
@@ -106,4 +107,61 @@
     init();
     setTheme();
 
+    // 메뉴 클릭시 해당 경로 저장 (sltd acitve를 위해)
+    var pathname;
+/*
+    $(document).on('click', 'a[data-pjax], [data-pjax] a, #aside .nav a', function(event) {
+
+        var pathname = this.pathname;
+        var pathname = $(location).attr('pathname');
+        localStorage.setItem("activeMenu", pathname);
+    });
+*/
+
+    //var hrefName = $('ul.nav.aa').find('li>a')["0"].pathname;
+    var menuLists = $('ul.nav.leftMenu').find('li>a');
+    var savedPathName = $(location).attr('pathname');//localStorage.getItem("activeMenu");
+    savedPathName = savedPathName.split('/');
+
+    //for(i in menuLists) {
+        //$(menuLists[i].parentElement).removeClass("active");
+    //}
+
+    if(savedPathName) {
+        for(i in menuLists) {
+            var hrefName = menuLists[i].pathname;
+            if("/"+savedPathName[1] == hrefName) {
+
+                //alert(hrefName);
+                //$(menuLists[i]).parentElement.addClass("active")
+                $(menuLists[i].parentElement).addClass("active");
+                break;
+            }
+        }
+    }
+
 })(jQuery);
+
+vue = new Vue({
+    el: '#aside',
+    data: {
+        isActive: true,
+        pathname:''
+    },
+    methods: {
+        chkMenu:function(e, t) {
+            alert("e");
+        }
+    },
+
+    computed: {
+
+
+        chkSltd: function (e) {
+            //alert(this.pathname);
+            return {
+                active:true
+            }
+        }
+    }
+});
