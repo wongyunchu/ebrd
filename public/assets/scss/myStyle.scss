@@ -3,6 +3,9 @@
   font-size: 13px;
 }
 
+label>.form-control.input-sm {
+  width: 100px !important;
+}
 
 table.blueTable:not(#datetimepicker1) {
   text-align: center;
