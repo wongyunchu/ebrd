@@ -1,9 +1,8 @@
 <?php
 
 namespace App;
-
+use App\Atcfile;
 use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\Post
  *
@@ -16,7 +15,7 @@ class  Post extends Model
     }
 
     public function atcfiles(){
-        return $this->hasMany('App\atcfile');
+        return $this->hasMany('App\Atcfile');
     }
     public function tags(){
         return $this->belongsToMany('App\Tag');
