@@ -100,11 +100,11 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-6">
-                        {!! Html::linkRoute('posts.index','Back', array(), ['class'=>'md-btn md-raised m-b-sm btn-lg w-sm green'] ) !!}
+                        {!! Html::linkRoute('posts.index','목록으로', array(), ['class'=>'md-btn md-raised m-b-sm btn-lg w-sm green'] ) !!}
                     </div>
                     @if ($isReadonly != 'readonly')
                     <div class="col-sm-6">
-                        <div class="end-xs">
+                        <div class="row p-r  end-xs">
                             <button type="submit" id="submit-all" class="md-btn md-raised m-b-sm btn-lg w-sm blue" >저장</button>
                         </div>
                     </div>

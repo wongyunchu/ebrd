@@ -107,8 +107,9 @@
     init();
     setTheme();
 
-    // 메뉴 클릭시 해당 경로 저장 (sltd acitve를 위해)
-    var pathname;
+///////////////////////////////////////////////////////
+// 메뉴 클릭시 해당 경로 저장 (sltd acitve를 위해)
+var pathname;
 /*
     $(document).on('click', 'a[data-pjax], [data-pjax] a, #aside .nav a', function(event) {
 
@@ -117,7 +118,6 @@
         localStorage.setItem("activeMenu", pathname);
     });
 */
-
     //var hrefName = $('ul.nav.aa').find('li>a')["0"].pathname;
     var menuLists = $('ul.nav.leftMenu').find('li>a');
     var savedPathName = $(location).attr('pathname');//localStorage.getItem("activeMenu");

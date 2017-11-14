@@ -1,3 +1,7 @@
+/*left subMenu font*/
+.nav-sub > li > a > span {
+  font-size: 13px; }
+
 table.blueTable:not(#datetimepicker1) {
   text-align: center;
   width: 100%; }

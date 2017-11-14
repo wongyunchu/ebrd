@@ -6,7 +6,7 @@
 
 @include('partials._top')
 <div class="container_forDel p-t-3">
-    @include('partials._aside')
+    @include('partials._aside2')
 
     @include('partials._panel')
 </div>

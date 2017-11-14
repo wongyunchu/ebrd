@@ -7,20 +7,16 @@
             <table id="example" width="100%" cellspacing="0" class="table table-striped table-bordered table-hover row-border p-b-md">
 
                 <thead>
-                <th></th>
                 <th style="width:100px">#</th>
-                <th>slug</th>
                 <th>Title</th>
                 <th>Body</th>
                 <th style="width:140px">Create At</th>
-                <th style="width:140px"></th>
+                <th style="width:140px">처리</th>
                 </thead>
                 <tbody>
                 @foreach($posts as $post)
                     <tr>
-                        <td></td>
                         <td>{{$post->id}}</td>
-                        <td>{{$post->slug}}</td>
                         <td>{{strip_tags($post->title)}}</td>
                         <td>{{substr(strip_tags($post->body), 0, 50)}} {{strlen($post->body) > 50 ? "...":""}}</td>
                         <td>{{date('M j, Y', strtotime($post->updated_at) )}}</td>
@@ -44,7 +40,7 @@
             --}}
             <div class="form_group">
                 <hr>
-                <div class="end-xs">
+                <div class="row p-r end-xs">
                     {{--<button id="addRow">Add new row</button>--}}
                     <a href="{{route('posts.create')}}" class="md-btn md-raised m-b-sm btn-lg w-sm indigo" >작성</a>
                 </div>
@@ -68,15 +64,15 @@
                     stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
                     "pagingType": "full_numbers", //first_last_number
                     // obj 순서대로 칼럼 정의 할수 있음
-                    "columnDefs": [{
+/*                    "columnDefs": [{
                             orderable: false,
                             className: 'select-checkbox',
                             targets: 0
-                        }],
-                    select: {
+                        }],*/
+                   /* select: {
                             style:    'os',
                             selector: 'td:first-child'
-                    },
+                    },*/
                     "createdRow": function ( row, data, index ) {
                         if ( data[0].replace(/[\$,]/g, '') * 1 > 55 ) {
                             $('td', row).eq(1).addClass('text-primary'); //

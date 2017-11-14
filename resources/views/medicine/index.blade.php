@@ -59,7 +59,7 @@
             --}}
             <div class="form_group">
                 <hr>
-                <div class="end-xs">
+                <div class="row end-xs p-r">
                     {{--<button id="addRow">Add new row</button>--}}
                     <a href="{{route('medicalDetails')}}" class="md-btn md-raised m-b-sm btn-lg w-sm indigo">작성</a>
                 </div>
