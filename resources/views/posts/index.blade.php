@@ -11,7 +11,7 @@
                 <th>Title</th>
                 <th>Body</th>
                 <th style="width:140px">Create At</th>
-                <th style="width:140px">처리</th>
+                <th style="min-width: 100px">처리</th>
                 </thead>
                 <tbody>
                 @foreach($posts as $post)
