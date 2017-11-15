@@ -49,12 +49,13 @@
             {!! Form::model($post, ['route' => ['posts.store'],  'files' => true, 'enctype' => 'multipart/form-data', 'data-parsley-validate'=>'', 'id' => 'postForm']) !!}
             <div class="md-form-group float-label">
                 {{--{{Form::text('title', null, ['class'=>'md-input', $isReadonly, 'required', 'min-length'=>'5', 'type'=>''])}}--}}
-                {{ Form::input('', 'title', null, ['class' => 'md-input']) }}
+                {{ Form::input('', 'title', null, ['class'=>'md-input', $isReadonly, 'required', 'min-length'=>'5', 'type'=>'']) }}
                 <label>Title: </label>
             </div>
 
             <div class="md-form-group float-label">
-                {{Form::text('slug', null, ['class'=>'md-input', $isReadonly,'required', 'min-length'=>'5'])}}
+                {{--{{Form::text('slug', null, ['class'=>'md-input', $isReadonly,'required', 'min-length'=>'5'])}}--}}
+                {{ Form::input('', 'slug', null, ['class'=>'md-input', $isReadonly, 'required', 'min-length'=>'5', 'type'=>'']) }}
                 <label>Slug : </label>
             </div>
 
