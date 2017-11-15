@@ -13,10 +13,12 @@
 //Route::view('medicine', 'medicine.index')->name('medicine.index');
 //Route::view('medicineCreate', 'medicine.create')->name('medicineCreate');
 
+/*페이지*/
+Route::view('profile', 'pages/profile')->name('profile');
+
+/*의료비*/
 Route::get('medicals/details/{id?}', 'MedicalController@medicalDetails')->name('medicalDetails');
 Route::post('medicals/detailsView', 'MedicalController@medicalDetailsView')->name('medicalDetailsView');
-/*medicalDetails
-medicalDetailsView*/
 Route::resource('medicals', 'MedicalController');
 
 

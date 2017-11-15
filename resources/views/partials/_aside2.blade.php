@@ -17,7 +17,7 @@
         {{--User profile--}}
         <div flex-no-shrink="">
             <div class="nav-fold">
-                <a href="#/app/page/profile" ui-sref="app.page.profile">
+                <a href="{{route('profile')}}" ui-sref="app.page.profile">
                     <span class="pull-right m-v-sm hidden-folded">
                       <b class="label warn">9</b>
                     </span>
