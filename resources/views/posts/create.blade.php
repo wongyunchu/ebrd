@@ -48,7 +48,8 @@
 
             {!! Form::model($post, ['route' => ['posts.store'],  'files' => true, 'enctype' => 'multipart/form-data', 'data-parsley-validate'=>'', 'id' => 'postForm']) !!}
             <div class="md-form-group float-label">
-                {{Form::text('title', null, ['class'=>'md-input', $isReadonly, 'required', 'min-length'=>'5', 'type'=>''])}}
+                {{--{{Form::text('title', null, ['class'=>'md-input', $isReadonly, 'required', 'min-length'=>'5', 'type'=>''])}}--}}
+                {{ Form::input('', 'title', null, ['class' => 'md-input']) }}
                 <label>Title: </label>
             </div>
 
