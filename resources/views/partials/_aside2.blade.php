@@ -1,6 +1,6 @@
 <div id="aside" class="app-aside modal fade nav-dropdown">
 
-    <div class="left navside dark box-shadow-z0">
+    <div class="left navside dark box-shadow-z0" layout="column">
         <div class="navbar">
             <!-- brand -->
             <a class="navbar-brand">
@@ -31,14 +31,9 @@
                 </a>
             </div>
         </div>
-
-        <div class="nav-border b-primary" flex="">
-
-
-
-
-
-            <ul class="nav leftMenu" ui-nav>
+        <div flex class="hide-scroll">
+            <nav class="scroll nav-border b-primary" flex="">
+                <ul class="nav leftMenu" ui-nav>
                 <li class="nav-header hidden-folded">
                     <span class="text-xs text-muted">Header</span>
                 </li>
@@ -121,8 +116,6 @@
                     </ul>
                 </li>
 
-
-
                 {{--HR Info--}}
                 <li>
                     <a>
@@ -144,7 +137,7 @@
                     </ul>
                 </li>
             </ul>
-
+            </nav>
         </div>
 
         <div flex-no-shrink="">
@@ -153,31 +146,28 @@
                     <li>
                         <div class="b-b b m-v-sm"></div>
                     </li>
+
                     <li class="no-bg">
-                        <a class="auto">
-                            <span class="nav-icon">
-                              <i class="material-icons inline"></i>
-                              <i class="material-icons text-warn none"></i>
-                            </span>
-                            <span class="nav-text">Filter</span>
-                        </a>
-                    </li>
-                    <li class="no-bg">
-                        <a>
+                        <a >
                         <span class="nav-icon">
                           <i class="material-icons"></i>
                         </span>
-                            <span class="nav-text">결재함<small class="block text-muted">Border</small></span>
+                            <span class="nav-text">결재함</span>
                         </a>
                     </li>
                     <li>
-                        <div class="b-b b m-t-sm"></div>
+                        <div class="b-b b "></div>
                     </li>
+                    @guest
+                    @else
                     <li class="no-bg">
-                        <a><span class="nav-icon"><i class="material-icons"></i></span>
+                        <a onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit();">
+                            <span class="nav-icon"><i class="material-icons"></i></span>
                             <span class="nav-text">Logout</span>
                         </a>
                     </li>
+                     @endguest
                 </ul>
             </nav>
         </div>

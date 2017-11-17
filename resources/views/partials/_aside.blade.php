@@ -1,5 +1,3 @@
-<!-- ############ LAYOUT START-->
-<!-- aside -->
 <div id="aside" class="app-aside modal fade nav-dropdown">
     <!-- fluid app aside -->
     <div class="left navside dark dk" layout="column">
@@ -12,8 +10,9 @@
             </a>
             <!-- / brand -->
         </div>
+
         <div flex class="hide-scroll">
-            <nav class="scroll nav-light">
+            <nav class="scroll nav-border b-primary" flex="">
                 <ul class="nav leftMenu" ui-nav>
                     <li class="nav-header hidden-folded">
                         <small class="text-success">인사/급여</small>
@@ -26,9 +25,9 @@
                             {{--<span class="nav-text">Dashboard</span>--}}
                         {{--</a>--}}
                     {{--</li>--}}
-                    {{--<li >
+                    <li >
                         <a>
-                            --}}{{--Menu명 앱스--}}{{--
+
                             <span class="nav-caret">
                             <i class="fa fa-caret-down"></i>
                           </span>
@@ -40,7 +39,7 @@
                             </span>
                             <span class="nav-text">개인정보</span>
                         </a>
-                        --}}{{--sub 메뉴--}}{{--
+
                         <ul class="nav-sub ">
                             <li><a href="inbox.html"><span class="nav-text">개인정보</span></a></li>
                             <li><a href="inbox.html"><span class="nav-text">급여정보</span></a></li>
@@ -51,7 +50,7 @@
                             <li><a href="inbox.html"><span class="nav-text">개인정보</span></a></li>
                         </ul>
                     </li>
---}}
+
                     <li>
 
                         <a href="/posts">
