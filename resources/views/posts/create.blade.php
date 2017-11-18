@@ -276,11 +276,11 @@
                 } );
             },
             success: function (file, response) {
-                alert("success");
+                //alert("success");
                 if(typeof (response.success) == 'undefined') {
                     file.previewElement.classList.add("dz-error");
-                    //$(file.previewElement).find('.dz-error-message').text(response.fail[2]);
-                    $(file.previewElement).find('.dz-error-message').text(response);
+                    $(file.previewElement).find('.dz-error-message').text(response.fail[2]);
+                    //$(file.previewElement).find('.dz-error-message').text(response);
                     return;
                 }
 
@@ -291,10 +291,9 @@
                 $hiddenInputName.appendTo('#postForm');
             },
             error: function (file, response) {
-                alert("failed");
                 file.previewElement.classList.add("dz-error");
-                //$(file.previewElement).find('.dz-error-message').text(response.message);
-                $(file.previewElement).find('.dz-error-message').text(response);
+                $(file.previewElement).find('.dz-error-message').text(response.message);
+                //$(file.previewElement).find('.dz-error-message').text(response);
             }
         };
 
