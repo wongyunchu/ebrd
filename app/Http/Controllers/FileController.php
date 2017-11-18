@@ -28,8 +28,10 @@ class FileController extends Controller
      */
     public function dropzoneStore(Request $request)
     {
-        $image = $request->file('file');
         return "ddddddd";
+
+        $image = $request->file('file');
+
 
         $org_name = $image->getClientOriginalName();
         $filename = time()."_".uniqid('file_').".".$image->getClientOriginalExtension();
