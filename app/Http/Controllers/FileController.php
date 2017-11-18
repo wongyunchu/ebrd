@@ -31,16 +31,21 @@ class FileController extends Controller
         $image = $request->file('file');
         $org_name = $image->getClientOriginalName();
         $filename = time()."_".uniqid('file_').".".$image->getClientOriginalExtension();
+        //return "ddddddd";
 
         $ext = strtoupper($image->getClientOriginalExtension());
         $file_size = ($image->getClientSize())/1000000;
+
+        return "aa".$ext;
+
         if($ext == 'JPG' || $ext == 'GIF'|| $ext == 'PNG') {
             $location = public_path('images\tb_'.$filename);
             //Image::make($image)->resize(800, 400)->save($location);
             Image::make($image)->resize(null, 200, function ($constraint) {
                 $constraint->aspectRatio();
-            })->save($location);;
+            })->save($location);
         }
+
         $image->move(public_path('images'),$filename);
 
         $atcFile = new Atcfile();

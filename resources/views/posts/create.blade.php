@@ -278,7 +278,8 @@
             success: function (file, response) {
                 if(typeof (response.success) == 'undefined') {
                     file.previewElement.classList.add("dz-error");
-                    $(file.previewElement).find('.dz-error-message').text(response.fail[2]);
+                    //$(file.previewElement).find('.dz-error-message').text(response.fail[2]);
+                    $(file.previewElement).find('.dz-error-message').text(response);
                     return;
                 }
 
