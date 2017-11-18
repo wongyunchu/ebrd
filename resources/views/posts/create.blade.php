@@ -276,6 +276,7 @@
                 } );
             },
             success: function (file, response) {
+                alert("success");
                 if(typeof (response.success) == 'undefined') {
                     file.previewElement.classList.add("dz-error");
                     //$(file.previewElement).find('.dz-error-message').text(response.fail[2]);
@@ -290,6 +291,7 @@
                 $hiddenInputName.appendTo('#postForm');
             },
             error: function (file, response) {
+                alert("failed");
                 file.previewElement.classList.add("dz-error");
                 $(file.previewElement).find('.dz-error-message').text(response.message);
             }
