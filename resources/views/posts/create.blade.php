@@ -293,7 +293,8 @@
             error: function (file, response) {
                 alert("failed");
                 file.previewElement.classList.add("dz-error");
-                $(file.previewElement).find('.dz-error-message').text(response.message);
+                //$(file.previewElement).find('.dz-error-message').text(response.message);
+                $(file.previewElement).find('.dz-error-message').text(response);
             }
         };
 
