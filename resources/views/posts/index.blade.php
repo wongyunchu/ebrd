@@ -7,7 +7,7 @@
             <table id="example" width="100%" cellspacing="0" class="table table-striped table-bordered table-hover row-border p-b-md ">
 
                 <thead>
-                <th style="width:100px">#</th>
+                <th style="width:110px">#</th>
                 <th>Title</th>
                 <th>Body</th>
                 <th style="width:140px">Create At</th>
@@ -66,11 +66,9 @@
                     stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
                     "pagingType": "full_numbers", //first_last_number
                     // obj 순서대로 칼럼 정의 할수 있음
-/*                    "columnDefs": [{
-                            orderable: false,
-                            className: 'select-checkbox',
-                            targets: 0
-                        }],*/
+                    "columnDefs": [
+                        { responsivePriority: 1, targets: 4},
+                    ],
                    /* select: {
                             style:    'os',
                             selector: 'td:first-child'

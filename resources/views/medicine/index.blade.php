@@ -15,15 +15,15 @@
             <table id="example" cellspacing="0" width="100%" class="table table-striped table-bordered table-hover row-border p-b-md">
 
                 <thead>
-                <th>대상년월</th>
-                <th>신청일</th>
-                <th>진료과목</th>
-                <th >사용일</th>
-                <th>지원건수</th>
-                <th>지원금액</th>
-                <th>품의상태</th>
-                <th>전표상태</th>
-                <th>변경/삭제</th>
+                    <th style="min-width:60px">대상년월</th>
+                    <th style="min-width:50px">신청일</th>
+                    <th style="min-width:60px">진료과목</th>
+                    <th style="min-width:50px">사용일</th>
+                    <th style="min-width:60px"> 지원건수</th>
+                    <th style="min-width:60px">지원금액</th>
+                    <th style="min-width:60px">품의상태</th>
+                    <th style="min-width:60px">전표상태</th>
+                    <th style="min-width:60px">변경/삭제</th>
                 </thead>
                 <tbody>
                 @foreach($list as $item)
@@ -87,6 +87,7 @@
                     "pagingType": "full_numbers", //first_last_number
                     // obj 순서대로 칼럼 정의 할수 있음
                     "columnDefs": [
+                        { responsivePriority: 1, targets: 8},
                         {
                           /*  "render": function ( data, type, row ) {
                                 return data +' ('+ row[1]+')';

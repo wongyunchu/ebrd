@@ -15,6 +15,7 @@
 
 /*페이지*/
 Route::view('profile', 'pages/profile')->name('profile');
+Route::view('dashboard', 'pages/dashboard')->name('dashboard');
 
 /*의료비*/
 Route::get('medicals/details/{id?}', 'MedicalController@medicalDetails')->name('medicalDetails');
