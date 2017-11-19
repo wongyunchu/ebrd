@@ -1,11 +1,11 @@
 @extends('main')
-@section('title', '| Profile')
+@section('title', '| Dashboard')
 @section('content')
     <div class="p-a white lt box-shadow">
         <div class="row">
             <div class="col-sm-6">
                 <h4 class="m-b-0 _300">Welcome to E-Hr</h4>
-                <small class="text-muted">Bootstrap <strong>4</strong> Web App Kit with AngularJS</small>
+                <small class="text-muted">E-hr <strong>4</strong> Web app Kit with Dashboard</small>
             </div>
             <div class="col-sm-6 text-sm-right">
                 <div class="m-y-sm">

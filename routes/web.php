@@ -13,6 +13,10 @@
 //Route::view('medicine', 'medicine.index')->name('medicine.index');
 //Route::view('medicineCreate', 'medicine.create')->name('medicineCreate');
 
+Route::get('/', function () {
+    return redirect('/dashboard');
+});
+
 /*페이지*/
 Route::view('profile', 'pages/profile')->name('profile');
 Route::view('dashboard', 'pages/dashboard')->name('dashboard');
@@ -23,7 +27,7 @@ Route::post('medicals/detailsView', 'MedicalController@medicalDetailsView')->nam
 Route::resource('medicals', 'MedicalController');
 
 
-Route::get('/', 'PagesController@index');
+
 Route::get('test', 'PagesController@test');
 Route::get('about', 'PagesController@getAbout');
 

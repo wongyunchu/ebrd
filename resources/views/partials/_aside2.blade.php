@@ -3,7 +3,7 @@
     <div class="left navside dark box-shadow-z0" layout="column">
         <div class="navbar">
             <!-- brand -->
-            <a class="navbar-brand">
+            <a href="{{route('dashboard')}}" class="navbar-brand">
                 <img src="../assets/images/logo.png" alt="." class="">
                 <span class="hidden-folded inline v-m">
                     E-HR
