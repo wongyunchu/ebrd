@@ -76,6 +76,8 @@
             //alert("의료비");
             var table = $('#example').DataTable(
                 {
+                    "responsive": true,
+                    select: false,
                     "paging": true,
                     "info": true,
                     "ordering": false,
