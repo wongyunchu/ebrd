@@ -25,7 +25,7 @@
                       <img src="../assets/images/a1.jpg" alt="..." class="w-40 img-circle">
                     </span>
                     <span class="clear hidden-folded p-x">
-                    <span class="block _500">Jack Perez</span>
+                    <span class="block _500">홍길동</span>
                       <small class="block text-muted">인사관리, 1팀</small>
                     </span>
                 </a>
