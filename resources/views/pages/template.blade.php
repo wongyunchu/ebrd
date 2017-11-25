@@ -1,5 +1,8 @@
 @extends('main')
-@section('title', '| Profile')
+@section('title', '| 근태/출장')
+@section('stylesheets')
+
+@endsection
 @section('content')
     <div class="container">
         <div class="row">

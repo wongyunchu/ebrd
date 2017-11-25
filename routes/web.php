@@ -21,6 +21,9 @@ Route::get('/', function () {
 Route::view('profile', 'pages/profile')->name('profile');
 Route::view('dashboard', 'pages/dashboard')->name('dashboard');
 
+//근태(스케쥴러)
+Route::view('work', 'pages/work')->name('work');
+
 /*의료비*/
 Route::get('medicals/details/{id?}', 'MedicalController@medicalDetails')->name('medicalDetails');
 Route::post('medicals/detailsView', 'MedicalController@medicalDetailsView')->name('medicalDetailsView');

@@ -51,8 +51,7 @@
                     <ul class="nav-sub">
                         <li><a href="/posts"><span class="nav-text">개인정보</span></a></li>
                         <li><a href="/medicals"><span class="nav-text">급여정보</span></a></li>
-                        <li><a><span class="nav-text">연말정산</span></a></li>
-                        <li><a><span class="nav-text">건강보험 연말정산</span></a></li>
+                        <li><a href="/work"><span class="nav-text">건강보험 연말정산</span></a></li>
                         <li><a><span class="nav-text">평가결과</span></a></li>
                         <li><a><span class="nav-text">근로계약/동의서</span></a></li>
 
