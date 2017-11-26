@@ -343,7 +343,7 @@
                 },
                 // 하단 추가, 수정, 삭제
                 addForm: function () {
-                    window.print();
+                    //window.print();
                     medicineListTable.rows().deselect();
                     vue.sltdData = null;
                     resetForm();

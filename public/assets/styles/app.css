@@ -3066,12 +3066,19 @@ body {
   -webkit-box-shadow: none !important;
   box-shadow: none !important; }
 
-@media (max-width: 767px) {
-  .pos-stc-sm {
-    position: static !important; } }
-@media (max-width: 543px) {
-  .pos-stc-xs {
-    position: static !important; } }
+/*
+@include media-breakpoint-down(sm) {
+  .pos-stc-sm{
+    position: static !important;
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .pos-stc-xs{
+    position: static !important;
+  }
+}
+*/
 .no-border {
   border-color: transparent;
   border-width: 0; }
@@ -3850,7 +3857,7 @@ a.text-blue:hover {
   color: black; }
 
 .text-black-lt {
-  color: rgba(0, 0, 0, 0.54); }
+  color: rgba(0, 0, 0, 0.2); }
 
 .text-black-dk {
   color: rgba(0, 0, 0, 0.87); }

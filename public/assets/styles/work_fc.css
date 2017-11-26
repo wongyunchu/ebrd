@@ -1,3 +1,17 @@
+.row.work > .box-color {
+  /*height: 50px;*/
+  margin-left: 10px;
+  margin-right: 16px; }
+  .row.work > .box-color > .box-body {
+    padding-top: 10px;
+    padding-bottom: 10px; }
+
+.form-inline.work > .form-group {
+  padding-right: 24px; }
+
+.fc-title {
+  color: #ffffff !important; }
+
 #pnDrag {
   width: 160px;
   float: left; }

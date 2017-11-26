@@ -69,7 +69,13 @@ $(document).ready(function () {
         //aspectRatio: 1.8,
         //scrollTime: '00:10',
         select:function(start, end, jsEvent, view) {
-          var title = prompt('이벤트를 입력하세요.') ;
+            $('#myModal').modal('show');
+
+
+//            $('#startdt').datepicker('setDate',start.format('YYYY-MM-DD'));
+
+            $('#myModal').find('#startdt').val(start.format('YYYY-MM-DD'));
+/*          var title = prompt('이벤트를 입력하세요.') ;
           if(title != null) {
               var event = {
                   title:title.trim() != "" ? title : 'new Event',
@@ -77,7 +83,7 @@ $(document).ready(function () {
                   end:end
               };
               $calendar.fullCalendar("renderEvent", event, true);
-          }
+          }*/
         },
 
         eventClick: function (calEvent, jsEvent, view) {
@@ -133,59 +139,47 @@ $(document).ready(function () {
 
         events: [
             {
-                title: 'All Day Event',
-                start: '2017-11-01 16:00'
+                title: '근태',
+                start: '2017-11-01 16:00',
+                color:"#6A9FCF"
             },
             {
-                title: 'Long Event',
-                start: '2017-11-07',
-                end: '2017-11-10'
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                start: '2017-11-09T16:00:00'
+                title: '휴가',
+                start: '2017-11-06',
+                end: '2017-11-09',
+                color:'#74BB5B'
             },
             {
                 id: 999,
-                title: 'Repeating Event',
-                start: '2017-11-16T16:00:00'
+                title: '출장',
+                start: '2017-11-09T16:00:00',
+                color:'#E34342'
             },
             {
-                title: 'Conference',
+                id: 999,
+                title: '출장',
+                start: '2017-11-16T16:00:00',
+                color:'#E34342'
+            },
+            {
+                title: '근태',
                 start: '2017-11-11',
-                end: '2017-11-13'
+                end: '2017-11-13',
+                color:"#6A9FCF"
             },
             {
-                title: 'Meeting',
+                title: '근태',
                 start: '2017-11-12T10:30:00',
-                end: '2017-11-12T12:30:00'
+                end: '2017-11-12T12:30:00',
+                color:"#6A9FCF"
             },
             {
-                title: 'Lunch',
-                start: '2017-11-12T12:00:00'
-            },
-            {
-                title: 'Meeting',
-                start: '2017-11-12T14:30:00'
-            },
-            {
-                title: 'Happy Hour',
-                start: '2017-11-12T17:30:00'
-            },
-            {
-                title: 'Dinner',
-                start: '2017-11-12T20:00:00'
-            },
-            {
-                title: 'Birthday Party',
-                start: '2017-11-13T07:00:00'
-            },
-            {
-                title: 'Click for Google',
-                url: 'http://google.com/',
-                start: '2017-11-28'
+                title: '휴가',
+                start: '2017-11-12T12:00:00',
+                color:'#74BB5B'
             }
+
+
         ]
     });
 
