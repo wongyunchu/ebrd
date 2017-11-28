@@ -374,7 +374,7 @@ input[type=text]:focus:not(.dateComp), textarea:focus {
   border: 1px solid #9bc4ee;
   box-shadow: 0 0 2px #a6d6ee;
   margin: 5px 1px 3px 0px;
-  padding: 3px 0px 3px 3px; }
+  /*padding:            3px 0px 3px 3px;*/ }
 
 .form-control-label {
   padding-top: .5rem;

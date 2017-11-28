@@ -70,11 +70,11 @@ $(document).ready(function () {
         //scrollTime: '00:10',
         select:function(start, end, jsEvent, view) {
             $('#myModal').modal('show');
-
-
+            $('#myModal').data({'action':'I'});
+            $('#myModal').find('#selTitle').val('선택');
 //            $('#startdt').datepicker('setDate',start.format('YYYY-MM-DD'));
-
             $('#myModal').find('#startdt').val(start.format('YYYY-MM-DD'));
+            $('#myModal').find('#btnSave').text('신청');
 /*          var title = prompt('이벤트를 입력하세요.') ;
           if(title != null) {
               var event = {
@@ -87,8 +87,14 @@ $(document).ready(function () {
         },
 
         eventClick: function (calEvent, jsEvent, view) {
+            $('#myModal').data({'event':calEvent});
+            $('#myModal').data({'action':'M'});
             $('#myModal').modal('show');
             $('#myModal').find('#myModalLabel').html("<b>" + calEvent.title + "</b>");
+            $('#myModal').find('#selTitle').val(calEvent.title);
+            $('#myModal').find('#startdt').val(calEvent.start.format("YYYY-MM-DD"));
+            $('#myModal').find('#comment').val(calEvent.comment);
+            $('#myModal').find('#btnSave').text('수정');
             //$('#myModal').find('#myModalLabel').html("<b>" + calEvent.start.format("dddd, MMMM Do YYYY") + " from " + calEvent.start.format("hh:mm a") + " to " + calEvent.end.format("hh:mm a") + "</b>");
 
             //alert('Event: ' + calEvent.title+ 'View: ' + view.name);
