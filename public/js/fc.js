@@ -75,15 +75,8 @@ $(document).ready(function () {
 //            $('#startdt').datepicker('setDate',start.format('YYYY-MM-DD'));
             $('#myModal').find('#startdt').val(start.format('YYYY-MM-DD'));
             $('#myModal').find('#btnSave').text('신청');
-/*          var title = prompt('이벤트를 입력하세요.') ;
-          if(title != null) {
-              var event = {
-                  title:title.trim() != "" ? title : 'new Event',
-                  start:start,
-                  end:end
-              };
-              $calendar.fullCalendar("renderEvent", event, true);
-          }*/
+
+
         },
 
         eventClick: function (calEvent, jsEvent, view) {

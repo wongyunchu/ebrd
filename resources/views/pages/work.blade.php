@@ -235,6 +235,13 @@
                 newWorkSave: function () {
                     var sTitle = $('#selTitle').val();
                     var action = $('#myModal').data('action');
+
+                    if(sTitle === null) {
+                        alert('근태 구분을 선택하세요');
+                        return;
+                    }
+
+
                     if(action === 'I') {
 /*                        var event = {
                             title: $('#selTitle').val(),//'new Event',
