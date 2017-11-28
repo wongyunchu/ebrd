@@ -55,16 +55,14 @@
                     <div class="box-header dker">
                         <h3>팀원 교육/출장/휴가 현황</h3>
                     </div>
-                    <div class="box-body">
-                        <p class="m-a-0">
-                        <table id="tableR1" cellspacing="0" width="100%" class="table table-bordered row-border table-responsive">
-                            <thead>
-                            <th>성명</th>
-                            <th>구분</th>
-                            <th>기간</th>
+                    <div class="box-body p-y-0">
+                        <table id="tableR1" cellspacing="0" width="100%" class="table">
+                            <thead style="width: 100%">
+                            <th style="width: 33%">성명</th>
+                            <th style="width: 33%">구분</th>
+                            <th style="width: 34%">기간</th>
                             </thead>
                         </table>
-                        </p>
                     </div>
                 </div>
 
@@ -72,8 +70,14 @@
                     <div class="box-header dker">
                         <h3>휴가일수</h3>
                     </div>
-                    <div class="box-body">
-                        <p class="m-a-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam-a-0 m-b-smitudin egestas dui nec, fermentum diam. Vivamus vel tincidunt libero, vitae elementu</p>
+                    <div class="box-body p-y-0">
+                        <table id="tableR2" cellspacing="0" width="100%" class="table">
+                            <thead style="width: 100%">
+                            <th >구분</th>
+                            <th >기간</th>
+                            <th >부여/사용일</th>
+                            </thead>
+                        </table>
                     </div>
                 </div>
 
@@ -81,8 +85,13 @@
                     <div class="box-header dker">
                         <h3>당월 OT 통계</h3>
                     </div>
-                    <div class="box-body">
-                        <p class="m-a-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam-a-0 m-b-smitudin egestas dui nec, fermentum diam. Vivamus vel tincidunt libero, vitae elementu</p>
+                    <div class="box-body p-y-0">
+                        <table id="tableR3" cellspacing="0" width="100%" class="table">
+                            <thead style="width: 100%">
+                            <th >OT 구분</th>
+                            <th >인정시간</th>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -199,7 +208,7 @@
                     "paging": false,
                     "info": false,
                     "ordering": false,
-                    "search":false
+                    "searching": false
                 }
             );
 
