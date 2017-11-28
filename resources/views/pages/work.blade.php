@@ -11,84 +11,82 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
 
-            </div>
-
-            <div id="pnDrag" class="col-sm-1 panel hidden-md-down">
-                <div class="box light-blue-800 b-a b-grey">
-                    <div class="box-header">
-                        <h7>근태/휴가</h7>
-                        {{----}}
-                        <div class="box-tool">
-                            <ul class="nav">
-
-                                <li class="nav-item inline dropdown">
-                                    <a class="nav-link" data-toggle="dropdown" aria-expanded="false">
-                                        <i class="material-icons md-18"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-scale pull-right">
-                                        <a class="dropdown-item" href="">Action</a>
-                                        <a class="dropdown-item" href="">Another action</a>
-                                        <a class="dropdown-item" href="">Something else here</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item">Separated link</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class=" box-body white">
-                        <div id='external-events'>
-                            <div class='fc-event biztrip'
-                                 data-event='{"title":"출장", "allDay":true, "color":"#E34342","textColor":"white","stick": true}'
-                                 style='background-color:#E34342;border-color: #A02929; color:#ffffff'>출장
-                            </div>
-                            <div class='fc-event work'
-                                 data-event='{"title":"근태",  "color":"#6A9FCF","textColor":"white"}'
-                                 style='background-color:#6A9FCF; color:#ffffff'>근태
-                            </div>
-                            <div class='fc-event vocation'
-                                 data-event='{"title":"휴가",  "color":"#74BB5B","textColor":"white"}'
-                                 style='background-color:#74BB5B; color:#ffffff'>휴가
-                            </div>
-                            <div class='fc-event edu'
-                                 data-event='{"title":"교육", "color":"#804040","textColor":"white", "borderColor":"#5A3500"}'
-                                 style='background-color:#804040; border-color: #5A3500; color:#fff'>교육
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-footer light-blue-50">
-                        <small>위 box를 달력으로 Drag하실수 있습니다.</small>
-                    </div>
-                </div>
-                {{-- <div class="panel-heading">
-                     <h5 class="panel-title">근태 / 휴가</h5>
-                 </div>
-                 <div class="panel-body">
-                     <div id='external-events'>
-                         <div class='fc-event biztrip' data-event='{"title":"출장", "allDay":true, "color":"#E34342","textColor":"white","stick": true}' style='background-color:#E34342;border-color: #A02929; color:#ffffff'>출장</div>
-                         <div class='fc-event work' data-event='{"title":"근태",  "color":"#6A9FCF","textColor":"white"}' style='background-color:#6A9FCF; color:#ffffff'>근태</div>
-                         <div class='fc-event vocation' data-event='{"title":"휴가",  "color":"#74BB5B","textColor":"white"}' style='background-color:#74BB5B; color:#ffffff'>휴가</div>
-                         <div class='fc-event edu' data-event='{"title":"교육", "color":"#FFFD84","textColor":"#5A3500", "borderColor":"#F0EA1F"}' style='background-color:#FFFD87; border-color: #F0EA1F; color:#5A3500'>교육</div>
-                     </div>
-                 </div>--}}
-            </div>
-            {{--            <div class="form-group">
-                            <div class="input-group date">
-                                <input id="usedate" type="text" class="form-control dateComp" readonly value="{{@date("Y-m-d")}}"/>
-                                <span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
-                            </div>
-                        </div>--}}
-
-
-
+        </div>
+        <div class="row">
 
             {{--스케쥴러--}}
-            <div class="col-sm-10">
+            <div class="col-sm-8">
+                <div id="pnDrag" class="hidden-md-down">
+                    <div id='external-events' class="row end-xs">
+                        <div class="col-xs-6 well well-sm">
+                            <div class="row">
+                                <small class="col-xs-12 text-left">* 달력으로 Drag하실수 있습니다.</small>
+                                <div class='col-xs fc-event biztrip '
+                                     data-event='{"title":"출장", "allDay":true, "color":"#E34342","textColor":"white","stick": true}'
+                                     style='background-color:#E34342;border-color: #A02929; color:#ffffff'><i class=" fa fa-fighter-jet"></i> 출장
+                                </div>
+                                <div class='col-xs fc-event work '
+                                     data-event='{"title":"근태",  "color":"#6A9FCF","textColor":"white"}'
+                                     style='background-color:#6A9FCF; color:#ffffff'><i class=" fa fa-file-word-o"></i>  근태
+                                </div>
+                                <div class='col-xs fc-event vocation '
+                                     data-event='{"title":"휴가",  "color":"#74BB5B","textColor":"white"}'
+                                     style='background-color:#74BB5B; color:#ffffff'><i class="fa fa fa-home"></i> 휴가
+                                </div>
+                                <div class='col-xs fc-event edu '
+                                     data-event='{"title":"교육", "color":"#804040","textColor":"white", "borderColor":"#5A3500"}'
+                                     style='background-color:#804040; border-color: #5A3500; color:#fff'><i class=" fa fa-mortar-board"></i> 교육
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div id='calendar' style="padding-bottom: 50px; margin-bottom: 50px"></div>
 
             </div>
+
+            {{-- 휴가 쿼터 리스트--}}
+            <div class="col-sm-4">
+                <div class="box b-light b-a">
+                    <div class="box-header dker">
+                        <h3>팀원 교육/출장/휴가 현황</h3>
+                    </div>
+                    <div class="box-body">
+                        <p class="m-a-0">
+                        <table id="tableR1" cellspacing="0" width="100%" class="table table-bordered row-border table-responsive">
+                            <thead>
+                            <th>성명</th>
+                            <th>구분</th>
+                            <th>기간</th>
+                            </thead>
+                        </table>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="box b-light b-a">
+                    <div class="box-header dker">
+                        <h3>휴가일수</h3>
+                    </div>
+                    <div class="box-body">
+                        <p class="m-a-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam-a-0 m-b-smitudin egestas dui nec, fermentum diam. Vivamus vel tincidunt libero, vitae elementu</p>
+                    </div>
+                </div>
+
+                <div class="box b-light b-a">
+                    <div class="box-header dker">
+                        <h3>당월 OT 통계</h3>
+                    </div>
+                    <div class="box-body">
+                        <p class="m-a-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam-a-0 m-b-smitudin egestas dui nec, fermentum diam. Vivamus vel tincidunt libero, vitae elementu</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -168,8 +166,8 @@
 
                         <h7 class="text-info p-l-20">근무수당 및 숙휴 기준</h7>
                         <ol class="m-b-0 p-l-md" type="1">
-                            <li>고정초근수당 지급 : 06~09시 / 18 ~ 22시</li>
-                            <li>고정초근수당 지급 : 06~09시 / 18 ~ 22시</li>
+                            <li>고정초근수당 지급 : 06~09시 / 18~22시</li>
+                            <li>고정초근수당 지급 : 06~09시 / 18~22시</li>
                         </ol>
                     </div>
                 </div>
@@ -194,6 +192,16 @@
     <script>
 
         $(document).ready(function () {
+
+
+            var table = $('#tableR1').DataTable(
+                {
+                    "paging": false,
+                    "info": false,
+                    "ordering": false,
+                    "search":false
+                }
+            );
 
             dtOptionStart = $('#startTime');
             dtOptionend = $('#endTime');

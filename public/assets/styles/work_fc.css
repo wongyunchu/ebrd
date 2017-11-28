@@ -12,10 +12,6 @@
 .fc-title {
   color: #ffffff !important; }
 
-#pnDrag {
-  width: 160px;
-  float: left; }
-
 .panel-primary > .panel-heading {
   background-color: #6A9FCF !important; }
 
@@ -27,9 +23,10 @@
   margin: 0 auto; }
 
 #external-events {
-  width: 100%;
+  /*float: left;*/
+  /*width: 50px;*/
   padding: 0 10px;
-  text-align: left;
+  text-align: center;
   /*  .work {
       background: #6CC788;
       border: 1px solid #6CC788;
