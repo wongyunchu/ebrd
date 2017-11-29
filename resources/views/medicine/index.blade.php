@@ -73,6 +73,53 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+
+
+            vue = new Vue({
+                el: '#myModal',
+                data: {
+                    sltdData: null
+                },
+                methods: {
+                    newWorkSave: function () {
+                        $('#myModal').modal('hide');
+                    },
+                    newWorkCancel: function () {
+                        $('#myModal').modal('hide');
+                    }
+                },
+                mounted: function() {
+
+//                    axios.post('/medicals',formDatas)
+                    axios.get('http://10.40.17.43:9088/erpsac/JsonServlet?SERVER=STC&FID=Z_HR_0131&import=%7B%22I%5FENDDA%22%3A%2220161231%22%2C%22I%5FPERNR%22%3A%222950001%22%2C%22I%5FBEGDA%22%3A%2220160101%22%7D')
+                        .then(function (response) {
+                            console.log(response);
+                            var a = response.data.T_MEDI[0].TEXT;
+                            bootbox.alert({
+                                title:'Success',
+                                message:a,
+                                callback: function (result) {
+                                    //window.location.href ='/medicals';
+                                }
+                            });
+                        })
+                        .catch(function (error) {
+                            msg = JSON.parse(error.request.responseText).message;
+                            exeption = JSON.parse(error.request.responseText).exception;
+                            bootbox.alert({
+                                title: exeption,
+                                message: msg
+                            })
+                        });
+                        /*
+                    axios.get("/api/stories")
+                        .then(function (response) {
+                            Vue.set(vm, "stories", response.data) // vm.stories = response.data
+                        })*/
+                }
+            });
+
+
             //alert("의료비");
             var table = $('#example').DataTable(
                 {
