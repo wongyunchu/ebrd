@@ -29,6 +29,10 @@ Route::get('medicals/details/{id?}', 'MedicalController@medicalDetails')->name('
 Route::post('medicals/detailsView', 'MedicalController@medicalDetailsView')->name('medicalDetailsView');
 Route::resource('medicals', 'MedicalController');
 
+/*Top bank*/
+Route::view('topbank', 'pages/topbank')->name('topbank');
+
+
 
 
 Route::get('test', 'PagesController@test');

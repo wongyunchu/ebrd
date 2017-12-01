@@ -1,5 +1,5 @@
 @extends('main')
-@section('title', '| 근태/출장')
+@section('title', '| template')
 @section('stylesheets')
 
 @endsection

@@ -1,0 +1,112 @@
+@media (min-width: 544px) {
+  .hidden-sm-up {
+    display: none !important; } }
+@media (max-width: 767px) {
+  .hidden-sm-down {
+    display: none !important; } }
+@media (min-width: 768px) {
+  .hidden-md-up {
+    display: none !important; } }
+@media (max-width: 991px) {
+  .hidden-md-down {
+    display: none !important; } }
+.well {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); }
+
+.well blockquote {
+  border-color: #ddd;
+  border-color: rgba(0, 0, 0, 0.15); }
+
+.well-lg {
+  padding: 24px;
+  border-radius: 6px; }
+
+.well-sm {
+  padding: 9px;
+  border-radius: 3px; }
+
+/*left subMenu font*/
+.nav-sub > li > a > span {
+  font-size: 13px; }
+
+label > .form-control.input-sm {
+  width: 100px !important; }
+
+table.blueTable:not(#datetimepicker1) {
+  text-align: center;
+  width: 100%; }
+  table.blueTable:not(#datetimepicker1) tr {
+    height: 39px; }
+  table.blueTable:not(#datetimepicker1) td:not(.day) {
+    border: 2px solid #C8D7E3;
+    padding: 4px 10px;
+    font-size: 13px;
+    color: #838383; }
+  table.blueTable:not(#datetimepicker1) td:nth-child(odd):not(.day) {
+    background: #E3F2F5;
+    color: #58849E;
+    font-weight: 500;
+    text-align: center; }
+
+.parsley-required {
+  text-align: left; }
+
+table th, td {
+  text-align: center !important; }
+
+.form-control.dateComp {
+  margin: 0 2px;
+  text-align: center; }
+
+.input-group.date .input-group-addon {
+  padding: 0 .75rem; }
+
+.pTitle {
+  padding-top: 30px; }
+  .pTitle i {
+    color: steelblue; }
+  .pTitle label {
+    padding-left: 10px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: dimgrey; }
+
+.blue_grid {
+  width: 100%;
+  /*
+    :first-child {
+      margin-bottom: -2px;
+    }
+
+    :nth-child(1) {
+      margin-bottom: -2px;
+    }*/
+  display: table;
+  border-collapse: collapse;
+  border-color: #C8D7E3;
+  border-width: 1px;
+  border-style: solid; }
+  .blue_grid .colTitle, .blue_grid .colContent {
+    border: 1px solid #C8D7E3;
+    border-collapse: collapse;
+    padding: 0.6rem; }
+  .blue_grid .myRow {
+    display: table-row; }
+  .blue_grid .colTitle {
+    border-collapse: collapse;
+    background-color: #E3F2F5;
+    /*    border-top: 1px solid #C8D7E3;
+        border-bottom: 1px solid #C8D7E3;*/ }
+  .blue_grid .colContent {
+    display: table-cell;
+    background-color: #fff;
+    /*    border: 1px solid #C8D7E3;*/ }
+
+/*# sourceMappingURL=myStyle.css.map */

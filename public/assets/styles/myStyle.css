@@ -78,16 +78,28 @@ table th, td {
     font-weight: 500;
     color: dimgrey; }
 
+.blueTable2 {
+  border-color: #C4D3E0 !important;
+  color: #4A809E;
+  border-collapse: collapse !important; }
+  .blueTable2 th {
+    background-color: #E3F2F5;
+    border-color: #C4D3E0 !important;
+    border-width: 1px !important; }
+  .blueTable2 td {
+    border-color: #C4D3E0 !important;
+    border-width: 1px !important; }
+
 .blue_grid {
   width: 100%;
-  /*
-    :first-child {
-      margin-bottom: -2px;
-    }
+    /*
+      :first-child {
+        margin-bottom: -2px;
+      }
 
-    :nth-child(1) {
-      margin-bottom: -2px;
-    }*/
+      :nth-child(1) {
+        margin-bottom: -2px;
+      }*/
   display: table;
   border-collapse: collapse;
   border-color: #C8D7E3;

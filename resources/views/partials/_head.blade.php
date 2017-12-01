@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/dist/css/bootstrap.min.css') }}" type="text/css" />
 
     <link rel="stylesheet" href="{{ asset('assets/styles/app.css') }}" type="text/css" />
+{{--    <link rel="stylesheet" href="{{ asset('/css/app.css') }}" type="text/css" />--}}
     <link rel="stylesheet" href="{{ asset('assets/styles/myStyle.css') }}" type="text/css" />
 
     <!-- endbuild -->
