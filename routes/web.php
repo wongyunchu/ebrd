@@ -30,8 +30,10 @@ Route::post('medicals/detailsView', 'MedicalController@medicalDetailsView')->nam
 Route::resource('medicals', 'MedicalController');
 
 /*Top bank*/
-Route::view('topbank', 'pages/topbank')->name('topbank');
-
+Route::view('topbank/list', 'topbank/list')->name('topbank.list');
+//Route::post('topbank/create', 'TopbankController@create')->name('topbank.create');
+Route::post('topbank/create', 'TopbankController@create')->name('topbank.create');
+//Route::post('topbank_create', 'topbank/create')->name('topbank_create');
 
 
 

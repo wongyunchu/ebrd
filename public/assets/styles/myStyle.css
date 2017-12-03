@@ -58,7 +58,7 @@ table.blueTable:not(#datetimepicker1) {
 .parsley-required {
   text-align: left; }
 
-table th, td {
+table th {
   text-align: center !important; }
 
 .form-control.dateComp {
