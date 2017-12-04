@@ -7,8 +7,8 @@
 @section('content')
     <div id="vuejs" class="container_del">
         <div class="row">
-
-            <div class="text-md _500 "><i class="text-info fa fa-edit p-r-sm"></i>신청정보</div>
+            <div class="col-md-12">
+            <div class="text-md2 _500 "><i class="text-info fa fa-edit p-r-sm"></i>신청정보</div>
             <table class="blueTable m-y-sm m-b-md">
                 <tr>
                     <td width="120">대출정보</td>
@@ -17,7 +17,7 @@
                 <tr>
                     <td width="120">대출용도</td>
                     <td>
-                        <select id="BUSE" name="BUSE" v-model="input.BUSE" class="text-center form-control form-control-sm " style="width: 120px;">
+                        <select id="BUSE" name="BUSE" v-model="input.tables.ITAB[0].BUSE" class="text-center form-control form-control-sm " style="width: 120px;">
                             <option value="" selected>- 선택 -</option>
                             <option v-for="option in output.params.T_UCODE" v-bind:value="option.CODE">
                                 @{{ option.TEXT}}
@@ -29,9 +29,9 @@
                 <tr>
                     <td width="120">대출금액</td>
                     <td>
-                        <select id="BETRG" name="BETRG" v-model="input.BETRG" class="text-center form-control form-control-sm " style="width: 120px;">
+                        <select id="BETRG" name="BETRG" v-model="input.tables.ITAB[0].BETRG" class="text-center form-control form-control-sm " style="width: 120px;">
                             <option value="" selected>- 선택 -</option>
-                            <option v-for="option in output.params.T_UCODE" v-bind:value="option.CODE">
+                            <option v-for="option in output.params.T_UCODE" v-bind:value="option.BETRG">
                                 @{{ accounting.formatMoney(option.BETRG)}}
                             </option>
                         </select>
@@ -40,12 +40,12 @@
                 <tr>
                     <td width="120">대출사유</td>
                     <td width="">
-                       <input  id="BREAS" name="BREAS" type="text" style="width: 100%;"/>
+                       <input  id="BREAS" name="BREAS" type="text" style="width: 100%;" v-model="input.tables.ITAB[0].BREAS">
                     </td>
                 </tr>
             </table>
 
-            <div class="text-md _500 p-t-md"><i class="text-info fa fa-edit p-r-sm"></i>진행정보</div>
+            <div class="text-md2 _500 p-t-md"><i class="text-info fa fa-edit p-r-sm"></i>진행정보</div>
             <table class="blueTable m-y-sm">
                 <tr>
                     <td width="120">신청상태</td>
@@ -62,7 +62,7 @@
                 </tr>
             </table>
 
-            <div class="text-md _500  p-t-md"><i class="text-info fa fa-edit p-r-sm"></i>대출사유 세부 기준 및 구비 서류</div>
+            <div class="text-md2 _500  p-t-md"><i class="text-info fa fa-edit p-r-sm"></i>대출사유 세부 기준 및 구비 서류</div>
             <table id="tbList" cellspacing="0" width="100%" class="table  text-center blueTable2 table-striped table-bordered table-hover row-border p-b-md " style="border-collapse:collapse!important;">
                 <thead>
                 <th>순위</th>
@@ -103,40 +103,91 @@
                 </tr>
                 </tbody>
             </table>
+            </div>
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button @click="onSave" class="md-btn md-raised m-b-sm w-sm blue">임시저장</button>
+                        <button @click="" class="md-btn md-raised m-b-sm w-sm blue">승인요청</button>
+                    </div>
+                    <div class="col-xs-8 end-xs">
+                        <a href="{{route('topbank.list')}}" class="md-btn md-raised m-b-sm w-sm blue">이전화면</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="row">
-            <div class="col-xs-4">
-                <button @click="" class="md-btn md-raised m-b-sm w-sm blue">임시저장</button>
-                <button @click="" class="md-btn md-raised m-b-sm w-sm blue">승인요청</button>
-            </div>
-            <div class="col-xs-8 end-xs">
-                <a href="{{route('medicalDetails')}}" class="md-btn md-raised m-b-sm w-sm blue">이전화면</a>
-            </div>
-        </div>
+
+
     </div>
 @endsection
 @section('scripts')
     <script type="text/javascript">
+
         Vue.config.devtools = true;
         {{--params = JSON.parse(' {!! $param !!}');--}}
         {{--var array = '{{ json_decode() }}';--}}
+
+
         vv = new Vue({
             el:'#vuejs',
             data : {
                 input:{
                     SERVER :'STC',
-                    FID :'Z_HR_TB01',
-                    import:'{"I_PERNR":"2950001"}',
+                    FID :'Z_HR_TB03',
+                    PERNR:'2950001',
 
-                    BUSE:"",
-                    BETRG:""
+                    import:{
+                        I_GWAREKEY:""
+                    },
+                    tables:{
+                        ITAB:[
+                            {
+                                PERNR:'2950001',
+                                BREAS:"",
+                                BETRG:"",
+                                BUSE:""
+                            }
+                        ]
+                    }
                 },
                 output:{
                     params:JSON.parse(' {!! $param !!}')
                 }
             },
             methods: {
+                makeParams:function () {
+                    retObj = {
+                        SERVER :'STC',
+                        FID :'Z_HR_TB03',
+                        import:JSON.stringify(vv.input.import),
+                        tables:JSON.stringify(vv.input.tables)
+                    }
+                    return retObj;
+                },
+                onSave:function () {
+                    //JSON.stringify()
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        url: 'http://localhost:8080/common_infra_01/JsonServlet',
+                        data: jQuery.param(vv.makeParams())
+                    }).done(function(data){
+                        if(data.RETCODE!==0) {
+                            alert(data.RETTEXT);
+                            return;
+                        }
+                        else {
+                            alert(data.RETTEXT);
+                        }
+                        vv.output.data = data;
+                        vv.output.E_DTEXT = data.E_DTEXT;
+                        vv.output.otab = data.OTAB;
+                    }).fail(function() {
+                        alert( "Posting failed." );
+                    });
+                },
                 getList:function() {
 /*                    $.ajax({
                         type: 'POST',

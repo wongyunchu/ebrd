@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <table id="tbList" cellspacing="0" width="100%" class="table blueTable2 table-striped table-bordered table-hover row-border p-b-md " style="border-collapse:collapse!important;">
+                <table id="tbList" cellspacing="0" width="100%" class="table text-center blueTable2 table-striped table-bordered table-hover row-border p-b-md " style="border-collapse:collapse!important;">
                     {{--<colgroup>
                         <col span="3" width="110px" style=" max-width: 110px;background-color: red;"/>
                         <col />
