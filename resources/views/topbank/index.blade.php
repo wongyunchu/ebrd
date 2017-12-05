@@ -16,8 +16,8 @@
                             <th style="min-width:50px">잔여금액</th>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>@{{output.E_DTEXT}}</td>
+                        <tr style="height: 35px">
+                            <td v-text="output.E_DTEXT"></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <table id="tbList" cellspacing="0" width="100%" class="table text-center blueTable2 table-striped table-bordered table-hover row-border p-b-md " style="border-collapse:collapse!important;">
+                <table id="tbList" cellspacing="0" width="100%" class="table text-center blueTable2 table-striped table-bordered table-hover row-border p-b-md " style="cursor: pointer;border-collapse:collapse!important;">
                     {{--<colgroup>
                         <col span="3" width="110px" style=" max-width: 110px;background-color: red;"/>
                         <col />
@@ -47,37 +47,36 @@
                     <th>변경/상태</th>
                     </thead>
                     <tbody>
-                        <tr v-for="row in output.otab" >
-                            <td width="80px" style="max-width:80px;" >@{{row.WSTATX}}</td>
-                            <td width="80px" style="max-width:80px;" >@{{moment(row.SDATE).format('YYYY-MM-DD')}}</td>
-                            <td width="80px">@{{row.BUSET}}</td>
-                            <td >@{{row.BREAS}}</td>
-                            <td width="110px" style="max-width:110px;" >@{{accounting.formatMoney(row.BETRG)}}</td>
-                            <td width="90px" style="max-width:90px;" >@{{row.RSTATX}}</td>
-                            <td width="80px" style="max-width:80px;" >@{{row.PAYDT}}</td>
-                            <td width="80px" style="max-width:80px;" >@{{row.WSTATX}}</td>
+                        <tr v-for="row in output.otab" @click="goView(row)">
+                            <td width="80px" style="max-width:80px;" v-text="row.WSTATX" ></td>
+                            <td width="80px" style="max-width:80px;" v-text="moment(row.SDATE).format('YYYY-MM-DD')"></td>
+                            <td width="80px" v-text="row.BUSET"></td>
+                            <td v-text="row.BREAS"></td>
+                            <td width="110px" style="max-width:110px;" v-text="accounting.formatMoney(row.BETRG)"></td>
+                            <td width="90px" style="max-width:90px;" v-text="row.RSTATX"></td>
+                            <td width="80px" style="max-width:80px;" v-text="row.PAYDT"></td>
+                            <td width="110px" style="max-width:110px;min-width: 110px;" >
+                                {{--@{{row.WSTATUS}}--}}
+                                <button @click.stop="goEdit(row)" class="btn btn-outline b-info text-info btn-sm">변경</button>
+                                <button @click.stop="goDelete(row)" class="btn btn-outline b-danger text-danger btn-sm">삭제</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 p-t-md">
                 <div class="row">
                     <div class="col-xs-2">
-                        <form id="formToCreate" action="{{route('topbank.create')}}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                            <input id="inputData" name="inputData" type="hidden" >
-                        </form>
-
-                        <button @click="goCreate" class="md-btn md-raised m-b-sm w-sm blue">신청</button>
-
-
-                        {{--<a  class="md-btn md-raised m-b-sm w-sm blue">신청</a>--}}
-                        {{--<a href="{{route('topbank_create')}}" class="md-btn md-raised m-b-sm w-sm blue m-r-sm">신청</a>--}}
+                        <button @click="goCreate" class="md-btn md-raised m-b-sm w-sm primary">신청</button>
                     </div>
-                    <div class="col-xs-10 end-xs">
+                    <div class="col-xs-10">
+                        <div class="row end-xs p-r-sm">
                         <a href="{{route('medicalDetails')}}" class="md-btn md-raised m-b-sm w-sm blue m-r-sm">동의서</a>
                         <a href="{{route('medicalDetails')}}" class="md-btn md-raised m-b-sm w-md blue">Top Bank 매뉴얼</a>
+                        </div>
                     </div>
+
+                    {{--help--}}
                     <div class="col-xs-12 well well-sm m-b-0">
                         <div class="text-info">
                             <i class="fa fa-comments-o"></i> Help :
@@ -96,11 +95,23 @@
             </div>
         </div>
     </div>
+    <form id="formToCreate" action="{{route('topbank.create')}}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+        <input id="inputData" name="inputData" type="hidden" >
+        {{--<input id="inputData" name="inputData" type="hidden" >--}}
+    </form>
 @endsection
 @section('scripts')
     <script type="text/javascript">
         Vue.config.devtools = true;
-        //alert("의료비");
+        $(document).ready(function() {
+            /*$('#tbList tbody').on( 'click', 'tr', function () {
+                var data = table.row( this ).data();
+                alert( 'You clicked on '+data+'\'s row' );
+            } );*/
+        } );
+
+
         var table = $('#tbList').DataTable(
             {
                 /*"responsive": true,*/
@@ -108,8 +119,8 @@
                 "paging": true,
                 "info": true,
                 "ordering": false,
-                /*"order": [[0, "desc"]],
-                "deferRender": true,*/
+                /*"order": [[0, "desc"]],*/
+                "deferRender": true,
                 stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
                 "pagingType": "full_numbers" //first_last_number
                 // obj 순서대로 칼럼 정의 할수 있음
@@ -134,11 +145,21 @@
                 }
             },
             methods: {
+                goView:function (row, _action='V') {
+                    val = $.extend({action:_action},{sltdRow:row}, {output:vv.output.data});
+                    p = JSON.stringify(val);
+                    $('#inputData').val(p);
+                    $('#formToCreate').submit();
+                },
+                goEdit:function (row) {
+                    this.goView(row, 'E')
+                },
                 goCreate:function(){
-                    inputData  = JSON.stringify(vv.output.data);
-                    $('#inputData').val(inputData);
-                    //var formDatas = $('#formToCreate').serialize();
-
+                    //inputData  = JSON.stringify(vv.output.data);
+                    //$('#inputData').val(inputData);
+                    val = $.extend({action:'C'},{sltdRow:''}, {output:vv.output.data});
+                    p = JSON.stringify(val);
+                    $('#inputData').val(p);
                     $('#formToCreate').submit();
                 },
                 getList:function() {
@@ -155,8 +176,47 @@
                         alert( "Posting failed." );
                     });
                 },
-                openInsertView:function() {
+                goDelete:function(row) {
+                    _row = row;
+                    bootbox.confirm({
+                        message: "삭제하시겠습니까?",
+                        buttons: {
+                            cancel: {
+                                label: 'No',
+                                className: 'btn btn-outline b-danger text-danger btn-md m-r-sm'
+                            },
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn btn-outline b-info text-info btn-md'
+                            }
+                        },
+                        callback: function (result) {
+                            if(result === true ) {
+                                $.ajax({
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    url: 'http://localhost:8080/common_infra_01/JsonServlet',
+                                    data: jQuery.param({
+                                        SERVER :'STC',
+                                        FID :'Z_HR_TB02',
+                                        import:JSON.stringify({"I_GWAREKEY":_row.GWAREKEY})
+                                    })
+                                }).done(function(data){
+                                    if(data.RETCODE!==0) {
+                                        alert(data.RETTEXT);
+                                        return;
+                                    }
+                                    else {
+                                        alert(data.RETTEXT);
+                                        window.location.href='/topbank';
+                                    }
+                                }).fail(function() {
+                                    alert( "delete failed." );
+                                });
+                            }
 
+                        }
+                    });
                 }
             },
             mounted: function() {
@@ -170,6 +230,7 @@
                 })
             }
         })
+
 
 
 

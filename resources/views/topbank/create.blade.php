@@ -12,14 +12,17 @@
             <table class="blueTable m-y-sm m-b-md">
                 <tr>
                     <td width="120">대출정보</td>
-                    <td class="text-left">@{{output.params.E_DTEXT}}</td>
+                    {{--<td class="text-left" v-text="params.action=='V'?params.output.E_DTEXT:'' " ></td>--}}
+                    <td class="text-left" v-text="params.output.E_DTEXT"></td>
+
                 </tr>
                 <tr>
                     <td width="120">대출용도</td>
                     <td>
-                        <select id="BUSE" name="BUSE" v-model="input.tables.ITAB[0].BUSE" class="text-center form-control form-control-sm " style="width: 120px;">
-                            <option value="" selected>- 선택 -</option>
-                            <option v-for="option in output.params.T_UCODE" v-bind:value="option.CODE">
+                        <select id="BUSE" name="BUSE" :disabled="isDisabled" v-model="input.tables.ITAB[0].BUSE"
+                                class="text-center form-control form-control-sm " style="width: 120px;">
+                            <option value="" >- 선택 -</option>
+                            <option  v-for="option in params.output.T_UCODE" v-bind:value="(option.CODE)" >
                                 @{{ option.TEXT}}
                             </option>
                         </select>
@@ -29,9 +32,10 @@
                 <tr>
                     <td width="120">대출금액</td>
                     <td>
-                        <select id="BETRG" name="BETRG" v-model="input.tables.ITAB[0].BETRG" class="text-center form-control form-control-sm " style="width: 120px;">
+                        <select id="BETRG" name="BETRG" :disabled="isDisabled" v-model="input.tables.ITAB[0].BETRG"
+                                class="text-center form-control form-control-sm " style="width: 120px;">
                             <option value="" selected>- 선택 -</option>
-                            <option v-for="option in output.params.T_UCODE" v-bind:value="option.BETRG">
+                            <option v-for="option in params.output.T_UCODE" v-bind:value="option.BETRG">
                                 @{{ accounting.formatMoney(option.BETRG)}}
                             </option>
                         </select>
@@ -40,7 +44,7 @@
                 <tr>
                     <td width="120">대출사유</td>
                     <td width="">
-                       <input  id="BREAS" name="BREAS" type="text" style="width: 100%;" v-model="input.tables.ITAB[0].BREAS">
+                       <input  id="BREAS" name="BREAS" type="text" style="width: 100%;" v-model="input.tables.ITAB[0].BREAS" :disabled="isDisabled">
                     </td>
                 </tr>
             </table>
@@ -61,7 +65,7 @@
                     <td width="100" class="text-left"></td>
                 </tr>
             </table>
-
+            {{--help--}}
             <div class="text-md2 _500  p-t-md"><i class="text-info fa fa-edit p-r-sm"></i>대출사유 세부 기준 및 구비 서류</div>
             <table id="tbList" cellspacing="0" width="100%" class="table  text-center blueTable2 table-striped table-bordered table-hover row-border p-b-md " style="border-collapse:collapse!important;">
                 <thead>
@@ -108,11 +112,11 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-xs-4">
-                        <button @click="onSave" class="md-btn md-raised m-b-sm w-sm blue">임시저장</button>
-                        <button @click="" class="md-btn md-raised m-b-sm w-sm blue">승인요청</button>
+                        <button @click="onSave" class="md-btn md-raised m-b-sm w-sm primary" v-if="getAction!='V'" >@{{getAction=='C'?'저장':'수정'}}</button>
+                        <button @click="" class="md-btn md-raised m-b-sm w-sm blue" v-if="getAction!='V'">승인요청</button>
                     </div>
                     <div class="col-xs-8 end-xs">
-                        <a href="{{route('topbank.list')}}" class="md-btn md-raised m-b-sm w-sm blue">이전화면</a>
+                        <a href="{{route('topbank.index')}}" class="md-btn md-raised m-b-sm w-sm blue">이전화면</a>
                     </div>
                 </div>
             </div>
@@ -133,6 +137,7 @@
         vv = new Vue({
             el:'#vuejs',
             data : {
+                params:JSON.parse(' {!! $param !!}'),
                 input:{
                     SERVER :'STC',
                     FID :'Z_HR_TB03',
@@ -147,13 +152,25 @@
                                 PERNR:'2950001',
                                 BREAS:"",
                                 BETRG:"",
-                                BUSE:""
+                                BUSE:"",
+                                GWAREKEY:""
                             }
                         ]
                     }
+                }
+
+            },
+            computed:{
+                isDisabled () {
+                    if(this.params.action ==="V") {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
                 },
-                output:{
-                    params:JSON.parse(' {!! $param !!}')
+                getAction(){
+                    return this.params.action;
                 }
             },
             methods: {
@@ -174,46 +191,33 @@
                         url: 'http://localhost:8080/common_infra_01/JsonServlet',
                         data: jQuery.param(vv.makeParams())
                     }).done(function(data){
+                        /*실패시*/
                         if(data.RETCODE!==0) {
                             alert(data.RETTEXT);
                             return;
                         }
                         else {
                             alert(data.RETTEXT);
+                            window.location.href='/topbank';
                         }
-                        vv.output.data = data;
-                        vv.output.E_DTEXT = data.E_DTEXT;
-                        vv.output.otab = data.OTAB;
                     }).fail(function() {
                         alert( "Posting failed." );
                     });
                 },
                 getList:function() {
-/*                    $.ajax({
-                        type: 'POST',
-                        dataType: 'json',
-                        url: 'http://localhost:8080/common_infra_01/JsonServlet',
-                        data: jQuery.param(this.input)
-                    }).done(function(data){
-                        vv.output.data = data;
-                        vv.output.E_DTEXT = data.E_DTEXT;
-                        vv.output.otab = data.OTAB;
-                    }).fail(function() {
-                        alert( "Posting failed." );
-                    });*/
-                },
-                openInsertView:function() {
 
                 }
             },
             mounted: function() {
-/*                this.output = {
-                    HEADER:{},
-                    OTAB:[]
-                }*/
-
                 this.$nextTick(function () {
-                    this.getList()
+                    if(vv.params.action !== 'C') {
+                        vv.input.tables.ITAB[0].BUSE = vv.params.sltdRow.BUSE;
+                        vv.input.tables.ITAB[0].BETRG  = vv.params.sltdRow.BETRG;
+                        vv.input.tables.ITAB[0].BREAS = vv.params.sltdRow.BREAS;
+                        vv.input.import.I_GWAREKEY = vv.params.sltdRow.GWAREKEY;
+                    }
+
+
                 })
             }
         })

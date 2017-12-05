@@ -112,7 +112,7 @@ padding: 0 .75rem;
 
 
 
-//.blueTable2>thead>tr>th {
+
   .blueTable2 {
     border-color: #C4D3E0 !important;
     color: #4A809E;
@@ -123,6 +123,7 @@ padding: 0 .75rem;
       border-width:1px !important;
     }
     td {
+      vertical-align: middle;
       border-color: #C4D3E0 !important;
       border-width:1px !important;
     }

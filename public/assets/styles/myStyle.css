@@ -87,6 +87,7 @@ table th {
     border-color: #C4D3E0 !important;
     border-width: 1px !important; }
   .blueTable2 td {
+    vertical-align: middle;
     border-color: #C4D3E0 !important;
     border-width: 1px !important; }
 
