@@ -166,7 +166,8 @@
                     $.ajax({
                         type: 'POST',
                         dataType: 'json',
-                        url: 'http://localhost:8080/common_infra_01/JsonServlet',
+                        //url: 'http://localhost:8080/common_infra_01/JsonServlet',
+                        url:'http://10.40.17.43:9088/erpsac/JsonServlet',
                         data: jQuery.param(this.input)
                     }).done(function(data){
                         vv.output.data = data;
