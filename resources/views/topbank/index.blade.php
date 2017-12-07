@@ -109,6 +109,7 @@
                 var data = table.row( this ).data();
                 alert( 'You clicked on '+data+'\'s row' );
             } );*/
+            vv.getList()
         } );
 
 
@@ -163,11 +164,19 @@
                     $('#formToCreate').submit();
                 },
                 getList:function() {
+                   /* loadSap()
+                     .done(function(data){
+                        vv.output.data = data;
+                        vv.output.E_DTEXT = data.E_DTEXT;
+                        vv.output.otab = data.OTAB;
+                    }).fail(function() {
+                        alert( "Posting failed." );
+                    });*/
+
                     $.ajax({
                         type: 'POST',
                         dataType: 'json',
-                        //url: 'http://localhost:8080/common_infra_01/JsonServlet',
-                        url:'http://10.40.17.43:9088/erpsac/JsonServlet',
+                        url:env.url,
                         data: jQuery.param(this.input)
                     }).done(function(data){
                         vv.output.data = data;
@@ -196,7 +205,7 @@
                                 $.ajax({
                                     type: 'POST',
                                     dataType: 'json',
-                                    url: 'http://localhost:8080/common_infra_01/JsonServlet',
+                                    url:env.url,
                                     data: jQuery.param({
                                         SERVER :'STC',
                                         FID :'Z_HR_TB02',
@@ -227,7 +236,7 @@
                 }*/
 
                 this.$nextTick(function () {
-                    this.getList()
+
                 })
             }
         })

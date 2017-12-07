@@ -188,7 +188,7 @@
                     $.ajax({
                         type: 'POST',
                         dataType: 'json',
-                        url: 'http://localhost:8080/common_infra_01/JsonServlet',
+                        url:env.url,
                         data: jQuery.param(vv.makeParams())
                     }).done(function(data){
                         /*실패시*/
