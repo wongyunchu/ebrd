@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+//require "../../vendor/autoload.php";
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
-
-
+use silver\config;
+use silverUtil\numberUtil;
 class TopbankController extends Controller
 {
     /**
@@ -16,18 +17,23 @@ class TopbankController extends Controller
 
     public function index()
     {
-        //$client = new Client(['base_uri' => 'https://foo.com/api/']);
-        $client = new Client();
-        $response = $client->request('POST','http://localhost:8080/common_infra_01/JsonServlet',
-            [
-                'form_params'=>[
-                'SERVER'=> 'STC',
-                'FID' =>'Z_HR_TB01',
-                'import' =>'{"I_PERNR":"2950001"}'
+        try {
+            $client = new Client();
+            $response = $client->request('POST', config::sapUrl(),
+                [
+                    'form_params'=>[
+                    'SERVER'=> 'STC',
+                    'FID' =>'Z_HR_TB01',
+                    'import' =>'{"I_PERNR":"2950001"}'
+                    ]
                 ]
-            ]
-        );
-        $res = json_decode($response->getBody(), true);
+            );
+            $res = json_decode($response->getBody(), true);
+        }
+        catch (\Exception $e) {
+            echo $e->getMessage();
+            exit;
+        }
         return view('topbank.index')->with('res', $res);
     }
 

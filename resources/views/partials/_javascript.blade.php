@@ -19,6 +19,7 @@
 </script>
 
 <script src="{{ asset('js/val.js')}}"></script>
+<script src="{{ asset('js/formSilver.js')}}"></script>
 
 
 <script src="{{ asset('js/vue.min.js')}}"></script>

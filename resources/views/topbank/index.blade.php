@@ -1,3 +1,5 @@
+<?php
+?>
 @extends('main')
 @section('title', '| Top Bank')
 @section('stylesheets')
@@ -6,10 +8,7 @@
 @section('content')
 
 @php
-function amtSapFormat(amt) {
 
-return number_format(amt * 100);
-}
 @endphp
         <div id="vuejs" class="container_del">
         <div class="row">
@@ -51,18 +50,18 @@ return number_format(amt * 100);
                     moment({{$row['SDATE']}}).format('YYYY-MM-DD')
                     --}}
                     @foreach($res['OTAB'] as $row)
-                        <tr @click="goView()" data-val="{{json_encode($row, JSON_UNESCAPED_UNICODE)}}">
+                        <tr @click="goView(event, 'V')" data-val="{{json_encode($row, JSON_UNESCAPED_UNICODE)}}">
                             <td width="80px" style="max-width:80px;">{{$row['WSTATX']}} </td>
                             <td width="80px" style="max-width:80px;">{{  date('Y-m-d',strtotime($row['SDATE']))  }}</td>
                             <td width="80px">{{$row['BUSET']}}</td>
                             <td>{{$row['BREAS']}}</td>
-                            <td width="110px" style="max-width:110px;">{{amtSapFormat($row['BETRG'])}}  </td>
+                            <td width="110px" style="max-width:110px;">{{\silverUtil\numberUtil::getAmtSap($row['BETRG'])}}  </td>
                             <td width="90px" style="max-width:90px;" >{{$row['RSTATX']}}</td>
                             <td width="80px" style="max-width:80px;" >{{$row['PAYDT']}}</td>
                             <td width="110px" style="max-width:110px;min-width: 110px;" >
                                 {{--{{$row->WSTATUS}}--}}
-                                <button @click.stop="goEdit" class="btn btn-outline b-info text-info btn-sm">변경</button>
-                                <button @click.stop="goDelete" class="btn btn-outline b-danger text-danger btn-sm">삭제</button>
+                                <button @click.stop="goView(event, 'E')" class="btn btn-outline b-info text-info btn-sm">변경</button>
+                                <button @click.stop="goDelete(event)" class="btn btn-outline b-danger text-danger btn-sm">삭제</button>
                             </td>
                         </tr>
                     @endforeach
@@ -88,7 +87,9 @@ return number_format(amt * 100);
             <div class="col-md-12 p-t-md">
                 <div class="row">
                     <div class="col-xs-2">
-                        <button @click="goCreate" class="md-btn md-raised m-b-sm w-sm primary">신청</button>
+                        <button @click="goView(event, 'C')" class="md-btn md-raised m-b-sm w-sm primary">신청</button>
+                        <button @click="getList" class="md-btn md-raised m-b-sm w-sm primary">test</button>
+
                     </div>
                     <div class="col-xs-10">
                         <div class="row end-xs p-r-sm">
@@ -130,8 +131,9 @@ return number_format(amt * 100);
         $(document).ready(function() {
             dt = $('#tbList').DataTable(
                 {
-                    //data:data2,
-                   /* columns: [
+                   /*
+                   data:data2,
+                   columns: [
                         { data: "SDATE", title:"신청일" },
                         { data: "BUSET", title:"대출용도" },
                         { data: "BREAS" , title:"대출사유" },
@@ -144,24 +146,14 @@ return number_format(amt * 100);
                             "<button @click.stop=\"goDelete(row)\" class=\"btn btn-outline b-danger text-danger btn-sm\">삭제</button>"
                         }
                     ],*/
-                    /*"responsive": true,*/
-                    select: false,
-                    "paging": true,
-                    "info": true,
-                    "ordering": false,
-                    /*"order": [[0, "desc"]],*/
-                    "deferRender": true,
-                    stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
-                    "pagingType": "full_numbers" //first_last_number
-                    // obj 순서대로 칼럼 정의 할수 있음
+                    select: false,"paging": true,"info": true,"ordering": false,"deferRender": true,stateSave: true,"pagingType": "full_numbers",responsive: true
                 }
             );
-
-/*            $('#tbList tbody').on( 'click', '#btnEdit', function () {
+            /*
+            $('#tbList tbody').on( 'click', '#btnEdit', function () {
                 var data = dt.row( $(this).parents('tr') ).data();
                 alert( data[0] +"'s salary is: "+ data[ 5 ] );
             } );*/
-
             /*$('#tbList tbody').on( 'click', 'tr', function () {
                 var data = table.row( this ).data();
                 alert( 'You clicked on '+data+'\'s row' );
@@ -169,11 +161,7 @@ return number_format(amt * 100);
             //dt.rows.add(data2).draw();
             //dt.rows().invalidate().draw();
             //dt.rows().draw();
-
         } );
-
-
-        //dt.data = data2;
 
         vv = new Vue({
             el:'#vuejs',
@@ -181,69 +169,34 @@ return number_format(amt * 100);
                 input:{
                     SERVER :'STC',
                     FID :'Z_HR_TB01',
-                    import:'{"I_PERNR":"2950001"}'
+                    //import:'{"I_PERNR":"2950001"}'
+                    import:{
+                        "I_PERNR":"2950001"
+                    }
                 },
                 output:{
                     //data:{},
                     param:{},
-                    /*
-                    otab:[],
-                    E_DTEXT:'',
-                    T_BCODE:[],
-                    T_UCODE:[]*/
                 }
             },
             methods: {
-                goView:function (row, _action='V') {
-                    //val = $.extend({action:_action},{sltdRow:row}, {output:vv.output.data});
+                goView:function (event, _action='V') {
+                    rowData = getRowVal(event);
                     val = $.extend(
-                        {action:_action},{sltdRow:row},{param:vv.output.param}
+                        {action:_action},{sltdRow:rowData},{param:vv.output.param} // action : [C, E,], sltdRow:선택된 row의 data-val, param:sap에서 받아온 값을 뷰화면에 전달
                     );
-                    p = JSON.stringify(val);
-                    $('#inputData').val(p);
-                    $('#formToCreate').submit();
-                },
-                goEdit:function (event) {
-                    row = $(event.currentTarget).closest('tr').data('val'); //row = JSON.parse(event.currentTarget.parentElement.parentElement.getAttribute("data-val"));
-                    this.goView(row, 'E')
-                },
-                goCreate:function(){
-                    //inputData  = JSON.stringify(vv.output.data);
-                    //$('#inputData').val(inputData);
-                    val = $.extend({action:'C'},{sltdRow:''}, {param:vv.output.param});
-                    p = JSON.stringify(val);
-                    $('#inputData').val(p);
-                    $('#formToCreate').submit();
+                    submitRow(val);
                 },
                 getList:function() {
-                   /* loadSap()
-                     .done(function(data){
+                    // ex) vuejs에서 call하는 경우 sample
+                    loadSap(vv.input.import).done(function(data){
                         vv.output.data = data;
-                        vv.output.E_DTEXT = data.E_DTEXT;
-                        vv.output.otab = data.OTAB;
-                    }).fail(function() {
-                        alert( "Posting failed." );
-                    });*/
-
-
-                    /*
-                    $.ajax({
-                        type: 'POST',
-                        dataType: 'json',
-                        url:env.url,
-                        data: jQuery.param(this.input)
-                    }).done(function(data){
-                        vv.output.data = data;
-                        vv.output.param.E_DTEXT = data.E_DTEXT;
-                        vv.output.param.T_BCODE = data.T_BCODE;
-                        vv.output.param.T_UCODE = data.T_UCODE;
                     }).fail(function() {
                         alert( "Posting failed." );
                     });
-                    */
                 },
-                goDelete:function(row) {
-                    _row = row;
+                goDelete:function(event) {
+                    _row = getRowVal(event);
                     bootbox.confirm({
                         message: "삭제하시겠습니까?",
                         buttons: {
@@ -258,6 +211,13 @@ return number_format(amt * 100);
                         },
                         callback: function (result) {
                             if(result === true ) {
+                                loadSap({"I_GWAREKEY":_row.GWAREKEY}).done(function(data){
+                                    vv.output.data = data;
+                                }).fail(function() {
+                                    alert( "Posting failed." );
+                                });
+
+
                                 $.ajax({
                                     type: 'POST',
                                     dataType: 'json',
