@@ -13,7 +13,7 @@
                 <tr>
                     <td width="120">대출정보</td>
                     {{--<td class="text-left" v-text="params.action=='V'?params.output.E_DTEXT:'' " ></td>--}}
-                    <td class="text-left" v-text="params.output.E_DTEXT"></td>
+                    <td class="text-left" v-text="params.param.E_DTEXT"></td>
 
                 </tr>
                 <tr>
@@ -22,7 +22,7 @@
                         <select id="BUSE" name="BUSE" :disabled="isDisabled" v-model="input.tables.ITAB[0].BUSE"
                                 class="text-center form-control form-control-sm " style="width: 120px;">
                             <option value="" >- 선택 -</option>
-                            <option  v-for="option in params.output.T_UCODE" v-bind:value="(option.CODE)" >
+                            <option  v-for="option in params.param.T_UCODE" v-bind:value="(option.CODE)" >
                                 @{{ option.TEXT}}
                             </option>
                         </select>
@@ -35,7 +35,7 @@
                         <select id="BETRG" name="BETRG" :disabled="isDisabled" v-model="input.tables.ITAB[0].BETRG"
                                 class="text-center form-control form-control-sm " style="width: 120px;">
                             <option value="" selected>- 선택 -</option>
-                            <option v-for="option in params.output.T_UCODE" v-bind:value="option.BETRG">
+                            <option v-for="option in params.param.T_UCODE" v-bind:value="option.BETRG">
                                 @{{ accounting.formatMoney(option.BETRG)}}
                             </option>
                         </select>

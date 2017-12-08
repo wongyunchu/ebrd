@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+
 
 class TopbankController extends Controller
 {
@@ -11,9 +13,22 @@ class TopbankController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        //
+        //$client = new Client(['base_uri' => 'https://foo.com/api/']);
+        $client = new Client();
+        $response = $client->request('POST','http://localhost:8080/common_infra_01/JsonServlet',
+            [
+                'form_params'=>[
+                'SERVER'=> 'STC',
+                'FID' =>'Z_HR_TB01',
+                'import' =>'{"I_PERNR":"2950001"}'
+                ]
+            ]
+        );
+        $res = json_decode($response->getBody(), true);
+        return view('topbank.index')->with('res', $res);
     }
 
     /**
@@ -45,7 +60,8 @@ class TopbankController extends Controller
      */
     public function show($id)
     {
-        //
+
+
     }
 
     /**

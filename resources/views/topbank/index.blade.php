@@ -4,7 +4,14 @@
 
 @endsection
 @section('content')
-    <div id="vuejs" class="container_del">
+
+@php
+function amtSapFormat(amt) {
+
+return number_format(amt * 100);
+}
+@endphp
+        <div id="vuejs" class="container_del">
         <div class="row">
             <div class="col-md-12">
                 <div class="row end-xs" style="margin-right: -24px">
@@ -28,14 +35,6 @@
             </div>
             <div class="col-md-12">
                 <table id="tbList" cellspacing="0" width="100%" class="table text-center blueTable2 table-striped table-bordered table-hover row-border p-b-md " style="cursor: pointer;border-collapse:collapse!important;">
-                    {{--<colgroup>
-                        <col span="3" width="110px" style=" max-width: 110px;background-color: red;"/>
-                        <col />
-                        <col width="110px"/>
-                        <col />
-                        <col span="2" width="100px" style="background-color: blue" />
-                    </colgroup>--}}
-
                     <thead>
                     <th>신청상태</th>
                     <th>신청일</th>
@@ -47,6 +46,28 @@
                     <th>변경/상태</th>
                     </thead>
                     <tbody>
+                    {{--{{dump($res['OTAB'])}}
+                    console.log($("#d1").data("role"));
+                    moment({{$row['SDATE']}}).format('YYYY-MM-DD')
+                    --}}
+                    @foreach($res['OTAB'] as $row)
+                        <tr @click="goView()" data-val="{{json_encode($row, JSON_UNESCAPED_UNICODE)}}">
+                            <td width="80px" style="max-width:80px;">{{$row['WSTATX']}} </td>
+                            <td width="80px" style="max-width:80px;">{{  date('Y-m-d',strtotime($row['SDATE']))  }}</td>
+                            <td width="80px">{{$row['BUSET']}}</td>
+                            <td>{{$row['BREAS']}}</td>
+                            <td width="110px" style="max-width:110px;">{{amtSapFormat($row['BETRG'])}}  </td>
+                            <td width="90px" style="max-width:90px;" >{{$row['RSTATX']}}</td>
+                            <td width="80px" style="max-width:80px;" >{{$row['PAYDT']}}</td>
+                            <td width="110px" style="max-width:110px;min-width: 110px;" >
+                                {{--{{$row->WSTATUS}}--}}
+                                <button @click.stop="goEdit" class="btn btn-outline b-info text-info btn-sm">변경</button>
+                                <button @click.stop="goDelete" class="btn btn-outline b-danger text-danger btn-sm">삭제</button>
+                            </td>
+                        </tr>
+                    @endforeach
+                        {{--
+                        vuejs 사용시
                         <tr v-for="row in output.otab" @click="goView(row)">
                             <td width="80px" style="max-width:80px;" v-text="row.WSTATX" ></td>
                             <td width="80px" style="max-width:80px;" v-text="moment(row.SDATE).format('YYYY-MM-DD')"></td>
@@ -56,11 +77,11 @@
                             <td width="90px" style="max-width:90px;" v-text="row.RSTATX"></td>
                             <td width="80px" style="max-width:80px;" v-text="row.PAYDT"></td>
                             <td width="110px" style="max-width:110px;min-width: 110px;" >
-                                {{--@{{row.WSTATUS}}--}}
+                                @{{row.WSTATUS}}
                                 <button @click.stop="goEdit(row)" class="btn btn-outline b-info text-info btn-sm">변경</button>
                                 <button @click.stop="goDelete(row)" class="btn btn-outline b-danger text-danger btn-sm">삭제</button>
                             </td>
-                        </tr>
+                        </tr>--}}
                     </tbody>
                 </table>
             </div>
@@ -103,30 +124,56 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
+        var dt;
         Vue.config.devtools = true;
+
         $(document).ready(function() {
+            dt = $('#tbList').DataTable(
+                {
+                    //data:data2,
+                   /* columns: [
+                        { data: "SDATE", title:"신청일" },
+                        { data: "BUSET", title:"대출용도" },
+                        { data: "BREAS" , title:"대출사유" },
+                        { data: "BETRG" , title:"대출금액" },
+                        { data: "RSTATX" , title:"보증보험상태" },
+                        { data: "PAYDT" , title:"지급일" },
+                        { data: "null" , title:"변경/상태",
+                            "defaultContent":
+                            "<button id='btnEdit' @click.stop=\"goEdit(row)\" class=\"btn btn-outline b-info text-info btn-sm\">변경</button>\n" +
+                            "<button @click.stop=\"goDelete(row)\" class=\"btn btn-outline b-danger text-danger btn-sm\">삭제</button>"
+                        }
+                    ],*/
+                    /*"responsive": true,*/
+                    select: false,
+                    "paging": true,
+                    "info": true,
+                    "ordering": false,
+                    /*"order": [[0, "desc"]],*/
+                    "deferRender": true,
+                    stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
+                    "pagingType": "full_numbers" //first_last_number
+                    // obj 순서대로 칼럼 정의 할수 있음
+                }
+            );
+
+/*            $('#tbList tbody').on( 'click', '#btnEdit', function () {
+                var data = dt.row( $(this).parents('tr') ).data();
+                alert( data[0] +"'s salary is: "+ data[ 5 ] );
+            } );*/
+
             /*$('#tbList tbody').on( 'click', 'tr', function () {
                 var data = table.row( this ).data();
                 alert( 'You clicked on '+data+'\'s row' );
             } );*/
-            vv.getList()
+            //dt.rows.add(data2).draw();
+            //dt.rows().invalidate().draw();
+            //dt.rows().draw();
+
         } );
 
 
-        var table = $('#tbList').DataTable(
-            {
-                /*"responsive": true,*/
-                select: false,
-                "paging": true,
-                "info": true,
-                "ordering": false,
-                /*"order": [[0, "desc"]],*/
-                "deferRender": true,
-                stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
-                "pagingType": "full_numbers" //first_last_number
-                // obj 순서대로 칼럼 정의 할수 있음
-            }
-        );
+        //dt.data = data2;
 
         vv = new Vue({
             el:'#vuejs',
@@ -137,28 +184,33 @@
                     import:'{"I_PERNR":"2950001"}'
                 },
                 output:{
-                    /*나중에 하나만 써야함 에지간하면 data로 통일시키는게 편할듯 */
-                    data:{},
-                    E_DTEXT:'',
+                    //data:{},
+                    param:{},
+                    /*
                     otab:[],
+                    E_DTEXT:'',
                     T_BCODE:[],
-                    T_UCODE:[]
+                    T_UCODE:[]*/
                 }
             },
             methods: {
                 goView:function (row, _action='V') {
-                    val = $.extend({action:_action},{sltdRow:row}, {output:vv.output.data});
+                    //val = $.extend({action:_action},{sltdRow:row}, {output:vv.output.data});
+                    val = $.extend(
+                        {action:_action},{sltdRow:row},{param:vv.output.param}
+                    );
                     p = JSON.stringify(val);
                     $('#inputData').val(p);
                     $('#formToCreate').submit();
                 },
-                goEdit:function (row) {
+                goEdit:function (event) {
+                    row = $(event.currentTarget).closest('tr').data('val'); //row = JSON.parse(event.currentTarget.parentElement.parentElement.getAttribute("data-val"));
                     this.goView(row, 'E')
                 },
                 goCreate:function(){
                     //inputData  = JSON.stringify(vv.output.data);
                     //$('#inputData').val(inputData);
-                    val = $.extend({action:'C'},{sltdRow:''}, {output:vv.output.data});
+                    val = $.extend({action:'C'},{sltdRow:''}, {param:vv.output.param});
                     p = JSON.stringify(val);
                     $('#inputData').val(p);
                     $('#formToCreate').submit();
@@ -173,6 +225,8 @@
                         alert( "Posting failed." );
                     });*/
 
+
+                    /*
                     $.ajax({
                         type: 'POST',
                         dataType: 'json',
@@ -180,11 +234,13 @@
                         data: jQuery.param(this.input)
                     }).done(function(data){
                         vv.output.data = data;
-                        vv.output.E_DTEXT = data.E_DTEXT;
-                        vv.output.otab = data.OTAB;
+                        vv.output.param.E_DTEXT = data.E_DTEXT;
+                        vv.output.param.T_BCODE = data.T_BCODE;
+                        vv.output.param.T_UCODE = data.T_UCODE;
                     }).fail(function() {
                         alert( "Posting failed." );
                     });
+                    */
                 },
                 goDelete:function(row) {
                     _row = row;
@@ -230,13 +286,10 @@
                 }
             },
             mounted: function() {
-/*                this.output = {
-                    HEADER:{},
-                    OTAB:[]
-                }*/
-
                 this.$nextTick(function () {
-
+                    vv.output.param.E_DTEXT = '{!! $res['E_DTEXT'] !!}';
+                    vv.output.param.T_BCODE  = {!!  json_encode($res['T_BCODE']) !!};
+                    vv.output.param.T_UCODE  = {!!  json_encode($res['T_UCODE']) !!};
                 })
             }
         })
