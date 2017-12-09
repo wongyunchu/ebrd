@@ -192,7 +192,7 @@
                         vv.input.tables.ITAB[0].BUSE = vv.params.sltdRow.BUSE;
                         vv.input.tables.ITAB[0].BETRG  = vv.params.sltdRow.BETRG;
                         vv.input.tables.ITAB[0].BREAS = vv.params.sltdRow.BREAS;
-                        vv.input.import.I_GWAREKEY = vv.params.sltdRow.GWAREKEY;
+                        vv.input.I_GWAREKEY = vv.params.sltdRow.GWAREKEY;
                     }
                 })
             }
