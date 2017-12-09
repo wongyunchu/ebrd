@@ -86,12 +86,11 @@
             </div>
             <div class="col-md-12 p-t-md">
                 <div class="row">
-                    <div class="col-xs-2">
+                    <div class="col-xs-4">
                         <button @click="goView(event, 'C')" class="md-btn md-raised m-b-sm w-sm primary">신청</button>
-                        <button @click="getList" class="md-btn md-raised m-b-sm w-sm primary">test</button>
-
+                        <button @click="getList" class="md-btn md-raised m-b-sm w-sm primary">js Sap</button>
                     </div>
-                    <div class="col-xs-10">
+                    <div class="col-xs-8">
                         <div class="row end-xs p-r-sm">
                         <a href="{{route('medicalDetails')}}" class="md-btn md-raised m-b-sm w-sm blue m-r-sm">동의서</a>
                         <a href="{{route('medicalDetails')}}" class="md-btn md-raised m-b-sm w-md blue">Top Bank 매뉴얼</a>
@@ -167,12 +166,7 @@
             el:'#vuejs',
             data : {
                 input:{
-                    SERVER :'STC',
-                    FID :'Z_HR_TB01',
-                    //import:'{"I_PERNR":"2950001"}'
-                    import:{
-                        "I_PERNR":"2950001"
-                    }
+                    "I_PERNR":"2950001"
                 },
                 output:{
                     //data:{},
@@ -189,8 +183,8 @@
                 },
                 getList:function() {
                     // ex) vuejs에서 call하는 경우 sample
-                    loadSap(vv.input.import).done(function(data){
-                        vv.output.data = data;
+                    loadSap('Z_HR_TB01', vv.input).done(function(data){
+                        alert('성공'+JSON.stringify(data));
                     }).fail(function() {
                         alert( "Posting failed." );
                     });
@@ -211,23 +205,8 @@
                         },
                         callback: function (result) {
                             if(result === true ) {
-                                loadSap({"I_GWAREKEY":_row.GWAREKEY}).done(function(data){
-                                    vv.output.data = data;
-                                }).fail(function() {
-                                    alert( "Posting failed." );
-                                });
-
-
-                                $.ajax({
-                                    type: 'POST',
-                                    dataType: 'json',
-                                    url:env.url,
-                                    data: jQuery.param({
-                                        SERVER :'STC',
-                                        FID :'Z_HR_TB02',
-                                        import:JSON.stringify({"I_GWAREKEY":_row.GWAREKEY})
-                                    })
-                                }).done(function(data){
+                                loadSap('Z_HR_TB02', {"I_GWAREKEY":_row.GWAREKEY})
+                                .done(function(data){
                                     if(data.RETCODE!==0) {
                                         alert(data.RETTEXT);
                                         return;
@@ -237,10 +216,9 @@
                                         window.location.href='/topbank';
                                     }
                                 }).fail(function() {
-                                    alert( "delete failed." );
+                                    alert( "Posting failed." );
                                 });
                             }
-
                         }
                     });
                 }
@@ -253,10 +231,5 @@
                 })
             }
         })
-
-
-
-
-
     </script>
 @endsection

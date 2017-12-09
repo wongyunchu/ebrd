@@ -139,13 +139,7 @@
             data : {
                 params:JSON.parse(' {!! $param !!}'),
                 input:{
-                    SERVER :'STC',
-                    FID :'Z_HR_TB03',
-                    PERNR:'2950001',
-
-                    import:{
-                        I_GWAREKEY:""
-                    },
+                    I_GWAREKEY:"",
                     tables:{
                         ITAB:[
                             {
@@ -174,33 +168,17 @@
                 }
             },
             methods: {
-                makeParams:function () {
-                    retObj = {
-                        SERVER :'STC',
-                        FID :'Z_HR_TB03',
-                        import:JSON.stringify(vv.input.import),
-                        tables:JSON.stringify(vv.input.tables)
-                    }
-                    return retObj;
-                },
                 onSave:function () {
-                    //JSON.stringify()
-                    $.ajax({
-                        type: 'POST',
-                        dataType: 'json',
-                        url:env.url,
-                        data: jQuery.param(vv.makeParams())
-                    }).done(function(data){
-                        /*실패시*/
-                        if(data.RETCODE!==0) {
-                            alert(data.RETTEXT);
-                            return;
-                        }
-                        else {
-                            alert(data.RETTEXT);
-                            window.location.href='/topbank';
-                        }
-                    }).fail(function() {
+                    saveSap('Z_HR_TB03', vv.input).done(function(data){
+                            if(data.RETCODE!==0) {
+                                alert(data.RETTEXT);
+                                return;
+                            }
+                            else {
+                                alert(data.RETTEXT);
+                                window.location.href='/topbank';
+                            }
+                        }).fail(function() {
                         alert( "Posting failed." );
                     });
                 },
@@ -216,8 +194,6 @@
                         vv.input.tables.ITAB[0].BREAS = vv.params.sltdRow.BREAS;
                         vv.input.import.I_GWAREKEY = vv.params.sltdRow.GWAREKEY;
                     }
-
-
                 })
             }
         })
