@@ -8,10 +8,10 @@
 
                 <thead>
                 <th style="width:110px">#</th>
-                <th>Title</th>
-                <th>Body</th>
+                <th style="width:20%">Title</th>
+                <th style="width:50%">Body</th>
                 <th style="width:140px">Create At</th>
-                <th style="min-width: 100px">처리</th>
+                <th style="width:140px;">처리</th>
                 </thead>
                 <tbody>
                 @foreach($posts as $post)
@@ -62,7 +62,7 @@
                     "info": true,
                     "ordering": true,
                     "order": [[0, "desc"]],
-                    "deferRender": true,
+                    "deferRender": false,
                     stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
                     "pagingType": "full_numbers", //first_last_number
                 }

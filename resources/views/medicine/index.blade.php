@@ -86,7 +86,7 @@
                     "info": true,
                     "ordering": false,
                     "order": [[0, "desc"]],
-                    "deferRender": true,
+                    "deferRender": false,
                     stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
                     "pagingType": "full_numbers", //first_last_number
                     // obj 순서대로 칼럼 정의 할수 있음
