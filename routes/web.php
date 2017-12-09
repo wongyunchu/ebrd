@@ -20,6 +20,7 @@ Route::get('/', function () {
 /*페이지*/
 Route::view('profile', 'pages/profile')->name('profile');
 Route::view('dashboard', 'pages/dashboard')->name('dashboard');
+Route::view('test2', 'pages/test2')->name('test2');
 
 //근태(스케쥴러)
 Route::view('work', 'pages/work')->name('work');

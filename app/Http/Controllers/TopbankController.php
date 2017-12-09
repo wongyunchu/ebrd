@@ -31,7 +31,11 @@ class TopbankController extends Controller
             $res = json_decode($response->getBody(), true);
         }
         catch (\Exception $e) {
-            echo $e->getMessage();
+echo <<<HTML
+<div class="well well-lg">SK 내부 망에 있어야 합니다.</div>
+            
+HTML;
+
             exit;
         }
         return view('topbank.index')->with('res', $res);

@@ -4,7 +4,7 @@
 @section('content')
     <div class="row">
         <div class="col-xs-offset-0 col-xs-12">
-            <table id="example" width="100%" cellspacing="0" class="table table-striped table-bordered table-hover row-border p-b-md ">
+            <table id="example" width="100%" cellspacing="0" class="table blueTable2 text-center table-striped table-bordered table-hover row-border p-b-md " >
 
                 <thead>
                 <th style="width:110px">#</th>
@@ -65,19 +65,6 @@
                     "deferRender": true,
                     stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
                     "pagingType": "full_numbers", //first_last_number
-                    // obj 순서대로 칼럼 정의 할수 있음
-                    "columnDefs": [
-                        { responsivePriority: 1, targets: 4},
-                    ],
-                   /* select: {
-                            style:    'os',
-                            selector: 'td:first-child'
-                    },*/
-                    "createdRow": function ( row, data, index ) {
-                        if ( data[0].replace(/[\$,]/g, '') * 1 > 55 ) {
-                            $('td', row).eq(1).addClass('text-primary'); //
-                        }
-                    }
                 }
             );
             // 테이블 셋팅완료
