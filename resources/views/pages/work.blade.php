@@ -52,8 +52,9 @@
             {{-- 휴가 쿼터 리스트--}}
             <div class="col-sm-4">
                 <div class="box b-light b-a">
-                    <div class="box-header dker">
-                        <h3>팀원 교육/출장/휴가 현황</h3>
+                    <div class="box-header">
+
+                        <h3><i class=" fa fa-fighter-jet"></i> 팀원 교육/출장/휴가 현황</h3>
                     </div>
                     <div class="box-body p-y-0">
                         <table id="tableR1" cellspacing="0" width="100%" class="table">
@@ -68,10 +69,10 @@
 
                 <div class="box b-light b-a">
                     <div class="box-header dker">
-                        <h3>휴가일수</h3>
+                        <h3><i class="fa fa-calendar"></i> 휴가일수</h3>
                     </div>
-                    <div class="box-body p-y-0">
-                        <table id="tableR2" cellspacing="0" width="100%" class="table">
+                    <div class="box-body p-y-0 ">
+                        <table id="tableR2" cellspacing="0" width="100%" class="table ">
                             <thead style="width: 100%">
                             <th >구분</th>
                             <th >기간</th>
@@ -83,7 +84,7 @@
 
                 <div class="box b-light b-a">
                     <div class="box-header dker">
-                        <h3>당월 OT 통계</h3>
+                        <h3><i class="fa fa-line-chart"></i> 당월 OT 통계</h3>
                     </div>
                     <div class="box-body p-y-0">
                         <table id="tableR3" cellspacing="0" width="100%" class="table">
