@@ -13,14 +13,33 @@
 //Route::view('medicine', 'medicine.index')->name('medicine.index');
 //Route::view('medicineCreate', 'medicine.create')->name('medicineCreate');
 
+Route::get('/', function () {
+    return redirect('/dashboard');
+});
+
+/*페이지*/
+Route::view('profile', 'pages/profile')->name('profile');
+Route::view('dashboard', 'pages/dashboard')->name('dashboard');
+Route::view('test2', 'pages/test2')->name('test2');
+
+//근태(스케쥴러)
+Route::view('work', 'pages/work')->name('work');
+
+/*의료비*/
 Route::get('medicals/details/{id?}', 'MedicalController@medicalDetails')->name('medicalDetails');
 Route::post('medicals/detailsView', 'MedicalController@medicalDetailsView')->name('medicalDetailsView');
-/*medicalDetails
-medicalDetailsView*/
 Route::resource('medicals', 'MedicalController');
 
+/*Top bank*/
+//Route::view('topbank', 'topbank/index')->name('topbank.index');
+//Route::post('topbank/create', 'TopbankController@create')->name('topbank.create');
 
-Route::get('/', 'PagesController@index');
+Route::get('topbank', 'TopbankController@index')->name('topbank.index');
+Route::post('topbank/create', 'TopbankController@create')->name('topbank.create');
+//Route::post('topbank_create', 'topbank/create')->name('topbank_create');
+
+
+
 Route::get('test', 'PagesController@test');
 Route::get('about', 'PagesController@getAbout');
 

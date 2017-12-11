@@ -5,6 +5,7 @@
 
 <!-- Bootstrap -->
 <script src="{{ asset('libs/jquery/jquery/dist/jquery.js') }}"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
 
@@ -17,6 +18,9 @@
     });
 </script>
 
+<script src="{{ asset('js/val.js')}}"></script>
+<script src="{{ asset('js/formSilver.js')}}"></script>
+
 
 <script src="{{ asset('js/vue.min.js')}}"></script>
 {{-- table grid관련 순서 중요 --}}
@@ -25,6 +29,8 @@
 
 <script src="{{ asset('libs/jquery/tether/dist/js/tether.min.js') }}"></script>
 <script src="{{ asset('libs/jquery/bootstrap/dist/js/bootstrap.js')}}"></script>
+
+<script src="{{ asset('js/sap.js')}}"></script>
 
 
 <!-- core -->

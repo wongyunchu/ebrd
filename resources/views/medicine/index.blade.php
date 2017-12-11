@@ -12,40 +12,40 @@
 @endsection
     <div class="row">
         <div class="col-xs-offset-0 col-xs-12">
-            <table id="example" cellspacing="0" width="100%" class="table table-striped table-bordered table-hover row-border p-b-md">
+            <table id="example" cellspacing="0" width="100%" class="table blueTable2 text-center table-striped table-bordered table-hover row-border p-b-md">
 
                 <thead>
-                <th>대상년월</th>
-                <th>신청일</th>
-                <th>진료과목</th>
-                <th >사용일</th>
-                <th>지원건수</th>
-                <th>지원금액</th>
-                <th>품의상태</th>
-                <th>전표상태</th>
-                <th>변경/삭제</th>
+                    <th style="min-width:60px">대상년월</th>
+                    <th style="min-width:50px">신청일</th>
+                    <th style="min-width:60px">진료과목</th>
+                    <th style="min-width:50px">사용일</th>
+                    <th style="min-width:60px"> 지원건수</th>
+                    <th style="min-width:60px">지원금액</th>
+                    <th style="min-width:60px">품의상태</th>
+                    <th style="min-width:60px">전표상태</th>
+                    <th style="min-width:60px">변경/삭제</th>
                 </thead>
                 <tbody>
                 @foreach($list as $item)
 
                     <tr >
-                        <th>{{\Illuminate\Support\Carbon::parse($item->tagetdate)->format('Y-m-d')}}</th>
-                        <th>{{\Illuminate\Support\Carbon::parse($item->created_at)->format('Y-m-d')}}</th>
-                        <th>{{$item->categorySubject}}</th>
-                        <th >-</th>
-                        <th >-</th>
-                        <th></th>
-                        <th>접수</th>
-                        <th>-</th>
-                        <th>
-                            <form action="{{route('medicalDetailsView')}}" method="post">
+                        <td>{{\Illuminate\Support\Carbon::parse($item->tagetdate)->format('Y-m-d')}}</td>
+                        <td>{{\Illuminate\Support\Carbon::parse($item->created_at)->format('Y-m-d')}}</td>
+                        <td>{{$item->categorySubject}}</td>
+                        <td >-</td>
+                        <td >-</td>
+                        <td></td>
+                        <td>접수</td>
+                        <td>-</td>
+                        <td>
+                            <form action="{{route('medicalDetailsView')}}" method="POST">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="item" value="{{json_encode($item)}}">
                                 <button type="submit" class="btn btn-outline b-info text-info btn-sm" >View</button>
                             </form>
 {{--                            <a href=""
                                class="btn btn-outline b-warning text-warning btn-sm">Edit</a>--}}
-                        </th>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -57,11 +57,13 @@
                 {!! $posts->links(); !!}
             </div>
             --}}
-            <div class="form_group">
+            <div id="myModal" class="form_group">
                 <hr>
                 <div class="row end-xs p-r">
                     {{--<button id="addRow">Add new row</button>--}}
                     <a href="{{route('medicalDetails')}}" class="md-btn md-raised m-b-sm btn-lg w-sm indigo">작성</a>
+                   {{--<button @click="get2"> get List crossDomain</button>--}}
+                    {{-- <button @click="save2"> test 저장</button>--}}
                 </div>
             </div>
         </div>
@@ -73,35 +75,21 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+
+
             //alert("의료비");
             var table = $('#example').DataTable(
                 {
+                    "responsive": true,
+                    select: false,
                     "paging": true,
                     "info": true,
                     "ordering": false,
                     "order": [[0, "desc"]],
-                    "deferRender": true,
+                    "deferRender": false,
                     stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
                     "pagingType": "full_numbers", //first_last_number
                     // obj 순서대로 칼럼 정의 할수 있음
-                    "columnDefs": [
-                        {
-                          /*  "render": function ( data, type, row ) {
-                                return data +' ('+ row[1]+')';
-                            },
-                            "targets": 0*/
-                        },
-                        {
-/*                            "targets": [1],
-                            "visible": false,
-                            "searchable": false*/
-                        }
-                    ],
-                    "createdRow": function ( row, data, index ) {
-                        if ( data[0].replace(/[\$,]/g, '') * 1 > 55 ) {
-                            $('td', row).eq(1).addClass('text-primary'); //
-                        }
-                    }
                 }
             );
             // 테이블 셋팅완료

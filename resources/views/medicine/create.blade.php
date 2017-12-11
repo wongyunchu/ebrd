@@ -167,13 +167,15 @@
             <div class="col-sm-8"></div>
             <div class="col-sm-2">
                 <div class="md-form-group float-label">
-                    {{Form::text('title', null, ['id'=>'idCount', 'class'=>'md-input text-right','readonly', '', 'min-length'=>'5'])}}
+                    {{ Form::input('idCount', 'title', null, ['id'=>'idCount', 'class'=>'md-input text-right','readonly', '', 'min-length'=>'5']) }}
+                    {{--{{Form::text('title', null, ['id'=>'idCount', 'class'=>'md-input text-right','readonly', '', 'min-length'=>'5'])}}--}}
                     <label class="w-full text-right p-r-0" >건수 </label>
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="md-form-group float-label">
-                    {{Form::text('title', null, ['id'=>'idAmount','class'=>'md-input text-right '])}}
+                    {{ Form::input('idAmount', 'title', null, ['id'=>'idAmount', 'class'=>'md-input text-right','readonly', '', 'min-length'=>'5']) }}
+                    {{--{{Form::text('title', null, ['id'=>'idAmount','class'=>'md-input text-right '])}}--}}
                     <label class="w-full text-right p-r-xs" >금액계 </label>
                 </div>
             </div>
@@ -341,6 +343,7 @@
                 },
                 // 하단 추가, 수정, 삭제
                 addForm: function () {
+                    //window.print();
                     medicineListTable.rows().deselect();
                     vue.sltdData = null;
                     resetForm();
@@ -476,7 +479,7 @@
                     @else []
                     @endif
                     ,
-                    /*[
+                    /*"data":[
                         {
                             "select":     "",
                             "usedate":       "2017-11-21",

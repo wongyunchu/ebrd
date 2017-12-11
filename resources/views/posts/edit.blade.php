@@ -14,9 +14,9 @@
     <div class="row">
         {!! Form::model($post, ['route'=>['posts.update', $post->id], 'method'=>'PUT']) !!}
         <div class="col-md-8" >
-            {{Form::Label('title', 'Title:')}}
+            {{Form::Label('title', 'Title11:')}}
             {{Form::text('title', null, ['class'=>'form-control input-lg'])}}
-
+            {{ Form::input('', 'title', null, ['class'=>'md-input', $isReadonly, 'required', 'min-length'=>'5', 'type'=>'']) }}
             <div class="form_group">
             {{--{{Form::Label('slug', 'Slug:')}}--}}
             {{--{{Form::text('slug', null, ['class'=>'form-control input-lg'])}}--}}

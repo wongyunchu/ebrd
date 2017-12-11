@@ -39,8 +39,7 @@
                 </div>
 
                 <div class="eq-ui-form-group eq-ui-input-field">
-                    <input id="password" type="password" name="password" data-parsley-minlength="6"
-                           class="form-control eq-ui-input" required="">
+                    <input id="password" type="password" name="password" class="form-control eq-ui-input" required="" value="">
                     <label for="password" data-error="Min length 6">Password</label>
                 </div>
 

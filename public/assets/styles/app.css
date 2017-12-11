@@ -5,7 +5,7 @@ html {
   background-color: #e0e0e0; }
 
 body {
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(0, 0, 0, 0.70);
   font-size: 0.875rem;
   background-color: #f0f0f0;
   -webkit-font-smoothing: antialiased; }
@@ -374,7 +374,7 @@ input[type=text]:focus:not(.dateComp), textarea:focus {
   border: 1px solid #9bc4ee;
   box-shadow: 0 0 2px #a6d6ee;
   margin: 5px 1px 3px 0px;
-  padding: 3px 0px 3px 3px; }
+  /*padding:            3px 0px 3px 3px;*/ }
 
 .form-control-label {
   padding-top: .5rem;
@@ -3066,12 +3066,19 @@ body {
   -webkit-box-shadow: none !important;
   box-shadow: none !important; }
 
-@media (max-width: 767px) {
-  .pos-stc-sm {
-    position: static !important; } }
-@media (max-width: 543px) {
-  .pos-stc-xs {
-    position: static !important; } }
+/*
+@include media-breakpoint-down(sm) {
+  .pos-stc-sm{
+    position: static !important;
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .pos-stc-xs{
+    position: static !important;
+  }
+}
+*/
 .no-border {
   border-color: transparent;
   border-width: 0; }
@@ -3850,7 +3857,7 @@ a.text-blue:hover {
   color: black; }
 
 .text-black-lt {
-  color: rgba(0, 0, 0, 0.54); }
+  color: rgba(0, 0, 0, 0.2); }
 
 .text-black-dk {
   color: rgba(0, 0, 0, 0.87); }
@@ -3897,6 +3904,9 @@ a.text-blue:hover {
 
 .text-md {
   font-size: 1.125rem; }
+
+.text-md2 {
+  font-size: 1.05rem; }
 
 .text-lg {
   font-size: 1.5rem; }

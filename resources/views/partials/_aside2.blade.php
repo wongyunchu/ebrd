@@ -1,9 +1,9 @@
 <div id="aside" class="app-aside modal fade nav-dropdown">
 
-    <div class="left navside dark box-shadow-z0">
+    <div class="left navside dark box-shadow-z0" layout="column">
         <div class="navbar">
             <!-- brand -->
-            <a class="navbar-brand">
+            <a href="{{route('dashboard')}}" class="navbar-brand">
                 <img src="../assets/images/logo.png" alt="." class="">
                 <span class="hidden-folded inline v-m">
                     E-HR
@@ -17,7 +17,7 @@
         {{--User profile--}}
         <div flex-no-shrink="">
             <div class="nav-fold">
-                <a href="#/app/page/profile" ui-sref="app.page.profile">
+                <a href="{{route('profile')}}" ui-sref="app.page.profile">
                     <span class="pull-right m-v-sm hidden-folded">
                       <b class="label warn">9</b>
                     </span>
@@ -25,20 +25,15 @@
                       <img src="../assets/images/a1.jpg" alt="..." class="w-40 img-circle">
                     </span>
                     <span class="clear hidden-folded p-x">
-                    <span class="block _500">Jack Perez</span>
+                    <span class="block _500">홍길동</span>
                       <small class="block text-muted">인사관리, 1팀</small>
                     </span>
                 </a>
             </div>
         </div>
-
-        <div class="nav-border b-primary" flex="">
-
-
-
-
-
-            <ul class="nav leftMenu" ui-nav>
+        <div flex class="hide-scroll">
+            <nav class="scroll nav-border b-primary" flex="">
+                <ul class="nav leftMenu" ui-nav>
                 <li class="nav-header hidden-folded">
                     <span class="text-xs text-muted">Header</span>
                 </li>
@@ -56,9 +51,8 @@
                     <ul class="nav-sub">
                         <li><a href="/posts"><span class="nav-text">개인정보</span></a></li>
                         <li><a href="/medicals"><span class="nav-text">급여정보</span></a></li>
-                        <li><a><span class="nav-text">연말정산</span></a></li>
-                        <li><a><span class="nav-text">건강보험 연말정산</span></a></li>
-                        <li><a><span class="nav-text">평가결과</span></a></li>
+                        <li><a href="/work"><span class="nav-text">건강보험 연말정산</span></a></li>
+                        <li><a href="/topbank"><span class="nav-text">평가결과</span></a></li>
                         <li><a><span class="nav-text">근로계약/동의서</span></a></li>
 
                         <li>
@@ -121,8 +115,6 @@
                     </ul>
                 </li>
 
-
-
                 {{--HR Info--}}
                 <li>
                     <a>
@@ -144,7 +136,7 @@
                     </ul>
                 </li>
             </ul>
-
+            </nav>
         </div>
 
         <div flex-no-shrink="">
@@ -153,31 +145,28 @@
                     <li>
                         <div class="b-b b m-v-sm"></div>
                     </li>
+
                     <li class="no-bg">
-                        <a class="auto">
-                            <span class="nav-icon">
-                              <i class="material-icons inline"></i>
-                              <i class="material-icons text-warn none"></i>
-                            </span>
-                            <span class="nav-text">Filter</span>
-                        </a>
-                    </li>
-                    <li class="no-bg">
-                        <a>
+                        <a >
                         <span class="nav-icon">
                           <i class="material-icons"></i>
                         </span>
-                            <span class="nav-text">결재함<small class="block text-muted">Border</small></span>
+                            <span class="nav-text">결재함</span>
                         </a>
                     </li>
                     <li>
-                        <div class="b-b b m-t-sm"></div>
+                        <div class="b-b b "></div>
                     </li>
+                    @guest
+                    @else
                     <li class="no-bg">
-                        <a><span class="nav-icon"><i class="material-icons"></i></span>
+                        <a onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit();">
+                            <span class="nav-icon"><i class="material-icons"></i></span>
                             <span class="nav-text">Logout</span>
                         </a>
                     </li>
+                     @endguest
                 </ul>
             </nav>
         </div>

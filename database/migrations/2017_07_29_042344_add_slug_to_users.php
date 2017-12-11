@@ -14,7 +14,7 @@ class AddSlugToUsers extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('slug')->unique('slug')->after('body');
+            $table->string('slug')->after('body');
             $table->index(['slug', 'title']);
         });
     }

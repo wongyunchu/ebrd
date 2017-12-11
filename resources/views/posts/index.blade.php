@@ -4,14 +4,14 @@
 @section('content')
     <div class="row">
         <div class="col-xs-offset-0 col-xs-12">
-            <table id="example" width="100%" cellspacing="0" class="table table-striped table-bordered table-hover row-border p-b-md">
+            <table id="example" width="100%" cellspacing="0" class="table blueTable2 text-center table-striped table-bordered table-hover row-border p-b-md " >
 
                 <thead>
-                <th style="width:100px">#</th>
-                <th>Title</th>
-                <th>Body</th>
+                <th style="width:110px">#</th>
+                <th style="width:20%">Title</th>
+                <th style="width:50%">Body</th>
                 <th style="width:140px">Create At</th>
-                <th style="width:140px">처리</th>
+                <th style="width:140px;">처리</th>
                 </thead>
                 <tbody>
                 @foreach($posts as $post)
@@ -55,29 +55,16 @@
             //alert("공지사항");
             var table = $('#example').DataTable(
                 {
+
+                    "responsive": true,
                     select: false,
                     "paging": true,
                     "info": true,
                     "ordering": true,
                     "order": [[0, "desc"]],
-                    "deferRender": true,
+                    "deferRender": false,
                     stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
                     "pagingType": "full_numbers", //first_last_number
-                    // obj 순서대로 칼럼 정의 할수 있음
-/*                    "columnDefs": [{
-                            orderable: false,
-                            className: 'select-checkbox',
-                            targets: 0
-                        }],*/
-                   /* select: {
-                            style:    'os',
-                            selector: 'td:first-child'
-                    },*/
-                    "createdRow": function ( row, data, index ) {
-                        if ( data[0].replace(/[\$,]/g, '') * 1 > 55 ) {
-                            $('td', row).eq(1).addClass('text-primary'); //
-                        }
-                    }
                 }
             );
             // 테이블 셋팅완료
