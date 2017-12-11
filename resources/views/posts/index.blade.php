@@ -7,11 +7,11 @@
             <table id="example" width="100%" cellspacing="0" class="table blueTable2 text-center table-striped table-bordered table-hover row-border p-b-md " >
 
                 <thead>
-                <th style="width:110px">#</th>
-                <th style="width:20%">Title</th>
-                <th style="width:50%">Body</th>
-                <th style="width:140px">Create At</th>
-                <th style="width:140px;">처리</th>
+                <th style="width:70px">#</th>
+                <th style="width:120px">Title</th>
+                <th style="">Body</th>
+                <th style="width:110px">Create</th>
+                <th style="width:110px; min-width: 110px;">처리</th>
                 </thead>
                 <tbody>
                 @foreach($posts as $post)
