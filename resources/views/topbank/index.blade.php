@@ -40,11 +40,11 @@ C:\0.project\02.laravel\eHr\resources\views\topbank\index.blade.php
             <table id="tbList" cellspacing="0" width="100%" class="table text-center blueTable2 table-striped table-bordered table-hover row-border p-b-md " style="table-layout: fixed; border-collapse:collapse!important;">
                 <thead>
                 <th style="width:90px">신청상태</th>
-                <th style="width:90px" >신청일</th>
+                <th style="width:110px" >신청일</th>
                 <th style="width:90px" >대출용도</th>
-                <th nowrap="" style="min-width: 120px" > 대출사유</th>
+                <th style="width:100%;min-width: 140px"> 대출사유</th>
                 <th style="width:90px" >대출금액</th>
-                <th style="width:120px" >보증보험상태</th>
+                <th style="width:110px" >보증보험상태</th>
                 <th style="width:90px" >지급일</th>
                 <th style="width:130px">변경/상태</th>
                 </thead>
@@ -139,6 +139,9 @@ C:\0.project\02.laravel\eHr\resources\views\topbank\index.blade.php
         $(document).ready(function() {
             dt = $('#tbList').DataTable(
                 {
+                    buttons: [
+                        'copy', 'excel', 'pdf'
+                    ],
                    /*
                    data:data2,
                    columns: [
