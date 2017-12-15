@@ -90,7 +90,7 @@ C:\0.project\02.laravel\eHr\resources\views\topbank\index.blade.php
                     <td v-text="row.RSTATX"></td>
                     <td v-text="row.PAYDT"></td>
                     <td >
-                        <button @click.stop="goEdit(row)" class="btn btn-outline b-info text-info btn-sm">변경</button>
+                        <button @click.stop="goView(row, 'E')" class="btn btn-outline b-info text-info btn-sm">변경</button>
                         <button @click.stop="goDelete(row)" class="btn btn-outline b-danger text-danger btn-sm">삭제</button>
                     </td>
                 </tr>
@@ -174,6 +174,10 @@ C:\0.project\02.laravel\eHr\resources\views\topbank\index.blade.php
                 init:function(){
                     loadSap('Z_HR_TB01', this.input).done(function(data){
                         vv.output.otab = data.OTAB;
+                        vv.output.param.E_DTEXT = data.E_DTEXT;
+                        vv.output.param.T_BCODE  = data.T_BCODE;
+                        vv.output.param.T_UCODE  = data.T_UCODE;
+
                         Vue.nextTick(function() {
                             dt = $('#tbList').DataTable({
                                 columnDefs: [

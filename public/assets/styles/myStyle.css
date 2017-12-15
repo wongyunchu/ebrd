@@ -92,6 +92,8 @@ table th {
     vertical-align: middle;
     border-color: #C4D3E0 !important;
     border-width: 1px !important; }
+  .blueTable2 tr {
+    cursor: pointer; }
 
 .blue_grid {
   width: 100%;
