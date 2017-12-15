@@ -5,6 +5,7 @@ function getRowVal(event){
 
 function submitRow(val){
     p = JSON.stringify(val);
+    //alert(p);
     $('#inputData').val(p);
     $('#formToCreate').submit();
 }

@@ -1,6 +1,6 @@
 @extends('main')
-@section('title', 'Top Bank | ')
-@section('title_sub', 'Request...')
+@section('title', 'Top Bank ')
+@section('title_sub', ' | Request...')
 @section('stylesheets')
 
 @endsection
@@ -21,12 +21,12 @@
                     <td>
                         <select id="BUSE" name="BUSE" :disabled="isDisabled" v-model="input.tables.ITAB[0].BUSE"
                                 class="text-center form-control form-control-sm " style="width: 120px;">
-                            <option value="" >- 선택 -</option>
-                            <option  v-for="option in params.param.T_UCODE" v-bind:value="(option.CODE)" >
+
+                            <option v-for="option in params.param.T_UCODE"
+                                    :value="option.CODE" >
                                 @{{ option.TEXT}}
                             </option>
                         </select>
-                        {{--<span>Selected: @{{ input.BUSE }}</span>--}}
                     </td>
                 </tr>
                 <tr>
@@ -35,7 +35,7 @@
                         <select id="BETRG" name="BETRG" :disabled="isDisabled" v-model="input.tables.ITAB[0].BETRG"
                                 class="text-center form-control form-control-sm " style="width: 120px;">
                             <option value="" selected>- 선택 -</option>
-                            <option v-for="option in params.param.T_UCODE" v-bind:value="option.BETRG">
+                            <option v-for="option in params.param.T_UCODE" :value="option.BETRG">
                                 @{{ accounting.formatMoney(option.BETRG)}}
                             </option>
                         </select>
@@ -115,7 +115,7 @@
                         <button @click="onSave" class="md-btn md-raised m-b-sm w-sm primary" v-if="getAction!='V'" >@{{getAction=='C'?'저장':'수정'}}</button>
                         <button @click="" class="md-btn md-raised m-b-sm w-sm blue" v-if="getAction!='V'">승인요청</button>
                     </div>
-                    <div class="col-xs-8 end-xs">
+                    <div class="col-xs-8 row end-xs">
                         <a href="{{route('topbank.index')}}" class="md-btn md-raised m-b-sm w-sm blue">이전화면</a>
                     </div>
                 </div>
@@ -137,7 +137,10 @@
         vv = new Vue({
             el:'#vuejs',
             data : {
+                templates: ['template1','template2','template3','template4'],
+                category: 'template1',
                 params:JSON.parse(' {!! $param !!}'),
+
                 input:{
                     I_GWAREKEY:"",
                     tables:{
@@ -155,7 +158,7 @@
 
             },
             computed:{
-                isDisabled () {
+                isDisabled:function () {
                     if(this.params.action ==="V") {
                         return true;
                     }
@@ -163,7 +166,7 @@
                         return false;
                     }
                 },
-                getAction(){
+                getAction:function(){
                     return this.params.action;
                 }
             },
@@ -187,13 +190,26 @@
                 }
             },
             mounted: function() {
+
+
+
+
                 this.$nextTick(function () {
                     if(vv.params.action !== 'C') {
                         vv.input.tables.ITAB[0].BUSE = vv.params.sltdRow.BUSE;
                         vv.input.tables.ITAB[0].BETRG  = vv.params.sltdRow.BETRG;
                         vv.input.tables.ITAB[0].BREAS = vv.params.sltdRow.BREAS;
                         vv.input.I_GWAREKEY = vv.params.sltdRow.GWAREKEY;
+
+                        //this.input.BUSE = vv.params.sltdRow.BUSE;
+
+                        //this.$forceUpdate();
+/*                        window.setTimeout(function() {
+                            vv.input.BUSE = vv.params.sltdRow.BUSE;
+                        }, 0);*/
                     }
+
+
                 })
             }
         })

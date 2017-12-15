@@ -1,9 +1,12 @@
 <?php
 ?>
 @extends('main')
-@section('title', '| Top Bank')
+@section('title', 'Top Bank ')
+@section('title_sub', ' | All List...')
 @section('stylesheets')
-
+<style>
+    /*.table-responsive { overflow-x: initial; }*/
+</style>
 @endsection
 @section('content')
 
@@ -36,23 +39,25 @@
 {{--
 C:\0.project\02.laravel\eHr\resources\views\topbank\index.blade.php
 --}}
-        <div class="table-responsive">
-            <table id="tbList" cellspacing="0" width="100%" class="table text-center blueTable2 table-striped table-bordered table-hover row-border p-b-md " style="table-layout: fixed; border-collapse:collapse!important;">
+        <div class="table-responsive1" >
+
+            <table id="tbList" cellspacing="0" width="100%" class="table text-center blueTable2 table-striped table-bordered table-hover row-border p-b-md " style=" border-collapse:collapse!important;">
                 <thead>
-                <th style="width:90px">신청상태</th>
-                <th style="width:110px" >신청일</th>
-                <th style="width:90px" >대출용도</th>
-                <th style="width:100%;min-width: 140px"> 대출사유</th>
+                <th style="width:100px;min-width: 100px">신청상태</th>
+                <th style="width:100px;;min-width: 100px" >신청일</th>
+                <th style="width:90px;min-width: 90px" >대출용도</th>
+                <th style="min-width: 140px"> 대출사유</th>
                 <th style="width:90px" >대출금액</th>
                 <th style="width:110px" >보증보험상태</th>
                 <th style="width:90px" >지급일</th>
-                <th style="width:130px">변경/상태</th>
+                <th style="width:110px">변경/상태</th>
                 </thead>
                 <tbody>
                 {{--{{dump($res['OTAB'])}}
                 console.log($("#d1").data("role"));
                 moment({{$row['SDATE']}}).format('YYYY-MM-DD')
                 --}}
+                {{--
                 @foreach($res['OTAB'] as $row)
                     <tr @click="goView(event, 'V')" style="cursor: pointer;" data-val="{{json_encode($row, JSON_UNESCAPED_UNICODE)}}">
                         <td >{{$row['WSTATX']}} </td>
@@ -63,7 +68,7 @@ C:\0.project\02.laravel\eHr\resources\views\topbank\index.blade.php
                         <td >{{$row['RSTATX']}}</td>
                         <td >{{$row['PAYDT']}}</td>
                         <td >
-                            {{--{{$row->WSTATUS}}--}}
+                            --}}{{--{{$row->WSTATUS}}--}}{{--
                             <div class="">
                                 <button @click.stop="goView(event, 'E')" class="btn btn-outline b-info text-info btn-sm">변경</button>
                                 <button @click.stop="goDelete(event)" class="btn btn-outline b-danger text-danger btn-sm">삭제</button>
@@ -72,24 +77,26 @@ C:\0.project\02.laravel\eHr\resources\views\topbank\index.blade.php
 
                     </tr>
                 @endforeach
-                {{--
-                vuejs 사용시
-                <tr v-for="row in output.otab" @click="goView(row)">
-                    <td width="80px" style="max-width:80px;" v-text="row.WSTATX" ></td>
-                    <td width="80px" style="max-width:80px;" v-text="moment(row.SDATE).format('YYYY-MM-DD')"></td>
-                    <td width="80px" v-text="row.BUSET"></td>
+                --}}
+                {{--vuejs 사용시
+                data-val="{{json_encode($row, JSON_UNESCAPED_UNICODE)}}"
+                --}}
+                <tr v-for="row in output.otab" @click="goView(row, 'V')">
+                    <td v-text="row.WSTATX" ></td>
+                    <td v-text="moment(row.SDATE).format('YYYY-MM-DD')"></td>
+                    <td v-text="row.BUSET"></td>
                     <td v-text="row.BREAS"></td>
-                    <td width="110px" style="max-width:110px;" v-text="accounting.formatMoney(row.BETRG)"></td>
-                    <td width="90px" style="max-width:90px;" v-text="row.RSTATX"></td>
-                    <td width="80px" style="max-width:80px;" v-text="row.PAYDT"></td>
-                    <td width="110px" style="max-width:110px;min-width: 110px;" >
-                        @{{row.WSTATUS}}
+                    <td v-text="accounting.formatMoney(row.BETRG)"></td>
+                    <td v-text="row.RSTATX"></td>
+                    <td v-text="row.PAYDT"></td>
+                    <td >
                         <button @click.stop="goEdit(row)" class="btn btn-outline b-info text-info btn-sm">변경</button>
                         <button @click.stop="goDelete(row)" class="btn btn-outline b-danger text-danger btn-sm">삭제</button>
                     </td>
-                </tr>--}}
+                </tr>
                 </tbody>
             </table>
+
         </div>
 
          <div class="row">
@@ -107,7 +114,7 @@ C:\0.project\02.laravel\eHr\resources\views\topbank\index.blade.php
                     </div>
 
                     {{--help--}}
-                    <div class="col-xs-12 well well-sm m-b-0">
+                    <div class="col-xs-12 well well-sm m-b-0 m-t-md">
                         <div class="text-info">
                             <i class="fa fa-comments-o"></i> Help :
                         </div>
@@ -137,29 +144,6 @@ C:\0.project\02.laravel\eHr\resources\views\topbank\index.blade.php
         Vue.config.devtools = true;
 
         $(document).ready(function() {
-            dt = $('#tbList').DataTable(
-                {
-                    buttons: [
-                        'copy', 'excel', 'pdf'
-                    ],
-                   /*
-                   data:data2,
-                   columns: [
-                        { data: "SDATE", title:"신청일" },
-                        { data: "BUSET", title:"대출용도" },
-                        { data: "BREAS" , title:"대출사유" },
-                        { data: "BETRG" , title:"대출금액" },
-                        { data: "RSTATX" , title:"보증보험상태" },
-                        { data: "PAYDT" , title:"지급일" },
-                        { data: "null" , title:"변경/상태",
-                            "defaultContent":
-                            "<button id='btnEdit' @click.stop=\"goEdit(row)\" class=\"btn btn-outline b-info text-info btn-sm\">변경</button>\n" +
-                            "<button @click.stop=\"goDelete(row)\" class=\"btn btn-outline b-danger text-danger btn-sm\">삭제</button>"
-                        }
-                    ],*/
-                    select: false,"paging": true,"info": true,"ordering": false,"deferRender": true,stateSave: true,"pagingType": "full_numbers",responsive: false
-                }
-            );
             /*
             $('#tbList tbody').on( 'click', '#btnEdit', function () {
                 var data = dt.row( $(this).parents('tr') ).data();
@@ -182,12 +166,30 @@ C:\0.project\02.laravel\eHr\resources\views\topbank\index.blade.php
                 },
                 output:{
                     //data:{},
+                    otab:{},
                     param:{},
                 }
             },
             methods: {
-                goView:function (event, _action='V') {
-                    rowData = getRowVal(event);
+                init:function(){
+                    loadSap('Z_HR_TB01', this.input).done(function(data){
+                        vv.output.otab = data.OTAB;
+                        Vue.nextTick(function() {
+                            dt = $('#tbList').DataTable({
+                                columnDefs: [
+                                    { responsivePriority: 1, targets: 0 },
+                                    { responsivePriority: 2, targets: -1 } //우측부터
+                                ],
+                                 buttons: ['copy', 'excel', 'pdf'],
+                                 select: false,"paging": true,"info": true,"ordering": false,"deferRender": true,stateSave: true,"pagingType": "full_numbers",responsive: true
+                            });
+                        })
+
+                    }).fail(function() {
+                        alert( "Posting failed." );
+                    });
+                },
+                goView:function (rowData, _action) {
                     val = $.extend(
                         {action:_action},{sltdRow:rowData},{param:vv.output.param} // action : [C, E,], sltdRow:선택된 row의 data-val, param:sap에서 받아온 값을 뷰화면에 전달
                     );
@@ -241,6 +243,9 @@ C:\0.project\02.laravel\eHr\resources\views\topbank\index.blade.php
                     vv.output.param.T_BCODE  = {!!  json_encode($res['T_BCODE']) !!};
                     vv.output.param.T_UCODE  = {!!  json_encode($res['T_UCODE']) !!};
                 })
+            },
+            created: function() {
+                this.init();
             }
         })
     </script>
