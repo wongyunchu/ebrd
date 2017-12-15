@@ -239,9 +239,11 @@ C:\0.project\02.laravel\eHr\resources\views\topbank\index.blade.php
             },
             mounted: function() {
                 this.$nextTick(function () {
+                    {{--
                     vv.output.param.E_DTEXT = '{!! $res['E_DTEXT'] !!}';
                     vv.output.param.T_BCODE  = {!!  json_encode($res['T_BCODE']) !!};
                     vv.output.param.T_UCODE  = {!!  json_encode($res['T_UCODE']) !!};
+                    --}}
                 })
             },
             created: function() {
