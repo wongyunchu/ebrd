@@ -44,7 +44,7 @@
                 <tr>
                     <td width="120">대출사유</td>
                     <td width="">
-                       <input  id="BREAS" name="BREAS" type="text" style="width: 100%;" v-model="input.tables.ITAB[0].BREAS" :disabled="isDisabled">
+                       <input  id="BREAS" name="BREAS" type="text"  style="width: 100%; " v-model="input.tables.ITAB[0].BREAS" :disabled="isDisabled">
                     </td>
                 </tr>
             </table>
@@ -76,32 +76,32 @@
                 </thead>
                 <tbody>
                 <tr >
-                    <td width="80px" style="max-width:80px;">1</td>
-                    <td width="180px" style="max-width:80px;" >주택 구입 및 주택임차</td>
+                    <td width="80px" >1</td>
+                    <td width="180px"  >주택 구입 및 주택임차</td>
                     <td>본인 또는 명의 주택 구입 및 임차</td>
                     <td width="120px">계약서 사본</td>
                 </tr>
                 <tr >
-                    <td width="80px" style="max-width:80px;">2</td>
-                    <td width="180px" style="max-width:80px;" >경조사</td>
+                    <td width="80px" >2</td>
+                    <td width="180px"  >경조사</td>
                     <td >결혼 - 본인결혼, 자녀결혼</td>
                     <td width="120px">청첩장</td>
                 </tr>
                 <tr >
-                    <td width="80px" style="max-width:80px;">2</td>
-                    <td width="180px" style="max-width:80px;" >경조사</td>
+                    <td width="80px" >2</td>
+                    <td width="180px"  >경조사</td>
                     <td >사망 - 본인 및 배우자 부모</td>
                     <td width="120px">사망확인서류</td>
                 </tr>
                 <tr >
-                    <td width="80px" style="max-width:80px;">3</td>
-                    <td width="180px" style="max-width:80px;" >학자금, 의료비</td>
+                    <td width="80px" >3</td>
+                    <td width="180px"  >학자금, 의료비</td>
                     <td >학자금 : 본인, 배우자, 자녀 학자금</td>
                     <td width="150px">등록금납입고지서</td>
                 </tr>
                 <tr >
-                    <td width="80px" style="max-width:80px;">3</td>
-                    <td width="180px" style="max-width:80px;" >학자금, 의료비</td>
+                    <td width="80px" >3</td>
+                    <td width="180px"  >학자금, 의료비</td>
                     <td >의료비 : 본인, 배우자, 자녀 , 부모, 배우자 부모</td>
                     <td width="120px">의료비영수증</td>
                 </tr>

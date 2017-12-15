@@ -10,6 +10,9 @@
 @media (max-width: 991px) {
   .hidden-md-down {
     display: none !important; } }
+input {
+  height: 30px; }
+
 .well {
   min-height: 20px;
   padding: 19px;

@@ -208,7 +208,7 @@ C:\0.project\02.laravel\eHr\resources\views\topbank\index.blade.php
                     });
                 },
                 goDelete:function(event) {
-                    _row = getRowVal(event);
+                    _row = event;
                     bootbox.confirm({
                         message: "삭제하시겠습니까?",
                         buttons: {
