@@ -17,6 +17,7 @@ class TopbankController extends Controller
 
     public function index()
     {
+        /*
         try {
             $client = new Client();
             $response = $client->request('POST', config::sapUrl(),
@@ -39,6 +40,8 @@ HTML;
             exit;
         }
         return view('topbank.index')->with('res', $res);
+        */
+        return view('topbank.index');
     }
 
     /**
