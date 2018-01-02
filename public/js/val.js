@@ -2,7 +2,7 @@ server='dev';
 
 
 
-let env = {
+env = {
     local:"http://localhost:8080/common_infra_01/",
     dev:"http://10.40.17.43:9088/erpsac/",
     prod:"http://10.40.17.42:9088/erpsac/",
@@ -14,7 +14,7 @@ let env = {
       else if(server === 'local') {
           return (env.local+env.sap);
       }
-    },
+    }
 
 
-}
+};

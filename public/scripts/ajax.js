@@ -16,7 +16,7 @@
       });
       // fix js
       $(document).on('pjax:end', function(event) {
-        
+
         $(event.target).find('[ui-jp]').uiJp();
         $(event.target).uiInclude();
 

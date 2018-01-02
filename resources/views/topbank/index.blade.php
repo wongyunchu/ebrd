@@ -11,9 +11,9 @@
 @section('content')
 
 @php
-
 @endphp
-        <div id="vuejs" class="container_del">
+
+    <div id="vuejs" class="container_del">
         <div class="row">
             <div class="col-md-12">
                 <div class="row end-xs" style="margin-right: -24px">

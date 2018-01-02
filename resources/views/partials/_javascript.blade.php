@@ -5,7 +5,7 @@
 
 <!-- Bootstrap -->
 <script src="{{ asset('libs/jquery/jquery/dist/jquery.js') }}"></script>
-
+<script src="{{ asset('js/datatables.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
 
@@ -17,14 +17,14 @@
 
     });
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 <script src="{{ asset('js/val.js')}}"></script>
 <script src="{{ asset('js/formSilver.js')}}"></script>
 
 
 <script src="{{ asset('js/vue.min.js')}}"></script>
 {{-- table grid관련 순서 중요 --}}
-<script src="{{ asset('js/datatables.js')}}"></script>
+
 <script src="{{ asset('js/bootbox.min.js')}}"></script>
 
 <script src="{{ asset('libs/jquery/tether/dist/js/tether.min.js') }}"></script>
@@ -72,10 +72,9 @@
 <script src="{{ asset('scripts/app.js')}}"></script>
 
 
-<!-- ajax -->
 {{--메뉴 클릭시 jquery가 반응을 안하는 현상이 발생 --}}
-{{--<script src="{{ asset('libs/jquery/jquery-pjax/jquery.pjax.js')}}"></script>
-<script src="{{ asset('scripts/ajax.js')}}"></script>--}}
+<script src="{{ asset('libs/jquery/jquery-pjax/jquery.pjax.js')}}"></script>
+<script src="{{ asset('scripts/ajax.js')}}"></script>
 
 
 {{--<script src="{{ asset('js/exentriq-bootstrap-material-ui.min.js')}}"></script>--}}

@@ -21,6 +21,7 @@ Route::get('/', function () {
 Route::view('profile', 'pages/profile')->name('profile');
 Route::view('dashboard', 'pages/dashboard')->name('dashboard');
 Route::view('test2', 'pages/test2')->name('test2');
+Route::view('test_empty', 'pages/test_empty')->name('test_empty');
 
 //근태(스케쥴러)
 Route::view('work', 'pages/work')->name('work');
