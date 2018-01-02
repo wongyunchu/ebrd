@@ -69,53 +69,30 @@
         </div>
     </div>
 
+<script type="text/javascript">
+    function initJquery() {
+        var table = $('#example').DataTable(
+            {
+                "responsive": true,
+                select: false,
+                "paging": true,
+                "info": true,
+                "ordering": false,
+                "order": [[0, "desc"]],
+                "deferRender": false,
+                stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
+                "pagingType": "full_numbers", //first_last_number
+                // obj 순서대로 칼럼 정의 할수 있음
+            });
+    }
+
+</script>
 @stop
 
 @section('scripts')
     <script type="text/javascript">
-
         $(document).ready(function () {
-
-
-            //alert("의료비");
-            var table = $('#example').DataTable(
-                {
-                    "responsive": true,
-                    select: false,
-                    "paging": true,
-                    "info": true,
-                    "ordering": false,
-                    "order": [[0, "desc"]],
-                    "deferRender": false,
-                    stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
-                    "pagingType": "full_numbers", //first_last_number
-                    // obj 순서대로 칼럼 정의 할수 있음
-                }
-            );
-            // 테이블 셋팅완료
-            /*var counter = 1;
-            $('#addRow').on( 'click', function () {
-                table.row.add( [
-                    '.1',
-                    '.2',
-                    '.3'
-
-                ] ).draw( false );
-
-                counter++;
-            } );
-            $('#addRow').click();*/
-
-
-/*            // 이벤트
-            $('#example tbody').on( 'click', 'tr', function () {
-                $(this).toggleClass('selected');
-            } );*/
-
-/*            $('#example tbody').on('click', 'tr', function () {
-                var data = table.row( this ).data();
-                alert( 'You clicked on '+data[0]+'\'s row' );
-            } );*/
+            initJquery();
         });
     </script>
 @endsection

@@ -29,6 +29,7 @@
                             </a>
                         </div>
                     </div>
+
                     <div class="portlet-body">
                         @yield('content')
                     </div>

@@ -21,7 +21,7 @@
                         <td>{{substr(strip_tags($post->body), 0, 50)}} {{strlen($post->body) > 50 ? "...":""}}</td>
                         <td>{{date('M j, Y', strtotime($post->updated_at) )}}</td>
                         <td>
-                            <a href="{{route('posts.show', $post->id)}}"
+                            <a href="{{route('posts.show', $post->id)}}" data-pjax
                                class="btn btn-outline b-info text-info btn-sm">View</a>
                             <a href="{{route('posts.edit', $post->id)}}"
                                class="btn btn-outline b-warning text-warning btn-sm">Edit</a>
@@ -47,15 +47,11 @@
             </div>
         </div>
     </div>
-
-@stop
-@section('scripts')
     <script type="text/javascript">
-        $(document).ready(function () {
-            //alert("공지사항");
+        function initJquery(){
+            //alert("공지사항ready22");
             var table = $('#example').DataTable(
                 {
-
                     "responsive": true,
                     select: false,
                     "paging": true,
@@ -84,13 +80,20 @@
 
             // 이벤트
             $('#example tbody').on( 'click', 'tr', function () {
-               // $(this).toggleClass('selected');
+                // $(this).toggleClass('selected');
             } );
 
-/*            $('#example tbody').on('click', 'tr', function () {
-                var data = table.row( this ).data();
-                alert( 'You clicked on '+data[0]+'\'s row' );
-            } );*/
+            /*            $('#example tbody').on('click', 'tr', function () {
+                            var data = table.row( this ).data();
+                            alert( 'You clicked on '+data[0]+'\'s row' );
+                        } );*/
+        }
+    </script>
+@stop
+@section('scripts')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            initJquery();
         });
     </script>
 @endsection
