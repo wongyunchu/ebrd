@@ -20,7 +20,8 @@
             $(document).ready(initJquery);
         }
         catch(e) {
-          alert('you gotta make initJquery() to Content Yield.');
+          alert(e+'\r\nyou gotta make initJquery() to Content Yield.');
+            $(document).ready(initJquery);
         }
 
         $(event.target).find('[ui-jp]').uiJp();

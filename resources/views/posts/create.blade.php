@@ -79,7 +79,7 @@
 
 
 
-            <div class="form_group">
+            <div class="form_group" style="padding-bottom: 30px;">
                 {{Form::label('body', 'Post Body:')}}
                 {{Form::textarea('body', null,['class'=>'form-control', $isReadonly])}}
             </div>
@@ -132,91 +132,91 @@
 
 
 
+
+
 @stop
 @section('scripts')
-    {!! (Html::script('js/select2.min.js')) !!}
-    {!! (Html::script('js/dropzone.js')) !!}
-
+    <script src="{{ asset('js/dropzone.js')}}"></script>
     <script type="text/javascript">
-        @if ($isReadonly == 'readonly')
-            $("#category_id option").not(":selected").remove();
-        @endif
-
-        $("#submit-all").click(function (e) {
-            if ($("#postForm")["0"].submitted ) {
-                alert('등록중입니다..');
-                return false;
-            }
-            $("#postForm")["0"].submitted = true;
-            $("#postForm").submit();
-        });
-
-        Dropzone.options.imageUpload = {
-            //autoProcessQueue: false,
-            parallelUploads: 100,
+        $(document).ready(function () {
             @if ($isReadonly == 'readonly')
+            $("#category_id option").not(":selected").remove();
+            @endif
+
+            $("#submit-all").click(function (e) {
+                if ($("#postForm")["0"].submitted ) {
+                    alert('등록중입니다..');
+                    return false;
+                }
+                $("#postForm")["0"].submitted = true;
+                $("#postForm").submit();
+            });
+            Dropzone.options.imageUpload = {
+                //autoProcessQueue: false,
+                parallelUploads: 100,
+                @if ($isReadonly == 'readonly')
                 clickable: false,
                 addRemoveLinks: false,
-            @else
+                @else
                 addRemoveLinks: true,
-            @endif
-            //previewTemplate: document.querySelector('#preview-template').innerHTML,
-            dictFileTooBig: 'Image is bigger than 8MB',
-            dictDefaultMessage: "Click 또는  File을 Drag&Drop 하실 수 있습니다 ",
-            dictRemoveFile: 'Remove',
-            dictRemoveFileConfirmation:'파일을 삭제하시겠습니까?',
-            maxFilesize: 500,
-            acceptedFiles: ".txt,.jpeg,.jpg,.png,.gif",
-            createImageThumbnails: "true",
+                @endif
+                //previewTemplate: document.querySelector('#preview-template').innerHTML,
+                dictFileTooBig: 'Image is bigger than 8MB',
+                dictDefaultMessage: "Click 또는  File을 Drag&Drop 하실 수 있습니다 ",
+                dictRemoveFile: 'Remove',
+                dictRemoveFileConfirmation:'파일을 삭제하시겠습니까?',
+                maxFilesize: 500,
+                acceptedFiles: ".txt,.jpeg,.jpg,.png,.gif",
+                createImageThumbnails: "true",
 
-            init: function () {
-                this.on("complete", function(file) {
-                    $(".dz-remove").html("<span class='fa-2x fa fa-trash text-danger' style='cursor:pointer; padding:6px'></span>");
-                    $(".dz-preview").addClass('center-xs');
-                    //$('.dz-remove').parent('div').addClass('center xs');
-                });
+                init: function () {
+                    this.on("complete", function(file) {
+                        $(".dz-remove").html("<span class='fa-2x fa fa-trash text-danger' style='cursor:pointer; padding:6px'></span>");
+                        $(".dz-preview").addClass('center-xs');
+                        //$('.dz-remove').parent('div').addClass('center xs');
+                    });
 
-                var myDropzone = this;
-                <?php
-                    // 드롭존 초기화시 파일 보여주는
-                    // 1. 저장 후 실패하여 돌아왔을경우
-                    // 2. just view
-                    $file_names_view = null;
-                    $file_names = [];
-                    // 업로드 되었고 리스트업 된 상태 ( 그중에 인풋 오류로 되돌아온 상태 old에 값이 있는)
-                    $file_names_error = old('file_name');
+                    var myDropzone = this;
+                        <?php
+                        // 드롭존 초기화시 파일 보여주는
+                        // 1. 저장 후 실패하여 돌아왔을경우
+                        // 2. just view
+                        $file_names_view = null;
+                        $file_names = [];
+                        // 업로드 되었고 리스트업 된 상태 ( 그중에 인풋 오류로 되돌아온 상태 old에 값이 있는)
+                        $file_names_error = old('file_name');
 
-                    if($post){
-                        $file_names_view = $post->atcfiles;
-                    }
+                        if($post){
+                            $file_names_view = $post->atcfiles;
+                        }
 
-                    if($file_names_error != null) {
-                        $file_names = $file_names_error;
-                    }
-                    else if($file_names_view != null) {
-                        $file_names = $file_names_view;
-                    }
+                        if($file_names_error != null) {
+                            $file_names = $file_names_error;
+                        }
+                        else if($file_names_view != null) {
+                            $file_names = $file_names_view;
+                        }
 
-                    if($file_names != null ) {
+                        if($file_names != null ) {
                         foreach($file_names as $file_name){
-                            if($file_names_error != null) {
-                                $ar = explode('|', $file_name);
-                                $ar_file_org_name = $ar[0];
-                                $ar_file_name = $ar[1];
-                                $ar_file_id = $ar[2];
-                            }
-                            else if($file_names_view != null) {
-                                $ar_file_org_name = $file_name->org_name;
-                                $ar_file_name = $file_name->name;
-                                $ar_file_id = $file_name->id;
-                            }
-                ?>
-                            var mockFile = {name: '{{$ar_file_org_name}}', size: 100, nameChg:'{{$ar_file_name}}'};
-                            myDropzone.emit("addedfile", mockFile);
-                            //myDropzone.emit("thumbnail", mockFile, "/image/url");
-                            //myDropzone.options.addedfile.call(myDropzone, file);
-                            myDropzone.createThumbnailFromUrl(mockFile, '/images/' + '{{$ar_file_name}}');
-                            myDropzone.emit("complete", mockFile);
+                        if($file_names_error != null) {
+                            $ar = explode('|', $file_name);
+                            $ar_file_org_name = $ar[0];
+                            $ar_file_name = $ar[1];
+                            $ar_file_id = $ar[2];
+                        }
+                        else if($file_names_view != null) {
+                            $ar_file_org_name = $file_name->org_name;
+                            $ar_file_name = $file_name->name;
+                            $ar_file_id = $file_name->id;
+                        }
+                        ?>
+                    var mockFile = {name: '{{$ar_file_org_name}}', size: 100, nameChg:'{{$ar_file_name}}'};
+                    myDropzone.emit("addedfile", mockFile);
+                    //myDropzone.emit("thumbnail", mockFile, "/image/url");
+                    //myDropzone.options.addedfile.call(myDropzone, file);
+                    myDropzone.createThumbnailFromUrl(mockFile, '/images/' + '{{$ar_file_name}}');
+                    myDropzone.emit("complete", mockFile);
 
 
 //row center-xs middle-xs
@@ -224,81 +224,81 @@
 //                            mockFile._downloadLink = Dropzone.createElement("<div class=\"\"> <a target='_blank' href='/images/"+mockFile.nameChg+" ' >" +
 //                            "<span class='fa fa-download  fa-2x text-success' style='cursor:pointer'  ></span></a></div>");
 
-                mockFile._downloadLink = Dropzone.createElement("<a target='_blank' href='/images/"+mockFile.nameChg+" ' >" +
-                    "<span class='fa fa-download  fa-2x text-success' style='cursor:pointer;padding:6px'  ></span></a>");
-
-
-
-                            mockFile.previewTemplate.appendChild(mockFile._downloadLink);
-
-                            var $hiddenInput = $('<input/>', {
-                                type: 'hidden',
-                                name: 'file_name[]',
-                                value: '{{$ar_file_org_name.'|'.$ar_file_name.'|'.$ar_file_id}}'
-                            });
-                            $hiddenInput.appendTo('#postForm');
-
-                            {{--var $hiddenFileId = $('<input/>', {type: 'hidden', name: 'file_id[]', value:'{{$ar_file_id}}' });--}}
-                            {{--$hiddenFileId.appendTo('#postForm');--}}
-                <?php
-                          }
-                //  echo 'myDropzone.emit("complete", mockFile)';
-                    }
-                ?>
-                this.on("success", function(file) {
-                    nameChg = JSON.parse(file.xhr.response).success.file_name.split("|")[1];
-                    file._downloadLink = Dropzone.createElement("<a target='_blank' href='/images/"+nameChg+" ' >" +
+                    mockFile._downloadLink = Dropzone.createElement("<a target='_blank' href='/images/"+mockFile.nameChg+" ' >" +
                         "<span class='fa fa-download  fa-2x text-success' style='cursor:pointer;padding:6px'  ></span></a>");
-                    file.previewTemplate.appendChild(file._downloadLink);
-                });
-                this.on("removedfile", function(file) {
-                    //$("#testRemove").submit();
-                    $.ajax({
-                        type: 'POST',
-                        url: '/dropzone/remove',
-                        //$("#testRemove").find('[name=_token]').val()
 
-                        data: {id: file.name,val:JSON.parse(file.xhr.response).success.file_name.split("|")[1], _token: $('#csrf-token').val()},
-                        //data: {id: file.name},
-                        dataType: 'html',
-                        success: function(data){
-                            var rep = JSON.parse(data);
-                            if(rep.code == 200)
-                            {
-                                alert('삭제되었습니다.');
-                            }
-                        },
-                        error:function(data) {
-                            alert('create.blade Err: ' + data.statusText+'@@'+data.msg);
-                        }
 
+
+                    mockFile.previewTemplate.appendChild(mockFile._downloadLink);
+
+                    var $hiddenInput = $('<input/>', {
+                        type: 'hidden',
+                        name: 'file_name[]',
+                        value: '{{$ar_file_org_name.'|'.$ar_file_name.'|'.$ar_file_id}}'
                     });
-                } );
-            },
-            success: function (file, response) {
-                //alert("success");
-                if(typeof (response.success) == 'undefined') {
+                    $hiddenInput.appendTo('#postForm');
+
+                    {{--var $hiddenFileId = $('<input/>', {type: 'hidden', name: 'file_id[]', value:'{{$ar_file_id}}' });--}}
+                            {{--$hiddenFileId.appendTo('#postForm');--}}
+                    <?php
+                        }
+                        //  echo 'myDropzone.emit("complete", mockFile)';
+                        }
+                        ?>
+                        this.on("success", function(file) {
+                        nameChg = JSON.parse(file.xhr.response).success.file_name.split("|")[1];
+                        file._downloadLink = Dropzone.createElement("<a target='_blank' href='/images/"+nameChg+" ' >" +
+                            "<span class='fa fa-download  fa-2x text-success' style='cursor:pointer;padding:6px'  ></span></a>");
+                        file.previewTemplate.appendChild(file._downloadLink);
+                    });
+                    this.on("removedfile", function(file) {
+                        //$("#testRemove").submit();
+                        $.ajax({
+                            type: 'POST',
+                            url: '/dropzone/remove',
+                            //$("#testRemove").find('[name=_token]').val()
+
+                            data: {id: file.name,val:JSON.parse(file.xhr.response).success.file_name.split("|")[1], _token: $('#csrf-token').val()},
+                            //data: {id: file.name},
+                            dataType: 'html',
+                            success: function(data){
+                                var rep = JSON.parse(data);
+                                if(rep.code == 200)
+                                {
+                                    alert('삭제되었습니다.');
+                                }
+                            },
+                            error:function(data) {
+                                alert('create.blade Err: ' + data.statusText+'@@'+data.msg);
+                            }
+
+                        });
+                    } );
+                },
+                success: function (file, response) {
+                    //alert("success");
+                    if(typeof (response.success) == 'undefined') {
+                        file.previewElement.classList.add("dz-error");
+                        $(file.previewElement).find('.dz-error-message').text(response.fail[2]);
+                        //$(file.previewElement).find('.dz-error-message').text(response);
+                        return;
+                    }
+
+                    var file_name = response.success.file_name;
+
+                    file.previewElement.classList.add("dz-success");
+                    var $hiddenInputName = $('<input/>', {type: 'hidden', name: 'file_name[]', value: file_name});
+                    $hiddenInputName.appendTo('#postForm');
+                },
+                error: function (file, response) {
                     file.previewElement.classList.add("dz-error");
-                    $(file.previewElement).find('.dz-error-message').text(response.fail[2]);
+                    $(file.previewElement).find('.dz-error-message').text(response.message);
                     //$(file.previewElement).find('.dz-error-message').text(response);
-                    return;
                 }
-
-                var file_name = response.success.file_name;
-
-                file.previewElement.classList.add("dz-success");
-                var $hiddenInputName = $('<input/>', {type: 'hidden', name: 'file_name[]', value: file_name});
-                $hiddenInputName.appendTo('#postForm');
-            },
-            error: function (file, response) {
-                file.previewElement.classList.add("dz-error");
-                $(file.previewElement).find('.dz-error-message').text(response.message);
-                //$(file.previewElement).find('.dz-error-message').text(response);
-            }
-        };
-
+            };
+        }
+        });
     </script>
-
 @endsection
 
 

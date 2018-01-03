@@ -69,30 +69,25 @@
         </div>
     </div>
 
-<script type="text/javascript">
-    function initJquery() {
-        var table = $('#example').DataTable(
-            {
-                "responsive": true,
-                select: false,
-                "paging": true,
-                "info": true,
-                "ordering": false,
-                "order": [[0, "desc"]],
-                "deferRender": false,
-                stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
-                "pagingType": "full_numbers", //first_last_number
-                // obj 순서대로 칼럼 정의 할수 있음
-            });
-    }
 
-</script>
 @stop
 
 @section('scripts')
     <script type="text/javascript">
         $(document).ready(function () {
-            initJquery();
+            var table = $('#example').DataTable(
+                {
+                    "responsive": true,
+                    select: false,
+                    "paging": true,
+                    "info": true,
+                    "ordering": false,
+                    "order": [[0, "desc"]],
+                    "deferRender": false,
+                    stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
+                    "pagingType": "full_numbers", //first_last_number
+                    // obj 순서대로 칼럼 정의 할수 있음
+                });
         });
     </script>
 @endsection

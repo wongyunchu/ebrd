@@ -42,13 +42,16 @@
                 <hr>
                 <div class="row p-r end-xs">
                     {{--<button id="addRow">Add new row</button>--}}
-                    <a href="{{route('posts.create')}}" class="md-btn md-raised m-b-sm btn-lg w-sm indigo" >작성</a>
+                    <a href="{{route('posts.create')}}" class="md-btn md-raised m-b-sm btn-lg w-sm indigo " >작성</a>
                 </div>
             </div>
         </div>
     </div>
+
+@stop
+@section('scripts')
     <script type="text/javascript">
-        function initJquery(){
+        $(document).ready(function () {
             //alert("공지사항ready22");
             var table = $('#example').DataTable(
                 {
@@ -87,13 +90,6 @@
                             var data = table.row( this ).data();
                             alert( 'You clicked on '+data[0]+'\'s row' );
                         } );*/
-        }
-    </script>
-@stop
-@section('scripts')
-    <script type="text/javascript">
-        $(document).ready(function () {
-            initJquery();
         });
     </script>
 @endsection
