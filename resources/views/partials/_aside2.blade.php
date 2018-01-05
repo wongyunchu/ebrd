@@ -154,6 +154,14 @@
                             <span class="nav-text">결재함</span>
                         </a>
                     </li>
+                    <li class="no-bg">
+                        <a >
+                        <span class="nav-icon">
+                          <i class="material-icons"></i>
+                        </span>
+                            <span @click="showFullscreen()" class="nav-text">전체화면</span>
+                        </a>
+                    </li>
                     <li>
                         <div class="b-b b "></div>
                     </li>
@@ -171,6 +179,44 @@
             </nav>
         </div>
     </div>
-
-
 </div>
+
+<script type="text/javascript">
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    }
+
+    Vue.config.devtools = true;
+        vv = new Vue({
+        el:'#aside',
+        data : {
+            input:{
+                I_GWAREKEY:"",
+            }
+        },
+        computed:{
+            isDisabled:function () {
+            },
+            getAction:function(){
+            }
+        },
+        methods: {
+            showFullscreen:function () {
+                screenfull.toggle();
+            },
+            getList:function() {
+            }
+        },
+        mounted: function() {
+                this.$nextTick(function () {
+
+                })
+        }
+    })
+</script>

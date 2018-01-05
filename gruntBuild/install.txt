@@ -1,0 +1,4 @@
+Download and install Node, which we use to manage our dependencies.
+Run npm install -g bower grunt-cli
+Run bower install --force-latest to install dependencies
+Run grunt build to build dist with minified js and css

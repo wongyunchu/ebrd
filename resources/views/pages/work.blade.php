@@ -5,7 +5,7 @@
     <link rel='stylesheet' href='/css/toastr.min.css'/>
 
     <link rel='stylesheet' href='/assets/styles/work_fc.css'/>
-
+    <script src="{{ asset('js/datatables.min.js')}}"></script>
 @endsection
 
 @section('content')
@@ -306,8 +306,8 @@
             }
         });
     </script>
-    <script src='/js/fullcalendar.js'></script>
+    <script src='/js/fullcalendar.min.js'></script>
     <script src="{{asset('/js/jquery-ui.min.js')}}"></script>
     <script src="{{asset('/js/fc.js')}}"></script>
-    <script src='/js/toastr.min.js'></script>
+
 @endsection

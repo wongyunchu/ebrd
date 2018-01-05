@@ -39,6 +39,7 @@
 
     {!! (Html::style('css/dropzone.css')) !!}
 
+
 @endsection
 
 @section('content')
@@ -296,7 +297,6 @@
                     //$(file.previewElement).find('.dz-error-message').text(response);
                 }
             };
-        }
         });
     </script>
 @endsection

@@ -11,22 +11,25 @@
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 --}}
 
-<script src="{{ asset('js/app.html.js')}}"></script>
+<script src="{{ asset('js/app.bundle.js')}}"></script>
 
 {{--
+jquery가 제일 먼저 읽혀짐을 위해 css영역으로 뺐음
+->>>>>>>>>>>>>>>     _head.blade.php
+
 <script src="{{ asset('libs/jquery/jquery/dist/jquery.js') }}"></script>
 <script src="{{ asset('js/datatables.min.js')}}"></script>
 <script src="{{ asset('js/val.js')}}"></script>
 --}}
 
 
-
+{{--
 <script src="{{ asset('js/formSilver.js')}}"></script>
 <script src="{{ asset('js/vue.min.js')}}"></script>
-<script src="{{ asset('js/sap.js')}}"></script>
+<script src="{{ asset('js/sap.js')}}"></script>--}}
 
 {{-- table grid관련 순서 중요 --}}
-<script src="{{ asset('js/bootbox.min.js')}}"></script>
+{{--<script src="{{ asset('js/bootbox.min.js')}}"></script>--}}
 
 
 <!-- core -->
@@ -49,35 +52,28 @@
 <script src="{{ asset('scripts/app.js')}}"></script>--}}
 
 {{--for datetimepicker--}}
-<script src="{{ asset('libs/js/moment/moment.js')}}"></script>
+{{--<script src="{{ asset('libs/js/moment/moment.js')}}"></script>
 <script src="{{ asset('js/bootstrap-datepicker.js')}}"></script>
-<script src="{{ asset('js/bootstrap-datepicker.kr.min.js')}}"></script>
+<script src="{{ asset('js/bootstrap-datepicker.kr.min.js')}}"></script>--}}
 
 {{-- greensock --}}
 <script src="/js/TweenMax.min.js"></script>
 
 {{--parsley--}}
-<script src="{{ asset('js/parsley.min.js')}}"></script>
-<script src="{{ asset('js/ko.js')}}"></script>
+{{--<script src="{{ asset('js/parsley.min.js')}}"></script>
+<script src="{{ asset('js/ko.js')}}"></script>--}}
 
-{{--통화관련 / 소숫점 --}}
+{{--통화관련 / 소숫점
 <script src="{{ asset('js/accounting.js')}}"></script>
-
+--}}
 {{--<script src="{{ asset('libs/jquery/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>--}}
 {{--<script src="../libs/jquery/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>--}}
-
-
-
-
-
-
 {{--메뉴 클릭시 jquery가 반응을 안하는 현상이 발생 / 디버깅이 안됨--}}
 {{--<script src="{{ asset('libs/jquery/jquery-pjax/jquery.pjax.js')}}"></script>
 <script src="{{ asset('scripts/ajax.js')}}"></script>--}}
 
 
-
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+{{--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>--}}
 <script type="text/javascript">
     $(document).ready(function() {
 

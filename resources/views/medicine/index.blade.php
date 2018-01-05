@@ -4,6 +4,7 @@
 @section('content')
 
 @section('stylesheets')
+    <script src="{{ asset('js/datatables.min.js')}}"></script>
     <style type="text/css">
         tbody>tr>th {
             font-weight: normal;

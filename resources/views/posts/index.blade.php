@@ -1,17 +1,21 @@
 @extends('main')
 @section('title', '공지사항')
 @section('title_sub', 'All Posts...')
+@section('stylesheets')
+    <script src="{{ asset('js/datatables.min.js')}}"></script>
+@endsection
+
 @section('content')
+
     <div class="row">
         <div class="col-xs-offset-0 col-xs-12">
             <table id="example" width="100%" cellspacing="0" class="table blueTable2 text-center table-striped table-bordered table-hover row-border p-b-md " >
-
                 <thead>
                 <th style="width:70px">#</th>
                 <th style="width:120px">Title</th>
                 <th style="">Body</th>
                 <th style="width:110px">Create</th>
-                <th style="width:120px; min-width: 120px;">처리</th>
+                <th style="width:130px; min-width: 130px;">처리</th>
                 </thead>
                 <tbody>
                 @foreach($posts as $post)
@@ -50,6 +54,7 @@
 
 @stop
 @section('scripts')
+
     <script type="text/javascript">
         $(document).ready(function () {
             //alert("공지사항ready22");

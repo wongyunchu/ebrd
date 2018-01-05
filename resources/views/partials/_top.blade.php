@@ -16,7 +16,7 @@
                     <i class="material-icons">&#xe7f5;</i>
                     <span class="label label-sm up warn">3</span>
                 </a>
-                <div ui-include="'/views/blocks/dropdown.notification.html'"></div>
+
             </li>
 
             {{--유저 팝업 --}}
@@ -73,21 +73,7 @@
             </li>
         </ul>
         <!-- / navbar right -->
-        <!-- navbar collapse -->
-        <div class="collapse navbar-toggleable-sm" id="collapse" style="padding-left: 200px">
-            <div ui-include="'../views/blocks/navbar.form.right.html'"></div>
-            <!-- link and dropdown -->
-            <ul class="nav navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href data-toggle="dropdown">
-                        <i class="fa fa-fw fa-plus text-muted"></i>
-                        <span>New</span>
-                    </a>
-                    <div ui-include="'../views/blocks/dropdown.new.html'"></div>
-                </li>
-            </ul>
-            <!-- / -->
-        </div>
+
 
 
         <!-- / navbar collapse -->
