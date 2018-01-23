@@ -12,13 +12,13 @@
 --}}
 
 <script src="{{ asset('js/app.bundle.js')}}"></script>
-
+<script src="{{ asset('js/datatables.min.js')}}"></script>
 {{--
 jquery가 제일 먼저 읽혀짐을 위해 css영역으로 뺐음
 ->>>>>>>>>>>>>>>     _head.blade.php
 
 <script src="{{ asset('libs/jquery/jquery/dist/jquery.js') }}"></script>
-<script src="{{ asset('js/datatables.min.js')}}"></script>
+
 <script src="{{ asset('js/val.js')}}"></script>
 --}}
 
