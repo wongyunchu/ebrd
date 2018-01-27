@@ -13,7 +13,7 @@
     <div class="row">
 
         {{--스케쥴러--}}
-        <div class="col-sm-8 col-lg-9">
+        <div class="col-sm-8 col-xl-9">
             <div id="pnDrag" class="hidden-md-down">
                 <div id='external-events' class="row end-xs">
                     <div class="col-xs-6 well well-sm">
@@ -47,7 +47,7 @@
         </div>
 
         {{-- 휴가 쿼터 리스트--}}
-        <div class="col-sm-4  col-lg-3" >
+        <div class="col-sm-4  col-xl-3" >
             <div class="box b-light b-a">
                 <div class="box-header">
 
