@@ -87,10 +87,12 @@
 @include('partials._messages')
 @yield('content')
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('libs/jquery/jquery/dist/jquery.js') }}"></script>
+<script src="{{ asset('js/jquery-3.2.1.min.js')}}"></script>
+{{--<script src="{{ asset('libs/jquery/jquery/dist/jquery.js') }}"></script>--}}
+<script src="{{ asset('js/app.bundle.js') }}"></script>
+
 <!-- Bootstrap -->
-<script src="{{ asset('libs/jquery/tether/dist/js/tether.min.js') }}"></script>
+{{--<script src="{{ asset('libs/jquery/tether/dist/js/tether.min.js') }}"></script>--}}
 <script type="text/javascript" src="js/exentriq-bootstrap-material-ui.min.js"></script>
 @yield('scripts')
 </body>
