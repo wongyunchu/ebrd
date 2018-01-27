@@ -13,7 +13,7 @@
     <div class="row">
 
         {{--스케쥴러--}}
-        <div class="col-sm-8">
+        <div class="col-sm-8 col-lg-9">
             <div id="pnDrag" class="hidden-md-down">
                 <div id='external-events' class="row end-xs">
                     <div class="col-xs-6 well well-sm">
