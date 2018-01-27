@@ -9,96 +9,93 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="row">
 
-        </div>
-        <div class="row">
+    <div class="row">
 
-            {{--스케쥴러--}}
-            <div class="col-sm-8">
-                <div id="pnDrag" class="hidden-md-down">
-                    <div id='external-events' class="row end-xs">
-                        <div class="col-xs-6 well well-sm">
-                            <div class="row">
-                                <small class="col-xs-12 text-left">* 달력으로 Drag하실수 있습니다.</small>
-                                <div class='col-xs fc-event biztrip '
-                                     data-event='{"title":"출장", "allDay":true, "color":"#E34342","textColor":"white","stick": true}'
-                                     style='background-color:#E34342;border-color: #A02929; color:#ffffff'><i class=" fa fa-fighter-jet"></i> 출장
-                                </div>
-                                <div class='col-xs fc-event work '
-                                     data-event='{"title":"근태",  "color":"#6A9FCF","textColor":"white"}'
-                                     style='background-color:#6A9FCF; color:#ffffff'><i class=" fa fa-file-word-o"></i>  근태
-                                </div>
-                                <div class='col-xs fc-event vocation '
-                                     data-event='{"title":"휴가",  "color":"#74BB5B","textColor":"white"}'
-                                     style='background-color:#74BB5B; color:#ffffff'><i class="fa fa fa-home"></i> 휴가
-                                </div>
-                                <div class='col-xs fc-event edu '
-                                     data-event='{"title":"교육", "color":"#804040","textColor":"white", "borderColor":"#5A3500"}'
-                                     style='background-color:#804040; border-color: #5A3500; color:#fff'><i class=" fa fa-mortar-board"></i> 교육
-                                </div>
-
+        {{--스케쥴러--}}
+        <div class="col-sm-8">
+            <div id="pnDrag" class="hidden-md-down">
+                <div id='external-events' class="row end-xs">
+                    <div class="col-xs-6 well well-sm">
+                        <div class="row">
+                            <small class="col-xs-12 text-left">* 달력으로 Drag하실수 있습니다.</small>
+                            <div class='col-xs fc-event biztrip '
+                                 data-event='{"title":"출장", "allDay":true, "color":"#E34342","textColor":"white","stick": true}'
+                                 style='background-color:#E34342;border-color: #A02929; color:#ffffff'><i class=" fa fa-fighter-jet"></i> 출장
                             </div>
+                            <div class='col-xs fc-event work '
+                                 data-event='{"title":"근태",  "color":"#6A9FCF","textColor":"white"}'
+                                 style='background-color:#6A9FCF; color:#ffffff'><i class=" fa fa-file-word-o"></i>  근태
+                            </div>
+                            <div class='col-xs fc-event vocation '
+                                 data-event='{"title":"휴가",  "color":"#74BB5B","textColor":"white"}'
+                                 style='background-color:#74BB5B; color:#ffffff'><i class="fa fa fa-home"></i> 휴가
+                            </div>
+                            <div class='col-xs fc-event edu '
+                                 data-event='{"title":"교육", "color":"#804040","textColor":"white", "borderColor":"#5A3500"}'
+                                 style='background-color:#804040; border-color: #5A3500; color:#fff'><i class=" fa fa-mortar-board"></i> 교육
+                            </div>
+
                         </div>
                     </div>
-
                 </div>
-
-                <div id='calendar' style="padding-bottom: 50px; margin-bottom: 50px"></div>
 
             </div>
 
-            {{-- 휴가 쿼터 리스트--}}
-                <div class="col-sm-4">
-                <div class="box b-light b-a">
-                    <div class="box-header">
-
-                        <h3><i class=" fa fa-fighter-jet"></i> 팀원 교육/출장/휴가 현황</h3>
-                    </div>
-                    <div class="box-body p-y-0">
-                        <table id="tableR1" cellspacing="0" width="100%" class="table">
-                            <thead style="width: 100%">
-                            <th style="width: 33%">성명</th>
-                            <th style="width: 33%">구분</th>
-                            <th style="width: 34%">기간</th>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="box b-light b-a">
-                    <div class="box-header dker">
-                        <h3><i class="fa fa-calendar"></i> 휴가일수</h3>
-                    </div>
-                    <div class="box-body p-y-0 ">
-                        <table id="tableR2" cellspacing="0" width="100%" class="table ">
-                            <thead style="width: 100%">
-                            <th >구분</th>
-                            <th >기간</th>
-                            <th >부여/사용일</th>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="box b-light b-a">
-                    <div class="box-header dker">
-                        <h3><i class="fa fa-line-chart"></i> 당월 OT 통계</h3>
-                    </div>
-                    <div class="box-body p-y-0">
-                        <table id="tableR3" cellspacing="0" width="100%" class="table">
-                            <thead style="width: 100%">
-                            <th >OT 구분</th>
-                            <th >인정시간</th>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <div id='calendar' style="padding-bottom: 50px; margin-bottom: 50px"></div>
 
         </div>
+
+        {{-- 휴가 쿼터 리스트--}}
+            <div class="col-sm-4">
+            <div class="box b-light b-a">
+                <div class="box-header">
+
+                    <h3><i class=" fa fa-fighter-jet"></i> 팀원 교육/출장/휴가 현황</h3>
+                </div>
+                <div class="box-body p-y-0">
+                    <table id="tableR1" cellspacing="0" width="100%" class="table">
+                        <thead style="width: 100%">
+                        <th style="width: 33%">성명</th>
+                        <th style="width: 33%">구분</th>
+                        <th style="width: 34%">기간</th>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+            <div class="box b-light b-a">
+                <div class="box-header dker">
+                    <h3><i class="fa fa-calendar"></i> 휴가일수</h3>
+                </div>
+                <div class="box-body p-y-0 ">
+                    <table id="tableR2" cellspacing="0" width="100%" class="table ">
+                        <thead style="width: 100%">
+                        <th >구분</th>
+                        <th >기간</th>
+                        <th >부여/사용일</th>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+            <div class="box b-light b-a">
+                <div class="box-header dker">
+                    <h3><i class="fa fa-line-chart"></i> 당월 OT 통계</h3>
+                </div>
+                <div class="box-body p-y-0">
+                    <table id="tableR3" cellspacing="0" width="100%" class="table">
+                        <thead style="width: 100%">
+                        <th >OT 구분</th>
+                        <th >인정시간</th>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </div>
+
 
 
     <!-- Modal -->
