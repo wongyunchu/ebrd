@@ -12,7 +12,7 @@
             <table id="example" width="100%" cellspacing="0" class="table blueTable2 text-center table-striped table-bordered table-hover row-border p-b-md " >
                 <thead>
                 <th style="width:70px">#</th>
-                <th style="width:220px">Title</th>
+                <th style="width:420px">Title</th>
                 <th style="">Body</th>
                 <th style="width:110px">Create</th>
                 <th style="width:130px; min-width: 130px;">처리</th>
