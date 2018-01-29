@@ -12,7 +12,7 @@
 --}}
 
 <script src="{{ asset('js/app.bundle.js')}}"></script>
-<script src="{{ asset('js/datatables.min.js')}}"></script>
+{{--<script src="{{ asset('js/datatables.min.js')}}"></script>--}}
 
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js">
 </script>
