@@ -1,5 +1,5 @@
 @extends('main')
-@section('title', '공지사항')
+@section('title', '공지사항1')
 @section('title_sub', 'All Posts...')
 @section('stylesheets')
     <script src="{{ asset('js/datatables.min.js')}}"></script>
@@ -12,7 +12,7 @@
             <table id="example" width="100%" cellspacing="0" class="table blueTable2 text-center table-striped table-bordered table-hover row-border p-b-md " >
                 <thead>
                 <th style="width:70px">#</th>
-                <th style="width:420px">Title</th>
+                <th style="width:320px">Title</th>
                 <th style="">Body</th>
                 <th style="width:110px">Create</th>
                 <th style="width:130px; min-width: 130px;">처리</th>
@@ -60,6 +60,7 @@
             //alert("공지사항ready22");
             var table = $('#example').DataTable(
                 {
+
                     "responsive": true,
                     select: false,
                     "paging": true,
@@ -69,6 +70,14 @@
                     "deferRender": false,
                     stateSave: true, // 페이징 번호, 정렬등 상태저장 가능
                     "pagingType": "full_numbers", //first_last_number
+                    dom: 'Bfrtip',
+                    buttons: [
+                        { extend: 'copyHtml5', footer: true },
+                        { extend: 'excelHtml5', footer: true },
+                        { extend: 'csvHtml5', footer: true },
+                        { extend: 'pdfHtml5', footer: true }
+                        , 'print'
+                    ]
                 }
             );
             // 테이블 셋팅완료

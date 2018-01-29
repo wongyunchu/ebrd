@@ -1,7 +1,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Flatkit - HTML Version | Bootstrap 4 Web App Kit with AngularJS</title>
+    <title>E-HR Common-IT </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
