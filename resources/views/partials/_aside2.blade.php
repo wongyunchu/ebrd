@@ -55,25 +55,28 @@
                         <li><a href="/topbank"><span class="nav-text">TopBank</span></a></li>
                         <li><a><span class="nav-text">근로계약/동의서</span></a></li>
 
-                        <li>
+                        <li class="active">
                             <a>
         	                    <span class="nav-caret text-muted"><i class="fa fa-caret-down"></i></span>
-                                <span class="nav-text">Action with sub</span>
+                                <span class="nav-text active">Chart</span>
                             </a>
                             <ul class="nav-sub">
+                                <li><a href="/chartline"><span class="nav-text">Line</span></a></li>
+                                <li><a href="/chartbar"><span class="nav-text">Bar</span></a></li>
+                                <li><a href="/chartpie"><span class="nav-text">Pie</span></a></li>
+                                <li><a href="/chartscatter"><span class="nav-text">Scatter</span></a></li>
+                                <li><a href="/chartradar"><span class="nav-text">Radar&Chord</span></a></li>
+                                <li><a href="/chartgauge"><span class="nav-text">Gauges&Funnel</span></a></li>
+                                <li><a href="/chartmap"><span class="nav-text">Map</span></a></li>
                                 <li>
-                                    <a><span class="nav-text">Action</span></a>
-                                </li>
-                                <li>
-                                <a>
-                                    <span class="nav-caret text-muted">
-                                          <i class="fa fa-caret-down"></i>
-                                    </span>
-                                    <span class="nav-text">Another</span>
-                                </a>
+                                    <a>
+                                        <span class="nav-caret text-muted">
+                                              <i class="fa fa-caret-down"></i>
+                                        </span>
+                                        <span class="nav-text">etc</span>
+                                    </a>
                                     <ul class="nav-sub">
-                                        <li><a><span class="nav-text">Action</span></a></li>
-                                        <li><a><span class="nav-text">Another</span></a></li>
+
                                     </ul>
                                 </li>
                             </ul>
@@ -133,6 +136,27 @@
                         <li><a><span class="nav-text">공지사항 관리</span></a></li>
                         <li><a><span class="nav-text">전사인사발령 공지</span></a></li>
                         <li><a><span class="nav-text">결재함</span></a></li>
+                    </ul>
+                </li>
+
+                {{--Chart--}}
+                <li>
+                    <a>
+                        <span class="nav-caret text-muted"><i class="fa fa-caret-down"></i></span>
+                        <i class="nav-label hidden-folded"><b class="label label-xs no-bg b-a">NEW</b></i>
+
+                        <span class="nav-icon"><i class="fa fa-book"></i></span>
+                        <span class="nav-text">Chart</span>
+                    </a>
+                    <ul class="nav-sub" >
+
+                        <li><a href="/chartline"><span class="nav-text">Line</span></a></li>
+                        <li><a href="/chartbar"><span class="nav-text">Bar</span></a></li>
+                        <li><a href="/chartpie"><span class="nav-text">Pie</span></a></li>
+                        <li><a href="/chartscatter"><span class="nav-text">Scatter</span></a></li>
+                        <li><a href="/chartradar"><span class="nav-text">Radar&Chord</span></a></li>
+                        <li><a href="/chartgauge"><span class="nav-text">Gauges&Funnel</span></a></li>
+                        <li><a href="/chartmap"><span class="nav-text">Map</span></a></li>
                     </ul>
                 </li>
             </ul>

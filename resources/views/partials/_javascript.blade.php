@@ -13,7 +13,7 @@
 
 <script src="{{ asset('js/app.bundle.js')}}"></script>
 {{--<script src="{{ asset('js/datatables.min.js')}}"></script>--}}
-
+{{--
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js">
 </script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js">
@@ -27,7 +27,7 @@
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js">
 </script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js">
-</script>
+</script>--}}
 {{--
 jquery가 제일 먼저 읽혀짐을 위해 css영역으로 뺐음
 ->>>>>>>>>>>>>>>     _head.blade.php

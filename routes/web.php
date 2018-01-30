@@ -18,6 +18,14 @@ Route::get('/', function () {
 });
 
 /*페이지*/
+Route::view('chartbar', 'pages/chart_bar')->name('chartbar');
+Route::view('chartpie', 'pages/chart_pie')->name('chartpie');
+Route::view('chartmap', 'pages/chart_map')->name('chartmap');
+Route::view('chartline', 'pages/chart_line')->name('chartline');
+Route::view('chartgauge', 'pages/chart_gauge')->name('chartgauge');
+Route::view('chartscatter', 'pages/chart_scatter')->name('chartscatter');
+Route::view('chartradar', 'pages/chart_radar')->name('chartradar');
+
 Route::view('profile', 'pages/profile')->name('profile');
 Route::view('dashboard', 'pages/dashboard')->name('dashboard');
 Route::view('test2', 'pages/test2')->name('test2');
