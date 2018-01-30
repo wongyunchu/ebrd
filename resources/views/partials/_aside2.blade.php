@@ -8,7 +8,7 @@
                 <span class="hidden-folded inline v-m">
                     E-HR
                     <span class="text-xs text-muted _300 block m-t-xs tagline">
-                        Common-IT - Dasom
+                        Common-IT - JsonTG
                     </span>
 	            </span>
             </a>
