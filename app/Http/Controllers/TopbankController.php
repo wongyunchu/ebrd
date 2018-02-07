@@ -41,8 +41,8 @@ HTML;
         }
         return view('topbank.index')->with('res', $res);
         */
-        return view('topbank.index');
-    }
+return view('topbank.index');
+}
 
     /**
      * Show the form for creating a new resource.
